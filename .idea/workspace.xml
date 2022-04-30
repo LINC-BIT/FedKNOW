@@ -135,6 +135,7 @@
       <find>class</find>
       <find>LocalUpdate</find>
       <find>train_packnet</find>
+      <find>mini</find>
     </findStrings>
   </component>
   <component name="Git.Settings">

@@ -10,7 +10,7 @@ from utils.options import args_parser
 from utils.train_utils import get_data, get_model, read_data
 from models.Update import LocalUpdate,DatasetSplit
 from models.test import test_img_local_all
-from single.ContinualLearningMethod.FPKD import Appr,LongLifeTest,LongLifeTrain
+from single.ContinualLearningMethod.FedKNOW import Appr,LongLifeTest,LongLifeTrain
 from models.Nets import RepTailInception_v3,RepTailResNet,RepTailWideResNet,RepTailResNext,RepTailMobilenet,RepTailshufflenet,RepTail,RepTailSENet
 from torch.utils.data import DataLoader
 import time
