@@ -51,7 +51,7 @@ def args_parser():
     # other arguments
     parser.add_argument('--dataset', type=str, default='cifar100', help="name of dataset")
     parser.add_argument('--iid', action='store_true', help='whether i.i.d or not')
-    parser.add_argument('--num_classes', type=int, default=10, help="number of classes")
+    parser.add_argument('--num_classes', type=int, default=100, help="number of classes")
     parser.add_argument('--num_channels', type=int, default=3, help="number of channels of imges")
     parser.add_argument('--gpu', type=int, default=0, help="GPU ID, -1 for CPU")
     parser.add_argument('--seed', type=int, default=1, help='random seed (default: 1)')

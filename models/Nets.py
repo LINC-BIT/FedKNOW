@@ -19,78 +19,6 @@ from models.language_utils import get_word_emb_arr
 from models.layer import DecomposedConv,DecomposedLinear
 from models.inception_v3 import inception_v3
 from models.shufflenetv2 import shufflenet_v2_x0_5
-class MLP(nn.Module):
-    def __init__(self, dim_in, dim_hidden, dim_out):
-        super(MLP, self).__init__()
-        self.layer_input = nn.Linear(dim_in, 512)
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(0)
-        self.layer_hidden1 = nn.Linear(512, 256)
-        self.layer_hidden2 = nn.Linear(256, 64)
-        self.layer_out = nn.Linear(64, dim_out)
-        self.softmax = nn.Softmax(dim=1)
-        self.weight_keys = [['layer_input.weight', 'layer_input.bias'],
-                            ['layer_hidden1.weight', 'layer_hidden1.bias'],
-                            ['layer_hidden2.weight', 'layer_hidden2.bias'],
-                            ['layer_out.weight', 'layer_out.bias']
-                            ]
-
-    def forward(self, x):
-        x = x.view(-1, x.shape[1]*x.shape[-2]*x.shape[-1])
-        x = self.layer_input(x)
-        x = self.relu(x)
-        x = self.layer_hidden1(x)
-        x = self.relu(x)
-        x = self.layer_hidden2(x)
-        x = self.relu(x)
-        x = self.layer_out(x)
-        return self.softmax(x)
-
-class CNNMnist(nn.Module):
-    def __init__(self, args):
-        super(CNNMnist, self).__init__()
-        self.conv1 = nn.Conv2d(1, 64, kernel_size=5)
-        self.conv2 = nn.Conv2d(64, 64, kernel_size=5)
-        self.conv2_drop = nn.Dropout2d()
-        self.fc1 = nn.Linear(1024, 128)
-        self.fc2 = nn.Linear(128, 64)
-        self.fc3 = nn.Linear(64, args.num_classes)
-
-    def forward(self, x):
-        x = F.relu(F.max_pool2d(self.conv1(x), 2))
-        x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
-        x = x.view(-1, x.shape[1]*x.shape[2]*x.shape[3])
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = self.fc3(x)
-        return F.log_softmax(x, dim=1)
-
-class CNNCifar(nn.Module):
-    def __init__(self, args):
-        super(CNNCifar, self).__init__()
-        self.conv1 = nn.Conv2d(3, 64, 5)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.conv2 = nn.Conv2d(64, 64, 5)
-        self.fc1 = nn.Linear(64 * 5 * 5, 120)
-        self.fc2 = nn.Linear(120, 64)
-        self.fc3 = nn.Linear(64, args.num_classes)
-        self.cls = args.num_classes
-
-        self.weight_keys = [['fc1.weight', 'fc1.bias'],
-                            ['fc2.weight', 'fc2.bias'],
-                            ['fc3.weight', 'fc3.bias'],
-                            ['conv2.weight', 'conv2.bias'],
-                            ['conv1.weight', 'conv1.bias'],
-                            ]
-
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = x.view(-1, 64 * 5 * 5)
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = self.drop(self.fc3(x))
-        return F.log_softmax(x, dim=1)
 
 class CNNCifar100(nn.Module):
     def __init__(self, args):
@@ -273,6 +201,34 @@ class RepTailSENet(nn.Module):
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
+                temp.append(name)
+                self.weight_keys.append(temp)
+    def forward(self,x,t,pre=False,is_con=False):
+        h = self.feature_net(x)
+        output = self.last(h)
+        if is_con:
+            # make sure we predict classes within the current task
+            if pre:
+                offset1 = 0
+                offset2 = int(t  * self.nc_per_task)
+            else:
+                offset1 = int(t * self.nc_per_task)
+                offset2 = int((t + 1) * self.nc_per_task)
+            if offset1 > 0:
+                output[:, :offset1].data.fill_(-10e10)
+            if offset2 < self.n_outputs:
+                output[:, offset2:self.n_outputs].data.fill_(-10e10)
+        return output
+class RepTailDensnet(nn.Module):
+    def __init__(self,output=100,nc_per_task = 10):
+        super().__init__()
+
+        self.feature_net = DenseNet()
+        self.last = torch.nn.Linear(512, output)
+        self.weight_keys = []
+        for name,para in self.named_parameters():
+            temp=[]
+            if 'last' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
     def forward(self,x,t,pre=False,is_con=False):

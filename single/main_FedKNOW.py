@@ -7,11 +7,10 @@ from torch import nn
 from torch.utils.tensorboard import SummaryWriter
 
 from utils.options import args_parser
-from utils.train_utils import get_data, get_model, read_data
-from models.Update import LocalUpdate,DatasetSplit
+from utils.train_utils import get_data, get_model
+from models.Update import DatasetSplit
 from models.test import test_img_local_all
 from single.ContinualLearningMethod.FedKNOW import Appr,LongLifeTest,LongLifeTrain
-from models.Nets import RepTailInception_v3,RepTailResNet,RepTailWideResNet,RepTailResNext,RepTailMobilenet,RepTailshufflenet,RepTail,RepTailSENet
 from torch.utils.data import DataLoader
 import time
 from models.Packnet import PackNet
@@ -33,7 +32,7 @@ if __name__ == '__main__':
     write = SummaryWriter('./log/FPKD_' + args.dataset+'_'+'round' + str(args.round) + '_frac' + str(args.frac) +'_RepTailshufflenet')
     # build model
     # net_glob = get_model(args)
-    net_glob = RepTailSENet(output=100,nc_per_task=10)
+    net_glob = get_model(args)
     net_glob.train()
     if args.load_fed != 'n':
         fed_model_path = './save/' + args.load_fed + '.pt'
