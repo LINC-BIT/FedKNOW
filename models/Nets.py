@@ -256,7 +256,41 @@ class Classification(nn.Module):
             if offset2 < self.n_outputs:
                 output[:, offset2:self.n_outputs].data.fill_(-10e10)
         return output
+class RepTailSENet(nn.Module):
+    def __init__(self,output=100,nc_per_task = 10):
+        super().__init__()
 
+        self.feature_net = resnet18()
+        pre_dict = torch.load('../pre_train/resnet18.pth')
+        pre_dict.pop('fc.weight')
+        pre_dict.pop('fc.bias')
+        state_dict = self.feature_net.state_dict()
+        model_dict = {k:v for k,v in pre_dict.items() if k in state_dict.keys()}
+        state_dict.update(model_dict)
+        self.feature_net.load_state_dict(state_dict)
+        self.last = torch.nn.Linear(512, output)
+        self.weight_keys = []
+        for name,para in self.named_parameters():
+            temp=[]
+            if 'fc' not in name:
+                temp.append(name)
+                self.weight_keys.append(temp)
+    def forward(self,x,t,pre=False,is_con=False):
+        h = self.feature_net(x)
+        output = self.last(h)
+        if is_con:
+            # make sure we predict classes within the current task
+            if pre:
+                offset1 = 0
+                offset2 = int(t  * self.nc_per_task)
+            else:
+                offset1 = int(t * self.nc_per_task)
+                offset2 = int((t + 1) * self.nc_per_task)
+            if offset1 > 0:
+                output[:, :offset1].data.fill_(-10e10)
+            if offset2 < self.n_outputs:
+                output[:, offset2:self.n_outputs].data.fill_(-10e10)
+        return output
 class RepTailResNet(nn.Module):
     def __init__(self,output=100,nc_per_task = 10):
         super().__init__()
@@ -809,7 +843,3 @@ class WEITResNet(nn.Module):
             if offset2 < self.n_outputs:
                 output[:, offset2:self.n_outputs].data.fill_(-10e10)
         return output
-c = WEITResNet()
-l= []
-# c = Cifar100WEIT([3,32,32])
-# l = []

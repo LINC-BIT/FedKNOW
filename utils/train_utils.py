@@ -44,7 +44,7 @@ def get_data(args):
         dict_users_train, rand_set_all = noniid(dataset_train, args.num_users, args.shard_per_user, args.num_classes)
         dict_users_test, rand_set_all = noniid(dataset_test, args.num_users, args.shard_per_user, args.num_classes, rand_set_all=rand_set_all)
     elif args.dataset == 'cifar100':
-        cifar100 = Cifar100Task('data/cifar100',task_num=10)
+        cifar100 = Cifar100Task('../../FedRep-main/data/cifar100',task_num=10)
         # dataset_train = datasets.CIFAR100('data/cifar100', train=True, download=True, transform=trans_cifar100_train)
         # dataset_test = datasets.CIFAR100('data/cifar100', train=False, download=True, transform=trans_cifar100_val)
         dataset_train,dataset_test = cifar100.getTaskDataSet()

@@ -49,7 +49,7 @@ def args_parser():
     parser.add_argument('--lam_ditto', type=float, default='1', help='Ditto parameter lambda')
 
     # other arguments
-    parser.add_argument('--dataset', type=str, default='miniimagenet', help="name of dataset")
+    parser.add_argument('--dataset', type=str, default='cifar100', help="name of dataset")
     parser.add_argument('--iid', action='store_true', help='whether i.i.d or not')
     parser.add_argument('--num_classes', type=int, default=10, help="number of classes")
     parser.add_argument('--num_channels', type=int, default=3, help="number of channels of imges")
