@@ -10,7 +10,7 @@ from torch import nn
 import torch.nn.functional as F
 from torch.nn import Parameter
 from torchvision import models
-from models.ResNet18 import resnet18,wide_resnet50_2,resnext50_32x4d
+from models.ResNet import resnet18,wide_resnet50_2,resnext50_32x4d,resnet152
 from models.ResNetWEIT import resnetWEIT18
 import json
 import numpy as np
@@ -19,171 +19,9 @@ from models.language_utils import get_word_emb_arr
 from models.layer import DecomposedConv,DecomposedLinear
 from models.inception_v3 import inception_v3
 from models.shufflenetv2 import shufflenet_v2_x0_5
-
-class CNNCifar100(nn.Module):
-    def __init__(self, args):
-        super(CNNCifar100, self).__init__()
-        self.conv1 = nn.Conv2d(3, 64, 5)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.drop = nn.Dropout(0.6)
-        self.conv2 = nn.Conv2d(64, 128, 5)
-        self.fc1 = nn.Linear(128 * 5 * 5, 256)
-        self.fc2 = nn.Linear(256, 128)
-        self.fc3 = nn.Linear(128, args.num_classes)
-        self.cls = args.num_classes
-
-        self.weight_keys = [['fc1.weight', 'fc1.bias'],
-                            ['fc2.weight', 'fc2.bias'],
-                            ['fc3.weight', 'fc3.bias'],
-                            ['conv2.weight', 'conv2.bias'],
-                            ['conv1.weight', 'conv1.bias'],
-                            ]
-
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = x.view(-1, 128 * 5 * 5)
-        x = F.relu(self.fc1(x))
-        x = self.drop((F.relu(self.fc2(x))))
-        x = self.fc3(x)
-        return F.log_softmax(x, dim=1)
-
-class CNN_FEMNIST(nn.Module):
-    def __init__(self, args):
-        super(CNN_FEMNIST, self).__init__()
-        self.conv1 = nn.Conv2d(1, 4, 5)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.conv2 = nn.Conv2d(4, 12, 5)
-        self.fc1 = nn.Linear(12 * 4 * 4, 120)
-        self.fc2 = nn.Linear(120, 100)
-        self.fc3 = nn.Linear(100, args.num_classes)
-
-        self.weight_keys = [['fc1.weight', 'fc1.bias'],
-                            ['fc2.weight', 'fc2.bias'],
-                            ['fc3.weight', 'fc3.bias'],
-                            ['conv2.weight', 'conv2.bias'],
-                            ['conv1.weight', 'conv1.bias'],
-                            ]
-
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = x.view(-1, 12 * 4 * 4)
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = self.fc3(x)
-        return F.log_softmax(x, dim=1)
-
-
-class RNNSent(nn.Module):
-    """
-    Container module with an encoder, a recurrent module, and a decoder.
-    Modified by: Hongyi Wang from https://github.com/pytorch/examples/blob/master/word_language_model/model.py
-    """
-
-    def __init__(self,args, rnn_type, ntoken, ninp, nhid, nlayers, dropout=0.5, tie_weights=False, emb_arr=None):
-        super(RNNSent, self).__init__()
-        VOCAB_DIR = 'models/embs.json'
-        emb, self.indd, vocab = get_word_emb_arr(VOCAB_DIR)
-        self.encoder = torch.tensor(emb).to(args.device)
-
-        if rnn_type in ['LSTM', 'GRU']:
-            self.rnn = getattr(nn, rnn_type)(ninp, nhid, nlayers)
-        else:
-            try:
-                nonlinearity = {'RNN_TANH': 'tanh', 'RNN_RELU': 'relu'}[rnn_type]
-            except KeyError:
-                raise ValueError( """An invalid option for `--model` was supplied,
-                                 options are ['LSTM', 'GRU', 'RNN_TANH' or 'RNN_RELU']""")
-            self.rnn = nn.RNN(ninp, nhid, nlayers, nonlinearity=nonlinearity, dropout=dropout)
-        self.fc = nn.Linear(nhid, 10)
-        self.decoder = nn.Linear(10, ntoken)
-
-        # "Using the Output Embedding to Improve Language Models" (Press & Wolf 2016)
-        # https://arxiv.org/abs/1608.05859
-        # and
-        # "Tying Word Vectors and Word Classifiers: A Loss Framework for Language Modeling" (Inan et al. 2016)
-        # https://arxiv.org/abs/1611.01462
-        if tie_weights:
-            if nhid != ninp:
-                raise ValueError('When using the tied flag, nhid must be equal to emsize')
-            self.decoder.weight = self.encoder.weight
-
-        self.drop = nn.Dropout(dropout)
-        self.init_weights()
-        self.rnn_type = rnn_type
-        self.nhid = nhid
-        self.nlayers = nlayers
-        self.device = args.device
-
-    def init_weights(self):
-        initrange = 0.1
-        self.fc.bias.data.zero_()
-        self.fc.weight.data.uniform_(-initrange, initrange)
-        self.decoder.bias.data.zero_()
-        self.decoder.weight.data.uniform_(-initrange, initrange)
-
-    def forward(self, input, hidden):
-        input = torch.transpose(input, 0,1)
-        emb = torch.zeros((25,4,300))
-        for i in range(25):
-            for j in range(4):
-                emb[i,j,:] = self.encoder[input[i,j],:]
-        emb = emb.to(self.device)
-        emb = emb.view(300,4,25)
-        self.rnn.flatten_parameters()
-        output, hidden = self.rnn(emb, hidden)
-        output = self.drop(F.relu(self.fc(output)))
-        decoded = self.decoder(output[-1,:,:])
-        return decoded.t(), hidden
-
-    def init_hidden(self, bsz):
-        weight = next(self.parameters())
-        if self.rnn_type == 'LSTM':
-            return (weight.new_zeros(self.nlayers, bsz, self.nhid),
-                    weight.new_zeros(self.nlayers, bsz, self.nhid))
-        else:
-            return weight.new_zeros(self.nlayers, bsz, self.nhid)
-
-class SupConMLP(nn.Module):
-    def __init__(self, inputsize, output=100, nc_per_task=10):
-        super().__init__()
-        self.encoder = Cifar100Net(inputsize)
-        self.head = nn.Sequential(
-            nn.Linear(1024, 1024),
-            nn.ReLU(inplace=True),
-            nn.Linear(1024, 1024)
-        )
-    def forward(self, x, return_feat=False):
-        encoded = self.encoder(x)
-        feat = self.head(encoded)
-        if return_feat:
-            return feat, encoded
-        else:
-            return feat
-class Classification(nn.Module):
-    def __init__(self, output=100, nc_per_task=10):
-        super().__init__()
-
-        self.last = nn.Linear(1024, output)
-        self.nc_per_task=nc_per_task
-        self.n_outputs = output
-
-    def forward(self, h, t, pre=False, is_cifar=True):
-        output = self.last(h)
-        if is_cifar:
-            # make sure we predict classes within the current task
-            if pre:
-                offset1 = 0
-                offset2 = int(t * self.nc_per_task)
-            else:
-                offset1 = int(t * self.nc_per_task)
-                offset2 = int((t + 1) * self.nc_per_task)
-            if offset1 > 0:
-                output[:, :offset1].data.fill_(-10e10)
-            if offset2 < self.n_outputs:
-                output[:, offset2:self.n_outputs].data.fill_(-10e10)
-        return output
+from models.Densenet import DenseNet
+def compute_conv_output_size(Lin, kernel_size, stride=1, padding=0, dilation=1):
+    return int(np.floor((Lin + 2 * padding - dilation * (kernel_size - 1) - 1) / float(stride) + 1))
 class RepTailSENet(nn.Module):
     def __init__(self,output=100,nc_per_task = 10):
         super().__init__()
@@ -247,12 +85,45 @@ class RepTailDensnet(nn.Module):
             if offset2 < self.n_outputs:
                 output[:, offset2:self.n_outputs].data.fill_(-10e10)
         return output
-class RepTailResNet(nn.Module):
+class RepTailResNet18(nn.Module):
     def __init__(self,output=100,nc_per_task = 10):
         super().__init__()
 
         self.feature_net = resnet18()
-        state_dict = torch.load('pre_train/resnet18.pth')
+        state_dict = torch.load('../pre_train/resnet18.pth')
+        state_dict.pop('fc.weight')
+        state_dict.pop('fc.bias')
+        self.feature_net.load_state_dict(state_dict)
+        self.last = torch.nn.Linear(self.feature_net.outlen, output)
+        self.weight_keys = []
+        for name,para in self.named_parameters():
+            temp=[]
+            if 'fc' not in name:
+                temp.append(name)
+                self.weight_keys.append(temp)
+    def forward(self,x,t,pre=False,is_con=False):
+        h = self.feature_net(x)
+        output = self.last(h)
+        if is_con:
+            # make sure we predict classes within the current task
+            if pre:
+                offset1 = 0
+                offset2 = int(t  * self.nc_per_task)
+            else:
+                offset1 = int(t * self.nc_per_task)
+                offset2 = int((t + 1) * self.nc_per_task)
+            if offset1 > 0:
+                output[:, :offset1].data.fill_(-10e10)
+            if offset2 < self.n_outputs:
+                output[:, offset2:self.n_outputs].data.fill_(-10e10)
+        return output
+
+class RepTailResNet152(nn.Module):
+    def __init__(self,output=100,nc_per_task = 10):
+        super().__init__()
+
+        self.feature_net = resnet152()
+        state_dict = torch.load('../pre_train/resnet152.pth')
         state_dict.pop('fc.weight')
         state_dict.pop('fc.bias')
         self.feature_net.load_state_dict(state_dict)
@@ -473,8 +344,7 @@ class RepTail(nn.Module):
             if offset2 < self.n_outputs:
                 output[:, offset2:self.n_outputs].data.fill_(-10e10)
         return output
-def compute_conv_output_size(Lin, kernel_size, stride=1, padding=0, dilation=1):
-    return int(np.floor((Lin + 2 * padding - dilation * (kernel_size - 1) - 1) / float(stride) + 1))
+
 class Cifar100Net(nn.Module):
     def __init__(self, inputsize):
         super().__init__()
@@ -536,9 +406,6 @@ class Cifar100Net(nn.Module):
             for idx, name in enumerate(names):
                 act[idx].register_hook(save_grad(name))
         return h
-
-
-
 
 class Cifar100WEIT(nn.Module):
     def __init__(self, inputsize,n_ouputs=100,nc_per_task=10):

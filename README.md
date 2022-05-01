@@ -271,4 +271,4 @@ python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Den
 ```
 #### 3.6.3 Experiment result
 - **算法在不同网络模型上的正确率**(x axis for task and y axis for accuracy)
-    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel.png)
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel.png)

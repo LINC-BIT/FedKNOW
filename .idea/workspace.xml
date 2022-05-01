@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac8ee188-539e-406a-ae69-46605dcefdaa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Experiment images/moremodel_acc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Experiment images/moremodel_fr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Experiment images/moremodel_time.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Nets.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Nets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ResNet18.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ResNet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/train_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/train_utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,20 +15,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/FedAvg_cifar10_2shards.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/FedAvg_cifar10_2shards_1000users.sh">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/single/main_fedrep.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -42,21 +27,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="125">
+              <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="368">
-                <caret line="273" column="55" lean-forward="true" selection-start-line="273" selection-start-column="55" selection-end-line="273" selection-end-column="55" />
+              <first_editor relative-caret-position="743">
+                <caret line="273" column="58" selection-start-line="273" selection-start-column="58" selection-end-line="273" selection-end-column="58" />
               </first_editor>
               <second_editor />
             </state>
@@ -64,10 +46,40 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/ResNet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1998">
+              <caret line="96" column="8" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/Nets.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1436">
+              <caret line="92" column="36" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
+              <folding>
+                <element signature="e#185#197#0" expanded="true" />
+                <element signature="e#10755#11996#0" />
+                <element signature="e#12037#13298#0" />
+                <element signature="e#13339#14580#0" />
+                <element signature="e#14621#15886#0" />
+                <element signature="e#15929#17234#0" />
+                <element signature="e#17266#18672#0" />
+                <element signature="e#18889#21360#0" />
+                <element signature="e#21400#26004#0" />
+                <element signature="e#26038#33273#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="146" column="30" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="30" />
+            <state relative-caret-position="-11">
+              <caret line="140" column="35" lean-forward="true" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
               <folding>
                 <element signature="e#122#166#0" expanded="true" />
               </folding>
@@ -78,8 +90,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+            <state relative-caret-position="25">
+              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/resnet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="315" selection-start-line="315" selection-end-line="324" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,17 +125,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="518">
               <caret line="223" column="37" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/shufflenetv2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2007">
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -143,6 +156,7 @@
       <find>model_urls</find>
       <find>FedKNOW</find>
       <find>Resnet18</find>
+      <find>resnet152</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,13 +171,14 @@
         <option value="$PROJECT_DIR$/models/layer.py" />
         <option value="$PROJECT_DIR$/models/Update.py" />
         <option value="$PROJECT_DIR$/models/Densenet.py" />
-        <option value="$PROJECT_DIR$/models/Nets.py" />
         <option value="$PROJECT_DIR$/multi/ServerStrategy/Fedavg.py" />
         <option value="$PROJECT_DIR$/multi/server.py" />
         <option value="$PROJECT_DIR$/utils/options.py" />
-        <option value="$PROJECT_DIR$/single/main_FedKNOW.py" />
-        <option value="$PROJECT_DIR$/utils/train_utils.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/single/main_FedKNOW.py" />
+        <option value="$PROJECT_DIR$/models/ResNet18.py" />
+        <option value="$PROJECT_DIR$/models/Nets.py" />
+        <option value="$PROJECT_DIR$/utils/train_utils.py" />
       </list>
     </option>
   </component>
@@ -189,7 +204,7 @@
             <path>
               <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
               <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
-              <item name="multi" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -261,19 +276,19 @@
       <option name="presentableId" value="Default" />
       <updated>1651300916339</updated>
       <workItem from="1651300917566" duration="10112000" />
-      <workItem from="1651327862854" duration="13986000" />
+      <workItem from="1651327862854" duration="14537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24098000" />
+    <option name="totallyTimeSpent" value="24649000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14765458" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14765458" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" />
@@ -283,7 +298,7 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.3340564" />
+      <window_info anchor="bottom" id="Run" order="8" visible="true" weight="0.3340564" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.27006507" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -306,7 +321,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/models/ResNet18.py</url>
+          <url>file://$PROJECT_DIR$/models/ResNet.py</url>
           <line>172</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
@@ -408,13 +423,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/ResNet18.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="127" column="51" selection-start-line="127" selection-start-column="8" selection-end-line="127" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/single/main_WEIT.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -491,16 +499,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/Nets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19563">
-          <caret line="3" column="21" lean-forward="true" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-          <folding>
-            <element signature="e#185#197#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/multi/main_FedKNOW.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -567,13 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/densenet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
@@ -591,33 +582,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
+    <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="25">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/resnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="315" selection-start-line="315" selection-end-line="324" selection-end-column="28" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
+    <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="146" column="30" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="30" />
-          <folding>
-            <element signature="e#122#166#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="125">
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="368">
-            <caret line="273" column="55" lean-forward="true" selection-start-line="273" selection-start-column="55" selection-end-line="273" selection-end-column="55" />
+          <first_editor relative-caret-position="743">
+            <caret line="273" column="58" selection-start-line="273" selection-start-column="58" selection-end-line="273" selection-end-column="58" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/ResNet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1998">
+          <caret line="96" column="8" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Nets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1436">
+          <caret line="92" column="36" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
+          <folding>
+            <element signature="e#185#197#0" expanded="true" />
+            <element signature="e#10755#11996#0" />
+            <element signature="e#12037#13298#0" />
+            <element signature="e#13339#14580#0" />
+            <element signature="e#14621#15886#0" />
+            <element signature="e#15929#17234#0" />
+            <element signature="e#17266#18672#0" />
+            <element signature="e#18889#21360#0" />
+            <element signature="e#21400#26004#0" />
+            <element signature="e#26038#33273#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <caret line="140" column="35" lean-forward="true" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+          <folding>
+            <element signature="e#122#166#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

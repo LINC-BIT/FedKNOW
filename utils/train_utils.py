@@ -2,7 +2,7 @@
 # credit goes to: Paul Pu Liang
 
 from torchvision import datasets, transforms
-from models.Nets import RepTailInception_v3,RepTailResNet,RepTailWideResNet,RepTailResNext,RepTailMobilenet,RepTailshufflenet,RepTail,RepTailSENet,RepTailDensnet
+from models.Nets import RepTailInception_v3,RepTailResNet18,RepTailResNet152,RepTailWideResNet,RepTailResNext,RepTailMobilenet,RepTailshufflenet,RepTail,RepTailSENet,RepTailDensnet
 from utils.sampling import noniid
 import os
 import json
@@ -132,8 +132,10 @@ def get_model(args):
     net_glob = None
     if args.model == '6layer_CNN' :
         net_glob = RepTail([3,32,32],output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'ResNet' :
-        net_glob = RepTailResNet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
+    if args.model == 'ResNet18' :
+        net_glob = RepTailResNet18(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
+    if args.model == 'ResNet152' :
+        net_glob = RepTailResNet152(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     if args.model == 'Inception' :
         net_glob = RepTailInception_v3(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     if args.model == 'WideResNet' :
