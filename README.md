@@ -189,18 +189,28 @@ python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:808
 ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png)
 **不同网络带宽在6-layer CNN以及ResNet模型下总通信时间(x axis for bandwidth and y axis for communication time)**
 ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png)
-### 3.3 多客户端以及多任务测试
+### 3.3 多客户端测试
 #### 3.3.1 Experiment setting
 |Devices|Models and data|Baselines|
 |--|--|--|
 |Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on CIFAR100<br>ResNet18 on CIFAR100+FC100+MiniImagNet+TintImagNet| GEM<br>FedWEIT
 #### 3.3.2 Experiment code
-**多客户端：**
 ```shell
+# 50 clients
+python single/main_FedKNOW.py --epochs=150 --num_users=50 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
+# 100 clients
 python single/main_FedKNOW.py --epochs=150 --num_users=100 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
 ```
-**多任务：**
-```shell
-python single/main_FedKNOW.py --epochs=400 --num_users=100 --frac=0.4 --model=ResNet18 --dataset=all --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
-```
 #### 3.3.3 Experiment 
+![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png)
+
+### 3.4 多任务测试
+#### 3.4.1 Experiment setting
+|Devices|Models and data|Baselines|
+|--|--|--|
+|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on CIFAR100<br>ResNet18 on CIFAR100+FC100+MiniImagNet+TintImagNet| GEM<br>FedWEIT
+#### 3.4.2 Experiment code
+```shell
+# dataset = MiniImageNet + TinyImageNet + cifar100 + FC100, task = 80 ,per_task_class = 5
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=400 --task=80 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
+```
