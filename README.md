@@ -174,14 +174,14 @@ python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:808
 	```shell
 	for ((i=0;i<20;i++));
 	do
-		python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
+		python multi/main_FedKNOW.py --client_id=$i --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
 	done
 	```
 - ResNet18 on TiniImageNet
 	```shell
 	for ((i=0;i<20;i++));
 	do
-		python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
+		python multi/main_FedKNOW.py --client_id=$i --model=ResNet18 --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
 	done
 	```
 #### 3.2.3 Experiment result 
@@ -193,7 +193,7 @@ python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:808
 #### 3.3.1 Experiment setting
 |Devices|Models and data|Baselines|
 |--|--|--|
-|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on CIFAR100<br>ResNet18 on CIFAR100+FC100+MiniImagNet+TintImagNet| GEM<br>FedWEIT
+|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on MiniImageNet| GEM<br>FedWEIT
 #### 3.3.2 Experiment code
 ```shell
 # 50 clients
@@ -210,7 +210,7 @@ python single/main_FedKNOW.py --epochs=150 --num_users=100 --frac=0.4 --model=Re
 #### 3.4.1 Experiment setting
 |Devices|Models and data|Baselines|
 |--|--|--|
-|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on CIFAR100<br>ResNet18 on CIFAR100+FC100+MiniImagNet+TintImagNet| GEM<br>FedWEIT
+|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on MiniImagNet+TintImagNet+CIFAR100+FC100| GEM<br>FedWEIT
 #### 3.4.2 Experiment code
 ```shell
 # dataset = MiniImageNet + TinyImageNet + cifar100 + FC100, task = 80 ,per_task_class = 5
@@ -218,24 +218,57 @@ python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Res
 ```
 #### 3.4.3 Experiment result
 - **算法在80个任务的平均准确率**(x axis for task and y axis for accuracy)
-    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel_acc.png)
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png)
 - **算法在80个任务的平均遗忘率**(x axis for task and y axis for average forgetting rate)
-    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel_fr.png)
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png)
 - **算法在80个任务的任务时间**(x axis for task and y axis for current task time)
-    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel_time.png)
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png)
 
 ### 3.5 参数存储比例测试
 #### 3.5.1 Experiment setting
 |Devices|Models and data|Baselines|
 |--|--|--|
-|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on CIFAR100<br>ResNet18 on CIFAR100+FC100+MiniImagNet+TintImagNet| GEM<br>FedWEIT
+|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on MiniImageNet| GEM<br>FedWEIT
 #### 3.5.2 Experiment code
 ```shell
-# store_rate = 0.05/0.1/0.2
-python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=All --num_classes=400 --task=80 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.05
+# store_rate = 0.05
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.05
+# store_rate = 0.1
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.1
+# store_rate = 0.2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.2
 ```
 #### 3.5.3 Experiment result
-- **算法使用不同存储比例时准确率**
+- **算法使用不同存储比例时准确率**(x axis for task and y axis for accuracy)
     ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png)
-- **算法使用不同存储比例时任务时间**
+- **算法使用不同存储比例时任务时间**(x axis for task and y axis for current task time)
     ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png)
+    
+### 3.6 适用性测试
+#### 3.6.1 Experiment setting
+|Devices|Models and data|Baselines|
+|--|--|--|
+|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|WideResNet50 on MiniImageNet<br>ResNeXt50 on MiniImageNet<br>ResNet152 on MiniImageNet<br>SENet18 on MiniImageNet<br>MobileNetV2 on MiniImageNet<br>ShuffleNetV2 on MiniImageNet<br>InceptionV3 on MiniImageNet<br>DenseNet on MiniImageNet| GEM<br>FedWEIT
+#### 3.6.2 Experiment code
+```shell
+# WideResNet50
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=WideResNet --dataset=All --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# ResNeXt50
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNeXt --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# ResNet152
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet152 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# SENet18
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=SENet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# MobileNetV2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=MobileNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
+# ShuffleNetV2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=MobileNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
+# InceptionV3
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Inception --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
+# DenseNet
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=DenseNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
+#
+```
+#### 3.6.3 Experiment result
+- **算法在不同网络模型上的正确率**(x axis for task and y axis for accuracy)
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel.png)

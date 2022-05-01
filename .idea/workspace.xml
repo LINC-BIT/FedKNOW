@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac8ee188-539e-406a-ae69-46605dcefdaa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Experiment images/moremodel_acc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/moremodel_fr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/moremodel_time.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/train_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/train_utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,8 +55,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="418">
-                <caret line="237" column="2" selection-start-line="237" selection-start-column="2" selection-end-line="237" selection-end-column="2" />
+              <first_editor relative-caret-position="368">
+                <caret line="273" column="55" lean-forward="true" selection-start-line="273" selection-start-column="55" selection-end-line="273" selection-end-column="55" />
               </first_editor>
               <second_editor />
             </state>
@@ -62,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1272">
-              <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
+            <state relative-caret-position="389">
+              <caret line="146" column="30" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="30" />
               <folding>
                 <element signature="e#122#166#0" expanded="true" />
               </folding>
@@ -138,6 +142,7 @@
       <find>RUN</find>
       <find>model_urls</find>
       <find>FedKNOW</find>
+      <find>Resnet18</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -156,8 +161,8 @@
         <option value="$PROJECT_DIR$/multi/ServerStrategy/Fedavg.py" />
         <option value="$PROJECT_DIR$/multi/server.py" />
         <option value="$PROJECT_DIR$/utils/options.py" />
-        <option value="$PROJECT_DIR$/utils/train_utils.py" />
         <option value="$PROJECT_DIR$/single/main_FedKNOW.py" />
+        <option value="$PROJECT_DIR$/utils/train_utils.py" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -256,15 +261,15 @@
       <option name="presentableId" value="Default" />
       <updated>1651300916339</updated>
       <workItem from="1651300917566" duration="10112000" />
-      <workItem from="1651327862854" duration="10830000" />
+      <workItem from="1651327862854" duration="13986000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20942000" />
+    <option name="totallyTimeSpent" value="24098000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -278,7 +283,7 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.34056398" />
+      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.3340564" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.27006507" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -586,16 +591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1272">
-          <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
-          <folding>
-            <element signature="e#122#166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -606,11 +601,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="146" column="30" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="30" />
+          <folding>
+            <element signature="e#122#166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="418">
-            <caret line="237" column="2" selection-start-line="237" selection-start-column="2" selection-end-line="237" selection-end-column="2" />
+          <first_editor relative-caret-position="368">
+            <caret line="273" column="55" lean-forward="true" selection-start-line="273" selection-start-column="55" selection-end-line="273" selection-end-column="55" />
           </first_editor>
           <second_editor />
         </state>

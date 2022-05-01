@@ -146,6 +146,8 @@ def get_model(args):
         net_glob = RepTailshufflenet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     if args.model == 'DenseNet' :
         net_glob = RepTailDensnet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
+    if args.model == 'SENet' :
+        net_glob = RepTailSENet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     else:
         exit('Error: unrecognized model')
     print(net_glob)
