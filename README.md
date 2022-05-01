@@ -267,7 +267,6 @@ python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Mob
 python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Inception --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
 # DenseNet
 python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=DenseNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
-#
 ```
 #### 3.6.3 Experiment result
 - **算法在不同网络模型上的正确率**(x axis for task and y axis for accuracy)
