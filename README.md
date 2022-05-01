@@ -1,7 +1,6 @@
 # FedKNOW
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/42ca0c6c6fc149e8a7a3c9c7508e689c.png)
 ## 1 介绍
-****
 目前，在联邦学习的场景下FedKNOW对图像分类的8种网络模型下取得了不错的效果，包括：ResNet，ResNeXt，MobileNet，WideResNet，SENet，ShuffleNet，Inception，DenseNet。
 - [ResNet](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html) : 在图像分类中，由多个卷积层和池化层进行提取图片信息。但随着网络的深度增加，深度神经网络出现梯度消失(爆炸)问题以及网络退化。对于梯度消失(爆炸)的问题，ResNet添加了BatchNorm层进行约束，而对于网络退化，ResNet则建立了残差网络结果，将每一层的输入添加映射到下一层的输入中。
 - [Inception](https://ieeexplore.ieee.org/document/7780677)：卷积网络为了提取高维特征，一般方式进行更深层卷积，但是随之带来网络变大的问题。Inception模块提出可以使网络变宽，在保证模型质量的前提下，减少参数个数，提取高维特征。在Inception结构，首先通过1x1卷积来降低通道数把信息聚集一下，再进行不同尺度的特征提取以及池化，得到多个尺度的信息，最后将特征进行叠加输出。
@@ -12,7 +11,6 @@
 - [ShuffleNet](https://arxiv.org/abs/1807.11164)：ShuffleNet的设计目标也是如何利用有限的计算资源来达到最好的模型精度，通过使用pointwise group convolution和channel shuffle两种操作来进行解决。ShuffleNet基本单元由ResNet出发，将ResNet中1x1的卷积层替换为group convolution，同时添加channel shuffle操作，用于降低参数量。
 - [DenseNet](https://arxiv.org/pdf/1707.06990.pdf)：DenseNet模型，它的基本思路与ResNet一致，但是它建立的是前面所有层与后面层的密集连接，通过特征在channel上的连接来实现特征重用。
 ## 2 代码相关
-****
 ### 2.1 安装
 **相关准备**
 - Linux and Windows 
@@ -80,7 +78,6 @@ python single/main_FedKNOW.py --alg fedknow --dataset [dataset] --model [mdoel]
 	```
 这里的参数描述和单设备参数描述一致，新添加的`client_id`表示客户端标识符, `ip`表示客户端连接服务器的ip地址，用于服务器确定具体的标识。对于每一个算法的配置信息我们放到了`multi/scripts/`。
 ## 3 实验细节描述
-****
 ### 3.1 在不同的工作负载运行结果
 #### 3.1.1 Experiment setting
 |Devices|Models and data|Baselines|
