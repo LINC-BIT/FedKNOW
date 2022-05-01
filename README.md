@@ -127,7 +127,8 @@ python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:808
 	done
 	```
 **Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。其他baseline的运行说明在`scripts/DifWork`中。
-#### 3.1.3 Experiment result (x axis for time and y axis for inference accuracy)
+#### 3.1.3 Experiment result 
+- **不同算法在不同工作负载上的运行时间和准确率**(x axis for time and y axis for inference accuracy)
 ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
 ### 3.2 在不同带宽下运行结果
 #### 3.2.1 Experiment setting
