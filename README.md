@@ -37,7 +37,7 @@
 	```
 ### 2.2 单设备运行
 FedKNOW 根据下面的命令进行运行：
-```python
+```shell
 python single/main_FedKNOW.py --alg fedknow --dataset [dataset] --model [mdoel]
 --num_users [num_users]  --shard_per_user [shard_per_user] --frac [frac] 
 --local_bs [local_bs] --lr [lr] --task [task] --epoch [epoch]  --local_ep 
@@ -128,7 +128,7 @@ python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:808
 	```
 **Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。其他baseline的运行说明在`scripts/DifWork`中。
 #### 3.1.3 Experiment result (x axis for time and y axis for inference accuracy)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/978b3038da994165a5040b992fc54ba1.png)
+![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
 ### 3.2 在不同带宽下运行结果
 #### 3.2.1 Experiment setting
 |Devices|Models and data|Baselines|
@@ -186,9 +186,9 @@ python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:808
 	```
 #### 3.2.3 Experiment result 
 **不同数据集在最大带宽为1MB/s 下的通信时间(x axis for dataset and y axis for communication time)**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/feea3be6af5f4fb2a009c0e992afbb3b.png)
+![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png)
 **不同网络带宽在6-layer CNN以及ResNet模型下总通信时间(x axis for bandwidth and y axis for communication time)**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/646f9ced5b264a62bc07a5e5c9a28c25.png)
+![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png)
 ### 3.3 多客户端以及多任务测试
 #### 3.3.1 Experiment setting
 |Devices|Models and data|Baselines|
