@@ -54,7 +54,7 @@ def get_data(args):
         # for dataset_train,dataset_test in zip(dataset_trains,dataset_tests):
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes)
         dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes, rand_set_all=rand_set_all)
-    elif args.dataset == 'miniimagenet':
+    elif args.dataset == 'MiniImageNet':
         Miniimagenet = MiniImageTask(root='../data/mini-imagenet',json_path="data/mini-imagenet/classes_name.json",task_num=10)
         dataset_train, dataset_test = Miniimagenet.getTaskDataSet()
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,dataname='miniimagenet')
@@ -67,14 +67,14 @@ def get_data(args):
                                                 dataname='FC100')
         dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
                                                rand_set_all=rand_set_all, dataname='FC100')
-    elif args.dataset == 'Corn50':
+    elif args.dataset == 'CORe50':
         Corn50 = Core50Task(root='../data', task_num=11)
         dataset_train, dataset_test = Corn50.getTaskDataSet()
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,
                                                 dataname='Corn50')
         dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
                                                rand_set_all=rand_set_all, dataname='Corn50')
-    elif args.dataset == 'tinyimagenet':
+    elif args.dataset == 'TinyImageNet':
         Tinyimagenet = TinyimageTask(root='../data/tiny-imagenet-200',task_num=20)
         dataset_train, dataset_test = Tinyimagenet.getTaskDataSet()
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,

@@ -5,7 +5,6 @@ import pandas as pd
 import torch
 from torch import nn
 from torch.utils.tensorboard import SummaryWriter
-
 from utils.options import args_parser
 from utils.train_utils import get_data, get_model
 from models.Update import DatasetSplit
@@ -21,7 +20,7 @@ if __name__ == '__main__':
     args.device = torch.device('cuda:{}'.format(args.gpu) if torch.cuda.is_available() and args.gpu != -1 else 'cpu')
 
     lens = np.ones(args.num_users)
-    if 'cifar' in args.dataset or args.dataset == 'mnist' or 'miniimagenet' in args.dataset or 'FC100' in args.dataset or 'Corn50' in args.dataset or 'tinyimagenet' in args.dataset:
+    if 'cifar' in args.dataset  or 'MiniImageNet' in args.dataset or 'FC100' in args.dataset or 'CORe50' in args.dataset or 'TinyImageNet' in args.dataset:
         dataset_train, dataset_test, dict_users_train, dict_users_test = get_data(args)
         for idx in dict_users_train.keys():
             np.random.shuffle(dict_users_train[idx])
@@ -29,7 +28,7 @@ if __name__ == '__main__':
         print('Not this dataset!!')
 
     print(args.alg)
-    write = SummaryWriter('./log/FPKD_' + args.dataset+'_'+'round' + str(args.round) + '_frac' + str(args.frac) +'_RepTailshufflenet')
+    write = SummaryWriter('./log/FedKNOW_' + args.dataset+'_'+'round' + str(args.round) + '_frac' + str(args.frac) +'_RepTailshufflenet')
     # build model
     # net_glob = get_model(args)
     net_glob = get_model(args)
@@ -43,7 +42,7 @@ if __name__ == '__main__':
     net_keys = [*net_glob.state_dict().keys()]
 
     # specify the representation parameters (in w_glob_keys) and head parameters (all others)
-    if args.alg == 'fedrep' or args.alg == 'fedknow':
+    if args.alg == 'fedrep' or args.alg == 'FedKNOW':
         if 'cifar' in args.dataset or 'miniimagenet' in args.dataset or 'FC100' in args.dataset or 'Corn50' in args.dataset or 'tinyimagenet' in args.dataset:
             # w_glob_keys = [[k] for k,_ in net_glob.feature_net.named_parameters()]
             w_glob_keys = [net_glob.weight_keys[i] for i in [j for j in range(len(net_glob.weight_keys))]]
@@ -53,7 +52,7 @@ if __name__ == '__main__':
     print(total_num_layers)
     print(w_glob_keys)
     print(net_keys)
-    if args.alg == 'fedrep' or args.alg == 'fedper' or args.alg == 'fedknow':
+    if args.alg == 'fedrep' or args.alg == 'fedper' or args.alg == 'FedKNOW':
         num_param_glob = 0
         num_param_local = 0
         for key in net_glob.state_dict().keys():
@@ -104,12 +103,6 @@ if __name__ == '__main__':
             glob_fisher = None
             start_in = time.time()
             tr_dataloaders = DataLoader(DatasetSplit(dataset_train[task],dict_users_train[idx][:args.m_ft]),batch_size=args.local_bs, shuffle=True,num_workers=2)
-                # if args.epochs == iter:
-                #     local = LocalUpdate(args=args, dataset=dataset_train[task], idxs=dict_users_train[idx][:args.m_ft])
-                # else:
-                #     local = LocalUpdate(args=args, dataset=dataset_train[task], idxs=dict_users_train[idx][:args.m_tr])
-
-                # appr = Appr(net, sbatch=args.batch_size, lr=args.lr, nepochs=args.nepochs, args=args, log_name=log_name)
             net_local = copy.deepcopy(net_glob)
             w_local = net_local.state_dict()
             if args.alg != 'fedavg' and args.alg != 'prox':
@@ -196,29 +189,14 @@ if __name__ == '__main__':
                 accs10 += acc_test / 10
 
             # below prints the global accuracy of the single global model for the relevant algs
-            if args.alg == 'fedavg' or args.alg == 'prox':
-                acc_test, loss_test = test_img_local_all(net_glob, args, dataset_test, dict_users_test,
-                                                         w_locals=None, indd=indd, dataset_train=dataset_train,
-                                                         dict_users_train=dict_users_train, return_all=False)
-                if iter != args.epochs:
-                    print(
-                        'Round {:3d}, Global train loss: {:.3f}, Global test loss: {:.3f}, Global test accuracy: {:.2f}'.format(
-                            iter, loss_avg, loss_test, acc_test))
-                else:
-                    print(
-                        'Final Round, Global train loss: {:.3f}, Global test loss: {:.3f}, Global test accuracy: {:.2f}'.format(
-                            loss_avg, loss_test, acc_test))
             if iter >= args.epochs - 10 and iter != args.epochs:
                 accs10_glob += acc_test / 10
 
-    # print('Average accuracy final 10 rounds: {}'.format(accs10))
-    # if args.alg == 'fedavg' or args.alg == 'prox':
-    #     print('Average global accuracy final 10 rounds: {}'.format(accs10_glob))
     end = time.time()
     print(end - start)
     print(times)
     print(accs)
-    base_dir = './save/FPKD/accs_FPKD_lambda_'+str(args.lamb) +str('_') + args.alg + '_' + args.dataset + '_' + str(args.num_users) + '_' + str(
+    base_dir = './save/FedKNOW/accs_FedKNOW_lambda_'+str(args.lamb) +str('_') + args.alg + '_' + args.dataset + '_' + str(args.num_users) + '_' + str(
                 args.shard_per_user) + '_iterFinal' + '_frac_'+str(args.frac)+ '_RepTailshufflenet.csv'
     user_save_path = base_dir
     accs = np.array(accs)

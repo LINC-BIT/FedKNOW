@@ -80,5 +80,9 @@ def args_parser():
                         help='Number of epochs per task')
     parser.add_argument('--Co2Lis_train', type=bool, default=False,
                         help='Number of epochs per task')
+    parser.add_argument('--client_id', type=int, default=0,
+                        help='client ID')
+    parser.add_argument('--ip', type=str, default=0,
+                        help='ip address')
     args = parser.parse_args()
     return args
