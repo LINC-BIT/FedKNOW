@@ -223,3 +223,19 @@ python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Res
     ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel_fr.png)
 - **算法在80个任务的任务时间**(x axis for task and y axis for current task time)
     ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel_time.png)
+
+### 3.5 参数存储比例测试
+#### 3.5.1 Experiment setting
+|Devices|Models and data|Baselines|
+|--|--|--|
+|Ubuntu 18.04.4 LTS<br>Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz<br>Quadro RTX8000|ResNet18 on CIFAR100<br>ResNet18 on CIFAR100+FC100+MiniImagNet+TintImagNet| GEM<br>FedWEIT
+#### 3.5.2 Experiment code
+```shell
+# store_rate = 0.05/0.1/0.2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=All --num_classes=400 --task=80 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.05
+```
+#### 3.5.3 Experiment result
+- **算法使用不同存储比例时准确率**
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png)
+- **算法使用不同存储比例时任务时间**
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png)
