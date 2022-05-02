@@ -147,7 +147,7 @@ sudo nload -m
 
 **运行服务器：**
 ```shell
-python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8080
+python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
 ```
 **运行客户端：**
 - 6-layer CNN on Cifar100
