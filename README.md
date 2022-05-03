@@ -140,7 +140,7 @@ python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:808
 ```shell
 sudo wondershaper [网卡名] 1000 1000 # 1000表示为最大速度为1000KB/s, 实际中网络会存在波动，可以调整上限值。
 ```
-**查看运行过程中服务器网速情况：**
+**查看运行过程中服务器网络情况：**
 ```shell
 sudo nload -m
 ```
