@@ -2,6 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac8ee188-539e-406a-ae69-46605dcefdaa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Experiment images/bigscale.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/bigscale_acc.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/bigscale_acc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/bigscale_fr.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/bigscale_fr.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/difbandwidth.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/difbandwidth.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/difctime.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/difctime.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/difporpotion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/difporpotion_acc.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/difporpotion_acc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/difporpotion_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/difporpotion_time.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/difworkerloader.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/difworkerloader.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/moretask.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/moretask_acc.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/moretask_acc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/moretask_fr.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/moretask_fr.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment images/moretask_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment images/moretask_time.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +47,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="318">
-                <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
+              <first_editor relative-caret-position="443">
+                <caret line="227" column="69" lean-forward="true" selection-start-line="227" selection-start-column="69" selection-end-line="227" selection-end-column="69" />
               </first_editor>
               <second_editor />
             </state>
@@ -45,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/ResNet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1998">
-              <caret line="96" column="8" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="8" />
+            <state relative-caret-position="208">
+              <caret line="233" column="26" selection-end-line="240" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -54,11 +67,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/Nets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1436">
-              <caret line="92" column="36" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
+            <state relative-caret-position="325">
+              <caret line="87" selection-start-line="87" selection-end-line="118" selection-end-column="21" />
               <folding>
                 <element signature="e#185#197#0" expanded="true" />
-                <element signature="e#10755#11996#0" />
+                <element signature="e#9498#10716#0" />
                 <element signature="e#12037#13298#0" />
                 <element signature="e#13339#14580#0" />
                 <element signature="e#14621#15886#0" />
@@ -273,12 +286,12 @@
       <option name="presentableId" value="Default" />
       <updated>1651300916339</updated>
       <workItem from="1651300917566" duration="10112000" />
-      <workItem from="1651327862854" duration="17305000" />
+      <workItem from="1651327862854" duration="21053000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27417000" />
+    <option name="totallyTimeSpent" value="31165000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -315,15 +328,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/models/ResNet.py</url>
-          <line>172</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="len(self.feature_net.state_dict().keys())" language="Python" />
@@ -603,20 +607,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <caret line="140" column="35" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+          <folding>
+            <element signature="e#122#166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models/ResNet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1998">
-          <caret line="96" column="8" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="8" />
+        <state relative-caret-position="208">
+          <caret line="233" column="26" selection-end-line="240" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/Nets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1436">
-          <caret line="92" column="36" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
+        <state relative-caret-position="325">
+          <caret line="87" selection-start-line="87" selection-end-line="118" selection-end-column="21" />
           <folding>
             <element signature="e#185#197#0" expanded="true" />
-            <element signature="e#10755#11996#0" />
+            <element signature="e#9498#10716#0" />
             <element signature="e#12037#13298#0" />
             <element signature="e#13339#14580#0" />
             <element signature="e#14621#15886#0" />
@@ -629,21 +643,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="140" column="35" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
-          <folding>
-            <element signature="e#122#166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="318">
-            <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
+          <first_editor relative-caret-position="443">
+            <caret line="227" column="69" lean-forward="true" selection-start-line="227" selection-start-column="69" selection-end-line="227" selection-end-column="69" />
           </first_editor>
           <second_editor />
         </state>
