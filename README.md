@@ -93,57 +93,54 @@
 
 ## 3 实验细节描述
 ### 3.1 在不同的工作负载运行结果
-#### 3.1.1 Experiment setting
-|Devices|Models and data|Baselines|
-|--|--|--|
-|<br>2 Jetson AGX, 2 Jetson TX2, <br>8 Jetson Xavier NX, <br>and 8 Jetson Nano platforms.<br>|6-layer CNN on CIFAR100<br>6-layer CNN on FC100<br>6-layer CNN on CORe50<br>ResNet18 on MiniImageNet<br>ResNet18 on TiniImageNet|GEM<br>BCN<br>Co2L<br>EWC<br>MAS<br>AGS-CL<br>FedAvg<br>APFL<br>FedRep<br>FLCN<br>FedWEIT
 
-#### 3.1.2 Experiment code
-**运行服务器：**
+1. **Experiment code**
+    **运行服务器：**
+    
+    ```shell
+    python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8080
+    ```
+    **运行客户端：**
+    - 6-layer CNN on Cifar100
+        ```shell
+        for ((i=0;i<20;i++));
+        do
+            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+        done
+        ```
+    - 6-layer CNN on FC100
+        ```shell
+        for ((i=0;i<20;i++));
+        do
+            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+        done
+        ```
+    - 6-layer CNN on CORe50
+        ```shell
+        for ((i=0;i<20;i++));
+        do
+            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+        done
+        ```
+    - ResNet18 on MiniImageNet
+        ```shell
+        for ((i=0;i<20;i++));
+        do
+            python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
+        done
+        ```
+    - ResNet18 on TiniImageNet
+        ```shell
+        for ((i=0;i<20;i++));
+        do
+            python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
+        done
+        ```
+    **Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。其他baseline的运行说明在`scripts/DifWork`中。
+2. **Experiment result**
 
-```shell
-python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8080
-```
-**运行客户端：**
-- 6-layer CNN on Cifar100
-	```shell
-	for ((i=0;i<20;i++));
-	do
-		python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-	done
-	```
-- 6-layer CNN on FC100
-	```shell
-	for ((i=0;i<20;i++));
-	do
-		python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-	done
-	```
-- 6-layer CNN on CORe50
-	```shell
-	for ((i=0;i<20;i++));
-	do
-		python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-	done
-	```
-- ResNet18 on MiniImageNet
-	```shell
-	for ((i=0;i<20;i++));
-	do
-		python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
-	done
-	```
-- ResNet18 on TiniImageNet
-	```shell
-	for ((i=0;i<20;i++));
-	do
-		python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
-	done
-	```
-**Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。其他baseline的运行说明在`scripts/DifWork`中。
-#### 3.1.3 Experiment result 
-- **不同算法在不同工作负载上的运行时间和准确率**(x axis for time and y axis for inference accuracy)
-![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
+    - **不同算法在不同工作负载上的运行时间和准确率**(x axis for time and y axis for inference accuracy)
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
 ### 3.2 在不同带宽下运行结果
 1. **Experiment code**
 
