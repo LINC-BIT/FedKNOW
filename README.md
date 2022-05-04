@@ -5,13 +5,14 @@
 - [2 代码相关](#2-code-and-installation)
   * [2.1 代码](#21-code)
   * [2.2 安装](#22-installation)
-- [3 实验细节描述](#3-repository-of-dnns-in-vision-tasks)
-  * [3.1 在不同的工作负载测试](#31-supported-models)
-  * [3.2 在不同带宽下测试](#32-full-examples)
-  * [3.3 大规模测试](#33-how-to-implement-new-models-in-legodnn)
-  * [3.4 多任务测试](#33-how-to-implement-new-models-in-legodnn)
-  * [3.5 参数存储比例测试](#33-how-to-implement-new-models-in-legodnn)
-  * [3.6 适用性测试](#33-how-to-implement-new-models-in-legodnn)
+- [3 Supported models in image classification]()
+- [4 实验细节描述](#3-repository-of-dnns-in-vision-tasks)
+  * [4.1 在不同的工作负载测试](#31-supported-models)
+  * [4.2 在不同带宽下测试](#32-full-examples)
+  * [4.3 大规模测试](#33-how-to-implement-new-models-in-legodnn)
+  * [4.4 多任务测试](#33-how-to-implement-new-models-in-legodnn)
+  * [4.5 参数存储比例测试](#33-how-to-implement-new-models-in-legodnn)
+  * [4.6 适用性测试](#33-how-to-implement-new-models-in-legodnn)
 ## 1 介绍
 目前，在联邦学习的场景下FedKNOW对图像分类的8种网络模型下取得了不错的效果，包括：ResNet，ResNeXt，MobileNet，WideResNet，SENet，ShuffleNet，Inception，DenseNet。
 - [ResNet](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html) : 在图像分类中，由多个卷积层和池化层进行提取图片信息。但随着网络的深度增加，深度神经网络出现梯度消失(爆炸)问题以及网络退化。对于梯度消失(爆炸)的问题，ResNet添加了BatchNorm层进行约束，而对于网络退化，ResNet则建立了残差网络结果，将每一层的输入添加映射到下一层的输入中。
@@ -90,9 +91,19 @@
 	git clone https://github.com/LINC-BIT/FedKNOW.git
 	pip install -r requirements.txt
 	```
-
-## 3 实验细节描述
-### 3.1 在不同的工作负载运行结果
+## 3 Supported models in image classification
+  ||Model Name|Data|Script|
+  |--|--|--|--|
+  |&#9745;|[ResNet (CVPR'2016)](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/ResNet.py)|
+  |&#9745;|[MobileNetV2 (CVPR'2018)](https://arxiv.org/abs/1801.04381)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/mobilenet.py)|
+  |&#9745;|[ResNeXt (CVPR'2017)](https://arxiv.org/abs/1611.05431)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/ResNet.py)|
+  |&#9745;|[InceptionV3(CVPR'2016)](https://ieeexplore.ieee.org/document/7780677/)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/inception_v3.py)|
+  |&#9745;|[WideResNet (BMVC'2016)](https://dx.doi.org/10.5244/C.30.87)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/ResNet.py)|
+  |&#9745;|[ShuffleNetV2 (CVPR'2017)](https://arxiv.org/abs/1807.11164)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/shufflenetv2.py)|
+  |&#9745;|[DenseNet (ECCV'2018)](https://arxiv.org/pdf/1707.06990.pdf)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/Densenet.py)|
+  |&#9745;|[SENet (CVPR'2018)](https://ieeexplore.ieee.org/document/341010)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/SENet.py)|
+## 4 实验细节描述
+### 4.1 在不同的工作负载运行结果
 
 1. **Experiment code**
     **运行服务器：**
@@ -141,7 +152,7 @@
 
     - **不同算法在不同工作负载上的运行时间和准确率**(x axis for time and y axis for inference accuracy)
     ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
-### 3.2 在不同带宽下运行结果
+### 4.2 在不同带宽下运行结果
 1. **Experiment code**
 
     **限制服务器网速：**
@@ -199,7 +210,7 @@
         ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png)
     - **算法在不同网络带宽的总通信时间(x axis for bandwidth and y axis for communication time)**
         ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png)
-### 3.3 大规模测试
+### 4.3 大规模测试
 1. **Experiment code**
 
     ```shell
@@ -214,7 +225,7 @@
         ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png)
     - **算法在50个客户端以及100个客户端的下的平均遗忘率**(x axis for task and y axis for average forgetting rate)
         ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png)
-### 3.4 多任务测试
+### 4.4 多任务测试
 1. **Experiment code**
 
     ```shell
@@ -230,7 +241,7 @@
     - **算法在80个任务的任务时间**(x axis for task and y axis for current task time)
         ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png)
 
-### 3.5 参数存储比例测试
+### 4.5 参数存储比例测试
 1. **Experiment code**
     ```shell
     # store_rate = 0.05
@@ -247,7 +258,7 @@
     - **算法使用不同存储比例时任务时间**(x axis for task and y axis for current task time)
         ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png)
     
-### 3.6 适用性测试
+### 4.6 适用性测试
 1. **Experiment code**
 
     ```shell
