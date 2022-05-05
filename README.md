@@ -117,14 +117,14 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
 ## 3 Supported models in image classification
 ||Model Name|Data|Script|
 |--|--|--|--|
-|&#9745;|[ResNet (CVPR'2016)](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/ResNet.py)|
-|&#9745;|[MobileNetV2 (CVPR'2018)](https://arxiv.org/abs/1801.04381)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/mobilenet.py)|
-|&#9745;|[ResNeXt (CVPR'2017)](https://arxiv.org/abs/1611.05431)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/ResNet.py)|
-|&#9745;|[InceptionV3(CVPR'2016)](https://ieeexplore.ieee.org/document/7780677/)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/inception_v3.py)|
-|&#9745;|[WideResNet (BMVC'2016)](https://dx.doi.org/10.5244/C.30.87)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/ResNet.py)|
-|&#9745;|[ShuffleNetV2 (CVPR'2017)](https://arxiv.org/abs/1807.11164)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/shufflenetv2.py)|
-|&#9745;|[DenseNet (ECCV'2018)](https://arxiv.org/pdf/1707.06990.pdf)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/Densenet.py)|
-|&#9745;|[SENet (CVPR'2018)](https://ieeexplore.ieee.org/document/341010)|[MiniImageNet](http://www.cs.toronto.edu/~kriz/cifar.html)|[Demo](models/SENet.py)|
+|&#9745;|[ResNet (CVPR'2016)](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/ResNet.py)|
+|&#9745;|[MobileNetV2 (CVPR'2018)](https://arxiv.org/abs/1801.04381)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/mobilenet.py)|
+|&#9745;|[ResNeXt (CVPR'2017)](https://arxiv.org/abs/1611.05431)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/ResNet.py)|
+|&#9745;|[InceptionV3(CVPR'2016)](https://ieeexplore.ieee.org/document/7780677/)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/inception_v3.py)|
+|&#9745;|[WideResNet (BMVC'2016)](https://dx.doi.org/10.5244/C.30.87)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/ResNet.py)|
+|&#9745;|[ShuffleNetV2 (ECCV'2018)](https://arxiv.org/abs/1807.11164)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/shufflenetv2.py)|
+|&#9745;|[DenseNet](https://arxiv.org/pdf/1707.06990.pdf)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/Densenet.py)|
+|&#9745;|[SENet (CVPR'2018)](https://ieeexplore.ieee.org/document/341010)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/SENet.py)|
 ## 4 Experiemts
 ### 4.1 Under different workloads (model and dataset)
 
