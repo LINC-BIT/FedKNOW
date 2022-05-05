@@ -1,4 +1,5 @@
 # FedKNOW
+[English](README.md) | 简体中文
 ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/FedKNOW_architecture.png)
 ## Table of contents
 - [1 介绍](#1-介绍)
