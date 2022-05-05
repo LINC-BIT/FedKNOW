@@ -1,4 +1,5 @@
 # FedKNOW
+English | [简体中文](README_zh-CN.md)
 ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/FedKNOW_architecture.png)
 
 ## Table of contents
