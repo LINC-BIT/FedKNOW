@@ -16,7 +16,7 @@ class Cifar100Task():
         self.root = root
         self.task_num = task_num
         self.transform_train = data_transform['train']
-        self.transform = data_transform['val']
+        self.transform = data_transform['test']
 
     def getTaskDataSet(self):
         trainDataset = myCIFAR100(root=self.root, train=True, transform=self.transform_train, download=True, task_num=self.task_num)

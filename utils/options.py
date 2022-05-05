@@ -15,6 +15,7 @@ def args_parser():
     parser.add_argument('--local_test_bs', type=int, default=50, help="the number  of local test epochs: E")
     parser.add_argument('--local_bs', type=int, default=40, help="local batch size: B")
     parser.add_argument('--bs', type=int, default=100, help="test batch size")
+    parser.add_argument('--optim', type=str, default='SGD', help="optimizer")
     parser.add_argument('--lr', type=float, default=0.001, help="learning rate")
     parser.add_argument('--momentum', type=float, default=0.5, help="SGD momentum (default: 0.5)")
     parser.add_argument('--split', type=str, default='user', help="train-test split type, user or sample")

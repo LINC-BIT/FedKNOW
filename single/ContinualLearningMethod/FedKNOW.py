@@ -148,13 +148,15 @@ class Appr(object):
         self.nepochs = nepochs
         self.tr_dataloader = tr_dataloader
         self.lr = lr
+        self.lr_decay = args.lr_decay
         self.lr_min = lr_min * 1 / 3
         self.lr_factor = lr_factor
         self.lr_patience = lr_patience
         self.clipgrad = clipgrad
         self.ce = torch.nn.CrossEntropyLoss()
+        self.optim_type = args.optim
         self.optimizer = self._get_optimizer()
-        self.pack_optimizer = torch.optim.Adam(self.packmodel.parameters(), lr=lr)
+        self.pack_optimizer = self._get_optimizer()
         self.lamb = args.lamb
         self.e_rep = args.local_rep_ep
         self.old_task=-1
@@ -172,8 +174,10 @@ class Appr(object):
         self.tr_dataloader = tr_dataloader
     def _get_optimizer(self, lr=None):
         if lr is None: lr = self.lr
-
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
+        if "SGD" in self.optim_type:
+            optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+        else:
+            optimizer = torch.optim.Adam(self.model.parameters(), lr=lr,weight_decay=self.lr_decay)
         # self.momentum = 0.9
         # self.weight_decay = 0.0001
         #

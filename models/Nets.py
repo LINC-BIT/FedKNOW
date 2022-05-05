@@ -37,6 +37,7 @@ class RepTailSENet(nn.Module):
         self.last = torch.nn.Linear(512, output)
         self.weight_keys = []
         self.nc_per_task = nc_per_task
+        self.n_outputs = output
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
@@ -66,6 +67,7 @@ class RepTailDensnet(nn.Module):
         self.last = torch.nn.Linear(512, output)
         self.weight_keys = []
         self.nc_per_task = nc_per_task
+        self.n_outputs = output
         for name,para in self.named_parameters():
             temp=[]
             if 'last' not in name:
@@ -99,6 +101,7 @@ class RepTailResNet18(nn.Module):
         self.last = torch.nn.Linear(self.feature_net.outlen, output)
         self.weight_keys = []
         self.nc_per_task = nc_per_task
+        self.n_outputs = output
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
@@ -133,6 +136,7 @@ class RepTailResNet152(nn.Module):
         self.last = torch.nn.Linear(self.feature_net.outlen, output)
         self.weight_keys = []
         self.nc_per_task = nc_per_task
+        self.n_outputs = output
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
@@ -167,6 +171,7 @@ class RepTailResNext(nn.Module):
         self.last = torch.nn.Linear(self.feature_net.outlen, output)
         self.weight_keys = []
         self.nc_per_task = nc_per_task
+        self.n_outputs = output
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
@@ -200,6 +205,8 @@ class RepTailMobilenet(nn.Module):
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(self.feature_net.last_channel, output)
         self.weight_keys = []
+        self.n_outputs = output
+        self.nc_per_task = nc_per_task
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
@@ -233,6 +240,7 @@ class RepTailWideResNet(nn.Module):
         self.last = torch.nn.Linear(self.feature_net.outlen, output)
         self.weight_keys = []
         self.nc_per_task = nc_per_task
+        self.n_outputs = output
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
@@ -265,6 +273,7 @@ class RepTailshufflenet(nn.Module):
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(self.feature_net._stage_out_channels[-1], output)
         self.nc_per_task = nc_per_task
+        self.n_outputs = output
         self.weight_keys = []
         for name,para in self.named_parameters():
             temp=[]
@@ -299,6 +308,7 @@ class RepTailInception_v3(nn.Module):
         self.last = torch.nn.Linear(2048, output)
         self.weight_keys = []
         self.nc_per_task = nc_per_task
+        self.n_outputs = output
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:

@@ -39,13 +39,13 @@ def get_data(args):
             data_transform = complex_data_transform
         cifar100 = Cifar100Task('../../FedRep-main/data/cifar100',task_num=10,data_transform=data_transform)
         dataset_train,dataset_test = cifar100.getTaskDataSet()
-        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes)
-        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes, rand_set_all=rand_set_all)
+        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes // args.task)
+        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes // args.task, rand_set_all=rand_set_all)
     elif args.dataset == 'MiniImageNet':
         Miniimagenet = MiniImageTask(root='../data/mini-imagenet',json_path="data/mini-imagenet/classes_name.json",task_num=10,data_transform = complex_data_transform)
         dataset_train, dataset_test = Miniimagenet.getTaskDataSet()
-        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,dataname='miniimagenet')
-        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
+        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes // args.task,dataname='miniimagenet')
+        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes // args.task,
                                                rand_set_all=rand_set_all,dataname='miniimagenet')
     elif args.dataset == 'FC100':
         if args.model == '6layer_CNN':
@@ -54,9 +54,9 @@ def get_data(args):
             data_transform = complex_data_transform
         Fc100 = FC100Task(root='../data/FC100',task_num=10,data_transform=data_transform)
         dataset_train, dataset_test = Fc100.getTaskDataSet()
-        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,
+        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes // args.task,
                                                 dataname='FC100')
-        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
+        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes // args.task,
                                                rand_set_all=rand_set_all, dataname='FC100')
     elif args.dataset == 'CORe50':
         if args.model == '6layer_CNN':
@@ -65,16 +65,16 @@ def get_data(args):
             data_transform = complex_data_transform
         CORe50 = Core50Task(root='../data', task_num=11,data_transform = data_transform)
         dataset_train, dataset_test = CORe50.getTaskDataSet()
-        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,
+        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes // args.task,
                                                 dataname='Corn50')
-        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
+        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes // args.task,
                                                rand_set_all=rand_set_all, dataname='Corn50')
     elif args.dataset == 'TinyImageNet':
         Tinyimagenet = TinyimageTask(root='../data/tiny-imagenet-200',task_num=20,data_transform = easy_data_transform)
         dataset_train, dataset_test = Tinyimagenet.getTaskDataSet()
-        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,
+        dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes // args.task,
                                                 dataname='tinyimagenet')
-        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
+        dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes // args.task,
                                                rand_set_all=rand_set_all, dataname='tinyimagenet')
     else:
         exit('Error: unrecognized dataset')
@@ -133,21 +133,21 @@ def get_model(args):
         net_glob = RepTail(image_size,output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     if args.model == 'ResNet18' :
         net_glob = RepTailResNet18(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'ResNet152' :
+    elif args.model == 'ResNet152' :
         net_glob = RepTailResNet152(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'Inception' :
+    elif args.model == 'Inception' :
         net_glob = RepTailInception_v3(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'WideResNet' :
+    elif args.model == 'WideResNet' :
         net_glob = RepTailWideResNet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'ResNeXt' :
+    elif args.model == 'ResNeXt' :
         net_glob = RepTailResNext(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'MobileNet' :
+    elif args.model == 'MobileNet' :
         net_glob = RepTailMobilenet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'ShuffleNet' :
+    elif args.model == 'ShuffleNet' :
         net_glob = RepTailshufflenet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'DenseNet' :
+    elif args.model == 'DenseNet' :
         net_glob = RepTailDensnet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'SENet' :
+    elif args.model == 'SENet' :
         net_glob = RepTailSENet(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     else:
         exit('Error: unrecognized model')
