@@ -10,7 +10,7 @@ from models.Nets import RepTail
 import cv2
 import numpy as np
 class TinyimageTask():
-    def __init__(self,root,task_num=1):
+    def __init__(self,root,task_num=1,data_transform = None):
         mean = [0.5071, 0.4867, 0.4408]
         std = [0.2675, 0.2565, 0.2761]
         self.root = root
@@ -19,23 +19,7 @@ class TinyimageTask():
             'test': "test.csv"
         }
         self.task_num = task_num
-        self.data_transform = {
-            "train": transforms.Compose([transforms.RandomResizedCrop(224),
-                                         transforms.RandomHorizontalFlip(),
-                                         transforms.ToTensor(),
-                                         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]),
-            "test": transforms.Compose([transforms.Resize(256),
-                                       transforms.CenterCrop(224),
-                                       transforms.ToTensor(),
-                                       transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])}
-        # self.transform_train = data_transform['train']
-        # self.transform = data_transform['val']
-        # self.data_transform = {
-        #     "train": transforms.Compose([transforms.ToTensor(),
-        #                                  transforms.Normalize(mean, std)]),
-        #     "test": transforms.Compose([
-        #                                transforms.ToTensor(),
-        #                                transforms.Normalize(mean, std)])}
+        self.data_transform =data_transform
     def getTaskDataSet(self):
         trainDataset = MyTinyimageDataSet(root_dir=self.root, csv_name=self.csv_name['train'],name='train',task=self.task_num)
         train_task_datasets = [TinyimageDataSet(data, transform=self.data_transform['train']) for data in trainDataset.task_datasets]

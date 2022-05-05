@@ -12,32 +12,11 @@ from torch.utils.data import DataLoader
 from torchvision.datasets.utils import check_integrity, download_and_extract_archive
 
 class Cifar100Task():
-    def __init__(self,root,task_num=1):
-        mean = [0.5071, 0.4867, 0.4408]
-        std = [0.2675, 0.2565, 0.2761]
+    def __init__(self,root,task_num=1,data_transform =None):
         self.root = root
         self.task_num = task_num
-        data_transform = {
-            "train": transforms.Compose([transforms.RandomResizedCrop(224),
-                                         transforms.RandomHorizontalFlip(),
-                                         transforms.ToTensor(),
-                                         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]),
-            "val": transforms.Compose([transforms.Resize(256),
-                                       transforms.CenterCrop(224),
-                                       transforms.ToTensor(),
-                                       transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])}
         self.transform_train = data_transform['train']
         self.transform = data_transform['val']
-        # self.transform_train = transforms.Compose([
-        #     # transforms.RandomCrop(32, padding=4),
-        #     # transforms.RandomHorizontalFlip(),
-        #     transforms.ToTensor(),
-        #     transforms.Normalize(mean, std),
-        #     # Cutout(n_holes=1, length=16)
-        # ])
-        # self.transform = transforms.Compose(
-        #     [transforms.ToTensor(), transforms.Normalize(mean, std)]
-        # )
 
     def getTaskDataSet(self):
         trainDataset = myCIFAR100(root=self.root, train=True, transform=self.transform_train, download=True, task_num=self.task_num)

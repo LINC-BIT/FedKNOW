@@ -28,29 +28,21 @@ if __name__ == '__main__':
         print('Not this dataset!!')
 
     print(args.alg)
-    write = SummaryWriter('./log/FedKNOW_' + args.dataset+'_'+'round' + str(args.round) + '_frac' + str(args.frac) +'_RepTailshufflenet')
+    write = SummaryWriter('./log/FedKNOW_' + args.dataset+'_'+'round' + str(args.round) + '_frac' + str(args.frac) + '_model_'+args.model)
     # build model
     # net_glob = get_model(args)
     net_glob = get_model(args)
     net_glob.train()
-    if args.load_fed != 'n':
-        fed_model_path = './save/' + args.load_fed + '.pt'
-        net_glob.load_state_dict(torch.load(fed_model_path))
-
     total_num_layers = len(net_glob.state_dict().keys())
     print(net_glob.state_dict().keys())
     net_keys = [*net_glob.state_dict().keys()]
 
     # specify the representation parameters (in w_glob_keys) and head parameters (all others)
-    if args.alg == 'fedrep' or args.alg == 'FedKNOW':
-        if 'cifar' in args.dataset or 'miniimagenet' in args.dataset or 'FC100' in args.dataset or 'Corn50' in args.dataset or 'tinyimagenet' in args.dataset:
-            # w_glob_keys = [[k] for k,_ in net_glob.feature_net.named_parameters()]
-            w_glob_keys = [net_glob.weight_keys[i] for i in [j for j in range(len(net_glob.weight_keys))]]
+    if 'cifar' in args.dataset or 'miniimagenet' in args.dataset or 'FC100' in args.dataset or 'Corn50' in args.dataset or 'tinyimagenet' in args.dataset:
+        # w_glob_keys = [[k] for k,_ in net_glob.feature_net.named_parameters()]
+        w_glob_keys = [net_glob.weight_keys[i] for i in [j for j in range(len(net_glob.weight_keys))]]
 
-    if args.alg == 'fedavg' or args.alg == 'prox':
-        w_glob_keys = []
     print(total_num_layers)
-    print(w_glob_keys)
     print(net_keys)
     if args.alg == 'fedrep' or args.alg == 'fedper' or args.alg == 'FedKNOW':
         num_param_glob = 0
@@ -83,7 +75,7 @@ if __name__ == '__main__':
     accs10_glob = 0
     start = time.time()
     task=-1
-    apprs = [Appr(copy.deepcopy(net_glob),PackNet(args.task,device=args.device),copy.deepcopy(net_glob), None,lr=args.lr, nepochs=args.local_ep, args=args) for i in range(args.num_users)]
+    apprs = [Appr(copy.deepcopy(net_glob),PackNet(args.task,local_ep=args.local_ep,local_rep_ep=args.local_rep_ep,device=args.device),copy.deepcopy(net_glob), None,lr=args.lr, nepochs=args.local_ep, args=args) for i in range(args.num_users)]
     print(args.round)
     for iter in range(args.epochs):
         if iter % (args.round) == 0:
@@ -197,7 +189,7 @@ if __name__ == '__main__':
     print(times)
     print(accs)
     base_dir = './save/FedKNOW/accs_FedKNOW_lambda_'+str(args.lamb) +str('_') + args.alg + '_' + args.dataset + '_' + str(args.num_users) + '_' + str(
-                args.shard_per_user) + '_iterFinal' + '_frac_'+str(args.frac)+ '_RepTailshufflenet.csv'
+                args.shard_per_user) + '_iterFinal' + '_frac_'+str(args.frac)+ '_model_'+args.model+'.csv'
     user_save_path = base_dir
     accs = np.array(accs)
     accs = pd.DataFrame(accs, columns=['accs'])

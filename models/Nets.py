@@ -36,12 +36,13 @@ class RepTailSENet(nn.Module):
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(512, output)
         self.weight_keys = []
+        self.nc_per_task = nc_per_task
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         h = self.feature_net(x)
         output = self.last(h)
         if is_con:
@@ -64,12 +65,13 @@ class RepTailDensnet(nn.Module):
         self.feature_net = DenseNet()
         self.last = torch.nn.Linear(512, output)
         self.weight_keys = []
+        self.nc_per_task = nc_per_task
         for name,para in self.named_parameters():
             temp=[]
             if 'last' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         h = self.feature_net(x)
         output = self.last(h)
         if is_con:
@@ -96,12 +98,13 @@ class RepTailResNet18(nn.Module):
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(self.feature_net.outlen, output)
         self.weight_keys = []
+        self.nc_per_task = nc_per_task
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         h = self.feature_net(x)
         output = self.last(h)
         if is_con:
@@ -129,12 +132,13 @@ class RepTailResNet152(nn.Module):
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(self.feature_net.outlen, output)
         self.weight_keys = []
+        self.nc_per_task = nc_per_task
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         h = self.feature_net(x)
         output = self.last(h)
         if is_con:
@@ -162,12 +166,13 @@ class RepTailResNext(nn.Module):
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(self.feature_net.outlen, output)
         self.weight_keys = []
+        self.nc_per_task = nc_per_task
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         h = self.feature_net(x)
         output = self.last(h)
         if is_con:
@@ -200,7 +205,7 @@ class RepTailMobilenet(nn.Module):
             if 'fc' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         h = self.feature_net(x)
         output = self.last(h)
         if is_con:
@@ -227,12 +232,13 @@ class RepTailWideResNet(nn.Module):
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(self.feature_net.outlen, output)
         self.weight_keys = []
+        self.nc_per_task = nc_per_task
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         h = self.feature_net(x)
         output = self.last(h)
         if is_con:
@@ -258,13 +264,14 @@ class RepTailshufflenet(nn.Module):
         state_dict.pop('fc.bias')
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(self.feature_net._stage_out_channels[-1], output)
+        self.nc_per_task = nc_per_task
         self.weight_keys = []
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         h = self.feature_net(x)
         output = self.last(h)
         if is_con:
@@ -291,12 +298,13 @@ class RepTailInception_v3(nn.Module):
         self.feature_net.load_state_dict(state_dict)
         self.last = torch.nn.Linear(2048, output)
         self.weight_keys = []
+        self.nc_per_task = nc_per_task
         for name,para in self.named_parameters():
             temp=[]
             if 'fc' not in name:
                 temp.append(name)
                 self.weight_keys.append(temp)
-    def forward(self,x,t,pre=False,is_con=False):
+    def forward(self,x,t,pre=False,is_con=True):
         if self.training:
             h,_ = self.feature_net(x)
         else:
@@ -328,10 +336,10 @@ class RepTail(nn.Module):
          ['feature_net.conv5.weight'], ['feature_net.conv5.bias'], ['feature_net.conv6.weight'], ['feature_net.conv6.bias'],
          ['feature_net.fc1.weight'], ['feature_net.fc1.bias'], ['last.weight'], ['last.bias']]
 
-    def forward(self,x,t,pre=False,is_cifar=True,avg_act=False):
+    def forward(self,x,t,pre=False,is_con=True,avg_act=False):
         h = self.feature_net(x,avg_act)
         output = self.last(h)
-        if is_cifar:
+        if is_con:
             # make sure we predict classes within the current task
             if pre:
                 offset1 = 0

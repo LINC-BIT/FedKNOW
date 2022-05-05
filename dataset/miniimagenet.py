@@ -7,7 +7,7 @@ from torch.utils.data import Dataset
 from torchvision import transforms, models
 from models.Nets import RepTail
 class MiniImageTask():
-    def __init__(self,root,json_path,task_num=1):
+    def __init__(self,root,json_path,task_num=1,data_transform=None):
         self.root = root
         self.csv_name = {
             'train':"new_train.csv",
@@ -15,15 +15,7 @@ class MiniImageTask():
         }
         self.task_num = task_num
         self.json_path = json_path
-        self.data_transform = {
-            "train": transforms.Compose([transforms.RandomResizedCrop(224),
-                                         transforms.RandomHorizontalFlip(),
-                                         transforms.ToTensor(),
-                                         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]),
-            "test": transforms.Compose([transforms.Resize(256),
-                                       transforms.CenterCrop(224),
-                                       transforms.ToTensor(),
-                                       transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])}
+        self.data_transform = data_transform
 
     def getTaskDataSet(self):
         trainDataset = MyMiniImageDataSet(root_dir=self.root, csv_name=self.csv_name['train'], json_path = self.json_path,task=self.task_num)

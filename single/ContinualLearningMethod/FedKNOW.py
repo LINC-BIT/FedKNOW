@@ -136,8 +136,6 @@ def freeze_model(model):
         param.requires_grad = False
     return
 class Appr(object):
-    """ Class implementing the Elastic Weight Consolidation approach described in http://arxiv.org/abs/1612.00796 """
-
     def __init__(self, model, packnet,packmodel, tr_dataloader,nepochs=100, lr=0.001, lr_min=1e-6, lr_factor=3, lr_patience=5, clipgrad=100,
                  args=None):
         self.device = args.device
@@ -161,6 +159,7 @@ class Appr(object):
         self.e_rep = args.local_rep_ep
         self.old_task=-1
         self.grad_dims = []
+        self.num_classes = args.num_classes // args.task
         for param in self.model.feature_net.parameters():
             self.grad_dims.append(param.data.numel())
 
@@ -288,7 +287,7 @@ class Appr(object):
         for images,targets in self.tr_dataloader:
             # Forward current model
             images = images.to(self.device)
-            targets = (targets - 10 * t).to(self.device)
+            targets = (targets - self.num_classes * t).to(self.device)
             pre_loss = 0
             grads = torch.Tensor(sum(self.grad_dims), 2+t)
             offset1, offset2 = compute_offsets(t, self.num_classes)

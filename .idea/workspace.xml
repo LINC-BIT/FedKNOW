@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac8ee188-539e-406a-ae69-46605dcefdaa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README_zh-CN.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_zh-CN.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/Cifar100.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/Cifar100.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/Tinyimagenet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/Tinyimagenet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/core50.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/core50.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/fc100.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/fc100.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/miniimagenet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/miniimagenet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Nets.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Nets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Packnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Packnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/main_FedKNOW.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/main_FedKNOW.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/train_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/train_utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,72 +22,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_fedrep.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="25">
-                <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="33" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README_zh-CN.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="150">
-                <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+              <first_editor relative-caret-position="-400">
+                <caret line="104" column="30" lean-forward="true" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/ResNet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="733">
-              <caret line="233" column="26" selection-end-line="240" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/Nets.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="87" column="21" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="21" />
-              <folding>
-                <element signature="e#185#197#0" expanded="true" />
-                <element signature="e#12037#13298#0" />
-                <element signature="e#13339#14580#0" />
-                <element signature="e#14621#15886#0" />
-                <element signature="e#15929#17234#0" />
-                <element signature="e#17266#18672#0" />
-                <element signature="e#18889#21360#0" />
-                <element signature="e#21400#26004#0" />
-                <element signature="e#26038#33273#0" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -86,8 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="140" column="35" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+            <state relative-caret-position="262">
+              <caret line="132" column="22" lean-forward="true" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
               <folding>
                 <element signature="e#122#166#0" expanded="true" />
               </folding>
@@ -96,34 +46,85 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/__init__.py">
+        <entry file="file://$PROJECT_DIR$/models/Nets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/resnet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="315" selection-start-line="315" selection-end-line="324" selection-end-column="28" />
+            <state relative-caret-position="595">
+              <caret line="38" column="24" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="24" />
               <folding>
-                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#185#197#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/densenet.py">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="262" column="34" selection-start-line="262" selection-start-column="34" selection-end-line="262" selection-end-column="34" />
+            <state relative-caret-position="477">
+              <caret line="144" column="20" selection-start-line="144" selection-start-column="20" selection-end-line="144" selection-end-column="20" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2025">
+              <caret line="81" column="19" lean-forward="true" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/Packnet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="302">
+              <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/options.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="39" column="39" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="-2125">
+                <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dataset/core50.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="50">
+              <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dataset/Cifar100.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -153,6 +154,10 @@
       <find>FedKNOW</find>
       <find>Resnet18</find>
       <find>resnet152</find>
+      <find>forward</find>
+      <find>per</find>
+      <find>10</find>
+      <find>num</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -170,12 +175,19 @@
         <option value="$PROJECT_DIR$/multi/ServerStrategy/Fedavg.py" />
         <option value="$PROJECT_DIR$/multi/server.py" />
         <option value="$PROJECT_DIR$/utils/options.py" />
-        <option value="$PROJECT_DIR$/single/main_FedKNOW.py" />
         <option value="$PROJECT_DIR$/models/ResNet18.py" />
-        <option value="$PROJECT_DIR$/models/Nets.py" />
-        <option value="$PROJECT_DIR$/utils/train_utils.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/README_zh-CN.md" />
+        <option value="$PROJECT_DIR$/dataset/miniimagenet.py" />
+        <option value="$PROJECT_DIR$/dataset/fc100.py" />
+        <option value="$PROJECT_DIR$/dataset/Cifar100.py" />
+        <option value="$PROJECT_DIR$/dataset/Tinyimagenet.py" />
+        <option value="$PROJECT_DIR$/dataset/core50.py" />
+        <option value="$PROJECT_DIR$/utils/train_utils.py" />
+        <option value="$PROJECT_DIR$/models/Nets.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py" />
+        <option value="$PROJECT_DIR$/single/main_FedKNOW.py" />
+        <option value="$PROJECT_DIR$/models/Packnet.py" />
       </list>
     </option>
   </component>
@@ -201,7 +213,28 @@
             <path>
               <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
               <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
+              <item name="dataset" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
+              <item name="single" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
+              <item name="single" type="462c0819:PsiDirectoryNode" />
+              <item name="ContinualLearningMethod" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -273,12 +306,12 @@
       <option name="presentableId" value="Default" />
       <updated>1651300916339</updated>
       <workItem from="1651300917566" duration="10112000" />
-      <workItem from="1651327862854" duration="24669000" />
+      <workItem from="1651327862854" duration="30715000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34781000" />
+    <option name="totallyTimeSpent" value="40827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -376,13 +409,6 @@
         <state relative-caret-position="-2032" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataset/Cifar100.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/sampling.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -461,15 +487,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-675">
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/Update.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="643">
@@ -514,13 +531,6 @@
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/options.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1187">
-          <caret line="80" column="67" selection-start-line="80" selection-start-column="67" selection-end-line="80" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -577,41 +587,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="140" column="35" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
-          <folding>
-            <element signature="e#122#166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Nets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="87" column="21" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="21" />
-          <folding>
-            <element signature="e#185#197#0" expanded="true" />
-            <element signature="e#12037#13298#0" />
-            <element signature="e#13339#14580#0" />
-            <element signature="e#14621#15886#0" />
-            <element signature="e#15929#17234#0" />
-            <element signature="e#17266#18672#0" />
-            <element signature="e#18889#21360#0" />
-            <element signature="e#21400#26004#0" />
-            <element signature="e#26038#33273#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torchvision/models/resnet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -629,23 +604,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="25">
-            <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="33" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/dataset/fc100.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="9" column="60" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/miniimagenet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/Tinyimagenet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/core50.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/Cifar100.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README_zh-CN.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="150">
-            <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+          <first_editor relative-caret-position="-400">
+            <caret line="104" column="30" lean-forward="true" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-2125">
+            <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="132" column="22" lean-forward="true" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
+          <folding>
+            <element signature="e#122#166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Nets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="38" column="24" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="24" />
+          <folding>
+            <element signature="e#185#197#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="144" column="20" selection-start-line="144" selection-start-column="20" selection-end-line="144" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="39" column="39" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Packnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2025">
+          <caret line="81" column="19" lean-forward="true" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

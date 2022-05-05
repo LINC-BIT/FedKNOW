@@ -7,21 +7,14 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 from models.Nets import RepTail
 class FC100Task():
-    def __init__(self,root,task_num=1):
-        mean = [0.5071, 0.4867, 0.4408]
-        std = [0.2675, 0.2565, 0.2761]
+    def __init__(self,root,task_num=1,data_transform =None):
         self.root = root
         self.csv_name = {
             'train':"train_csv",
             'test': "test_csv"
         }
         self.task_num = task_num
-        self.data_transform = {
-            "train": transforms.Compose([transforms.ToTensor(),
-                                         transforms.Normalize(mean, std)]),
-            "test": transforms.Compose([
-                                       transforms.ToTensor(),
-                                       transforms.Normalize(mean, std)])}
+        self.data_transform = data_transform
 
     def getTaskDataSet(self):
         trainDataset = MyFC100DataSet(root_dir=self.root, csv_name=self.csv_name['train'],task=self.task_num)

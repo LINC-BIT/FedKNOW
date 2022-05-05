@@ -11,71 +11,66 @@ from dataset.miniimagenet import MiniImageTask
 from dataset.fc100 import FC100Task
 from dataset.core50 import Core50Task
 from dataset.Tinyimagenet import TinyimageTask
-trans_mnist = transforms.Compose([transforms.ToTensor(),
-                                  transforms.Normalize((0.1307,), (0.3081,))])
-trans_cifar10_train = transforms.Compose([transforms.RandomCrop(32, padding=4),
-                                          transforms.RandomHorizontalFlip(),
-                                          transforms.ToTensor(),
-                                          transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                                               std=[0.229, 0.224, 0.225])])
-trans_cifar10_val = transforms.Compose([transforms.ToTensor(),
-                                        transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                                             std=[0.229, 0.224, 0.225])])
-trans_cifar100_train = transforms.Compose([transforms.RandomCrop(32, padding=4),
-                                          transforms.RandomHorizontalFlip(),
-                                          transforms.ToTensor(),
-                                          transforms.Normalize(mean=[0.507, 0.487, 0.441],
-                                                               std=[0.267, 0.256, 0.276])])
-trans_cifar100_val = transforms.Compose([transforms.ToTensor(),
-                                         transforms.Normalize(mean=[0.507, 0.487, 0.441],
-                                                              std=[0.267, 0.256, 0.276])])
 
+complex_data_transform = {
+    "train": transforms.Compose([transforms.RandomResizedCrop(224),
+                                 transforms.RandomHorizontalFlip(),
+                                 transforms.ToTensor(),
+                                 transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]),
+    "test": transforms.Compose([transforms.Resize(256),
+                                transforms.CenterCrop(224),
+                                transforms.ToTensor(),
+                                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
+}
+
+easy_data_transform = {
+    "train": transforms.Compose([transforms.ToTensor(),
+                                 transforms.Normalize([0.5071, 0.4867, 0.4408], [0.2675, 0.2565, 0.2761])]),
+    "test": transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize([0.5071, 0.4867, 0.4408], [0.2675, 0.2565, 0.2761])])
+}
 
 def get_data(args):
-    if args.dataset == 'mnist':
-        dataset_train = datasets.MNIST('data/mnist/', train=True, download=True, transform=trans_mnist)
-        dataset_test = datasets.MNIST('data/mnist/', train=False, download=True, transform=trans_mnist)
-        # sample users
-        dict_users_train, rand_set_all = noniid(dataset_train, args.num_users, args.shard_per_user, args.num_classes)
-        dict_users_test, rand_set_all = noniid(dataset_test, args.num_users, args.shard_per_user, args.num_classes, rand_set_all=rand_set_all, testb=True)
-    elif args.dataset == 'cifar10':
-        dataset_train = datasets.CIFAR10('../data/cifar10', train=True, download=True, transform=trans_cifar10_train)
-        dataset_test = datasets.CIFAR10('../data/cifar10', train=False, download=True, transform=trans_cifar10_val)
-        dict_users_train, rand_set_all = noniid(dataset_train, args.num_users, args.shard_per_user, args.num_classes)
-        dict_users_test, rand_set_all = noniid(dataset_test, args.num_users, args.shard_per_user, args.num_classes, rand_set_all=rand_set_all)
-    elif args.dataset == 'cifar100':
-        cifar100 = Cifar100Task('../../FedRep-main/data/cifar100',task_num=10)
-        # dataset_train = datasets.CIFAR100('data/cifar100', train=True, download=True, transform=trans_cifar100_train)
-        # dataset_test = datasets.CIFAR100('data/cifar100', train=False, download=True, transform=trans_cifar100_val)
+    if args.dataset == 'cifar100':
+        if args.model == '6layer_CNN':
+            data_transform = easy_data_transform
+        else:
+            data_transform = complex_data_transform
+        cifar100 = Cifar100Task('../../FedRep-main/data/cifar100',task_num=10,data_transform=data_transform)
         dataset_train,dataset_test = cifar100.getTaskDataSet()
-        # dict_users_train, rand_set_all = noniid(dataset_train, args.num_users, args.shard_per_user, args.num_classes)
-        # dict_users_test, rand_set_all = noniid(dataset_test, args.num_users, args.shard_per_user, args.num_classes,
-        #                                        rand_set_all=rand_set_all)
-        # for dataset_train,dataset_test in zip(dataset_trains,dataset_tests):
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes)
         dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes, rand_set_all=rand_set_all)
     elif args.dataset == 'MiniImageNet':
-        Miniimagenet = MiniImageTask(root='../data/mini-imagenet',json_path="data/mini-imagenet/classes_name.json",task_num=10)
+        Miniimagenet = MiniImageTask(root='../data/mini-imagenet',json_path="data/mini-imagenet/classes_name.json",task_num=10,data_transform = complex_data_transform)
         dataset_train, dataset_test = Miniimagenet.getTaskDataSet()
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,dataname='miniimagenet')
         dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
                                                rand_set_all=rand_set_all,dataname='miniimagenet')
     elif args.dataset == 'FC100':
-        Fc100 = FC100Task(root='../data/FC100',task_num=10)
+        if args.model == '6layer_CNN':
+            data_transform = easy_data_transform
+        else:
+            data_transform = complex_data_transform
+        Fc100 = FC100Task(root='../data/FC100',task_num=10,data_transform=data_transform)
         dataset_train, dataset_test = Fc100.getTaskDataSet()
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,
                                                 dataname='FC100')
         dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
                                                rand_set_all=rand_set_all, dataname='FC100')
     elif args.dataset == 'CORe50':
-        Corn50 = Core50Task(root='../data', task_num=11)
-        dataset_train, dataset_test = Corn50.getTaskDataSet()
+        if args.model == '6layer_CNN':
+            data_transform = easy_data_transform
+        else:
+            data_transform = complex_data_transform
+        CORe50 = Core50Task(root='../data', task_num=11,data_transform = data_transform)
+        dataset_train, dataset_test = CORe50.getTaskDataSet()
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,
                                                 dataname='Corn50')
         dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes,
                                                rand_set_all=rand_set_all, dataname='Corn50')
     elif args.dataset == 'TinyImageNet':
-        Tinyimagenet = TinyimageTask(root='../data/tiny-imagenet-200',task_num=20)
+        Tinyimagenet = TinyimageTask(root='../data/tiny-imagenet-200',task_num=20,data_transform = easy_data_transform)
         dataset_train, dataset_test = Tinyimagenet.getTaskDataSet()
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes,
                                                 dataname='tinyimagenet')
@@ -131,7 +126,11 @@ def read_data(train_data_dir, test_data_dir):
 def get_model(args):
     net_glob = None
     if args.model == '6layer_CNN' :
-        net_glob = RepTail([3,32,32],output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
+        if 'cifar100' in args.dataset or 'FC100' in args.dataset or 'CORe50' in args.dataset:
+            image_size = [3,32,32]
+        else:
+            image_size = [3, 224, 224]
+        net_glob = RepTail(image_size,output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     if args.model == 'ResNet18' :
         net_glob = RepTailResNet18(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     if args.model == 'ResNet152' :
