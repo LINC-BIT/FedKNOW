@@ -288,7 +288,9 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
 2. **Result**
 
     - **The accuracy under different parameter storage ratios** (X-axis represents the task and Y-axis represents the accuracy)
+        
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png" width="50%">
+        
     - **The time under different parameter storage ratios** (X-axis represents the task and Y-axis represents the time on current task)
         ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png)
     
