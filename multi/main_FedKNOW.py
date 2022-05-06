@@ -1,16 +1,10 @@
 import copy
-import itertools
 import numpy as np
-import pandas as pd
 import torch
-from torch import nn
-from torch.utils.tensorboard import SummaryWriter
 from utils.options import args_parser
-from utils.train_utils import get_data, get_model, read_data
+from utils.train_utils import get_data, get_model
 from models.Update import DatasetSplit
-from models.test import test_img_local_all
 from multi.ContinualLearningMethod.FedKNOW import Appr,LongLifeTest,LongLifeTrain
-from models.Nets import RepTailResNet,RepTail
 from torch.utils.data import DataLoader
 import time
 from models.Packnet import PackNet
@@ -61,34 +55,9 @@ if __name__ == '__main__':
         dataset_train, dataset_test, dict_users_train, dict_users_test = get_data(args)
         for idx in dict_users_train.keys():
             np.random.shuffle(dict_users_train[idx])
-    else:
-        if 'femnist' in args.dataset:
-            train_path = './leaf-master/data/' + args.dataset + '/data/mytrain'
-            test_path = './leaf-master/data/' + args.dataset + '/data/mytest'
-        else:
-            train_path = './leaf-master/data/' + args.dataset + '/data/train'
-            test_path = './leaf-master/data/' + args.dataset + '/data/test'
-        clients, groups, dataset_train, dataset_test = read_data(train_path, test_path)
-        lens = []
-        for iii, c in enumerate(clients):
-            lens.append(len(dataset_train[c]['x']))
-        dict_users_train = list(dataset_train.keys())
-        dict_users_test = list(dataset_test.keys())
-        print(lens)
-        print(clients)
-        for c in dataset_train.keys():
-            dataset_train[c]['y'] = list(np.asarray(dataset_train[c]['y']).astype('int64'))
-            dataset_test[c]['y'] = list(np.asarray(dataset_test[c]['y']).astype('int64'))
 
-    print(args.alg)
-    # write = SummaryWriter('./log/FPKD_' + args.dataset+'_'+'round' + str(args.round) + '_frac' + str(args.frac))
-    # build model
-    # net_glob = get_model(args)
-    net_glob = RepTail([3,32,32])
+    net_glob = get_model(args)
     net_glob.train()
-    # if args.load_fed != 'n':
-    #     fed_model_path = './save/' + args.load_fed + '.pt'
-    #     net_glob.load_state_dict(torch.load(fed_model_path))
 
     total_num_layers = len(net_glob.state_dict().keys())
     print(net_glob.state_dict().keys())
@@ -107,7 +76,7 @@ if __name__ == '__main__':
     times = []
     start = time.time()
     task=-1
-    appr = Appr(copy.deepcopy(net_glob),PackNet(args.task,device=args.device),copy.deepcopy(net_glob), None,lr=args.lr, nepochs=args.local_ep, args=args)
+    appr = Appr(copy.deepcopy(net_glob),PackNet(args.task,local_ep=args.local_ep,local_rep_ep=args.local_rep_ep,device=args.device),copy.deepcopy(net_glob), None,lr=args.lr, nepochs=args.local_ep, args=args)
     for i in range(args.task):
         tr_dataloaders = DataLoader(DatasetSplit(dataset_train[i], dict_users_train[args.client_id]),
                                     batch_size=args.local_bs, shuffle=True, num_workers=0)
@@ -115,4 +84,4 @@ if __name__ == '__main__':
         appr.traindataloaders.append(tr_dataloaders)
         appr.testdataloaders.append(te_dataloader)
     client = FPKDClient(appr,args)
-    fl.client.start_numpy_client("10.1.114.64:8000", client=client)
+    fl.client.start_numpy_client(args.ip, client=client)

@@ -684,3 +684,43 @@ class WEITResNet(nn.Module):
             if offset2 < self.n_outputs:
                 output[:, offset2:self.n_outputs].data.fill_(-10e10)
         return output
+
+class Classification(nn.Module):
+    def __init__(self, output=100, nc_per_task=10):
+        super().__init__()
+
+        self.last = nn.Linear(1024, output)
+        self.nc_per_task=nc_per_task
+        self.n_outputs = output
+
+    def forward(self, h, t, pre=False, is_cifar=True):
+        output = self.last(h)
+        if is_cifar:
+            # make sure we predict classes within the current task
+            if pre:
+                offset1 = 0
+                offset2 = int(t * self.nc_per_task)
+            else:
+                offset1 = int(t * self.nc_per_task)
+                offset2 = int((t + 1) * self.nc_per_task)
+            if offset1 > 0:
+                output[:, :offset1].data.fill_(-10e10)
+            if offset2 < self.n_outputs:
+                output[:, offset2:self.n_outputs].data.fill_(-10e10)
+        return output
+class SupConMLP(nn.Module):
+    def __init__(self, inputsize, output=100, nc_per_task=10):
+        super().__init__()
+        self.encoder = Cifar100Net(inputsize)
+        self.head = nn.Sequential(
+            nn.Linear(1024, 1024),
+            nn.ReLU(inplace=True),
+            nn.Linear(1024, 1024)
+        )
+    def forward(self, x, return_feat=False):
+        encoded = self.encoder(x)
+        feat = self.head(encoded)
+        if return_feat:
+            return feat, encoded
+        else:
+            return feat
