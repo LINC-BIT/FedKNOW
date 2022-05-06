@@ -208,9 +208,13 @@
 2. **Experiment result**
 
     - **算法在最大带宽为1MB/s下在不同工作负载的通信时间(x axis for dataset and y axis for communication time)**
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png)
+         
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png" width="50%">
+        
     - **算法在不同网络带宽的总通信时间(x axis for bandwidth and y axis for communication time)**
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png" width="50%">
+        
 ### 4.3 大规模测试
 1. **Experiment code**
 
@@ -223,9 +227,13 @@
 2. **Experiment result**
 
     - **算法在50个客户端以及100个客户端的下的准确率**(x axis for task and y axis for accuracy)
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png" width="50%">
+        
     - **算法在50个客户端以及100个客户端的下的平均遗忘率**(x axis for task and y axis for average forgetting rate)
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png" width="50%">
+        
 ### 4.4 多任务测试
 1. **Experiment code**
 
@@ -236,11 +244,16 @@
 2. **Experiment result**
 
     - **算法在80个任务的平均准确率**(x axis for task and y axis for accuracy)
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png" width="50%">
+        
     - **算法在80个任务的平均遗忘率**(x axis for task and y axis for average forgetting rate)
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png" width="50%">
+        
     - **算法在80个任务的任务时间**(x axis for task and y axis for current task time)
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
 
 ### 4.5 参数存储比例测试
 1. **Experiment code**
@@ -255,9 +268,13 @@
 2. **Experiment result**
 
     - **算法使用不同存储比例时准确率**(x axis for task and y axis for accuracy)
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png)
+         
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png" width="50%">
+        
     - **算法使用不同存储比例时任务时间**(x axis for task and y axis for current task time)
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png" width="50%">
+    
     
 ### 4.6 适用性测试
 1. **Experiment code**
