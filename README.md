@@ -241,9 +241,13 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
 2. **Result**
 
     - **The communication time under different workloads and maximal network bandwidth 1MB/s** (X-axis represents the dataset and Y-axis represents the communication time)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png" width="50%">
+        
     - **The communication time under different network bandwidths** (X-axis represents the network bandwidth and Y-axis represents the communication time)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png" width="50%">
+        
 ### 4.3 Large scale
 1. **Run**
 
@@ -256,9 +260,13 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
 2. **Result**
 
     - **The accuracy under 50 clients and 100 clients** (X-axis represents the task and Y-axis represents the accuracy)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png)
+    
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png" width="50%">
+        
     - **The average forgetting rate under 50 clients and 100 clients** (X-axis represents the task and Y-axis represents the average forgetting rate)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png" width="50%">
+        
 ### 4.4 Long task sequence
 1. **Run**
 
@@ -269,11 +277,16 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
 2. **Result**
 
     - **The average accuracy under 80 tasks** (X-axis represents the task and Y-axis represents the accuracy)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png)
+        
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png" width="50%">
+        
     - **The average forgetting rate under 80 tasks** (X-axis represents the task and Y-axis represents the average forgetting rate)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png)
+    
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png" width="50%">
+        
     - **The time under 80 tasks** (X-axis represents the task and Y-axis represents the time on current task)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png)
+    
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
 
 ### 4.5 Under different parameter storage ratios
 1. **Run**
@@ -292,7 +305,8 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png" width="50%">
         
     - **The time under different parameter storage ratios** (X-axis represents the task and Y-axis represents the time on current task)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png)
+    
+        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png" width="50%">
     
 ### 4.6 Applicability on different networks
 1. **Run**
