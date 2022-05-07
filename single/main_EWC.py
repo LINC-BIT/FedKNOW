@@ -10,7 +10,7 @@ from utils.options import args_parser
 from utils.train_utils import get_data, get_model, read_data
 from models.Update import DatasetSplit
 from models.test import test_img_local_all
-from single.ContinualLearningMethod.AGS import Appr,LongLifeTrain
+from single.ContinualLearningMethod.EWC import Appr,LongLifeTrain
 from torch.utils.data import DataLoader
 import time
 
@@ -28,7 +28,7 @@ if __name__ == '__main__':
         print('Not this dataset!!')
 
     print(args.alg)
-    write = SummaryWriter('./log/AGS_' + args.dataset + '_' + 'round' + str(args.round) + '_frac' + str(
+    write = SummaryWriter('./log/EWC_' + args.dataset + '_' + 'round' + str(args.round) + '_frac' + str(
         args.frac) + '_model_' + args.model)
     # build model
     # net_glob = get_model(args)
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     print(end - start)
     print(times)
     print(accs)
-    base_dir = './save/AGS/accs_AGS_lambda_' + str(args.lamb) + str( '_') + args.alg + '_' + args.dataset + '_' + str(args.num_users) + '_' + str(
+    base_dir = './save/EWC/accs_EWC_lambda_' + str(args.lamb) + str( '_') + args.alg + '_' + args.dataset + '_' + str(args.num_users) + '_' + str(
         args.shard_per_user) + '_iterFinal' + '_frac_' + str(args.frac) + '_model_' + args.model + '.csv'
     user_save_path = base_dir
     accs = np.array(accs)

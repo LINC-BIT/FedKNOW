@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac8ee188-539e-406a-ae69-46605dcefdaa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/models/Nets.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Nets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi/main_FedKNOW.py" beforeDir="false" afterPath="$PROJECT_DIR$/multi/main_FedKNOW.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/single/main_FedKNOW.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/main_FedKNOW.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/single/main_WEIT.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/main_WEIT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/single/main_fedavg.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/main_fedavg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/single/main_fedrep.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/main_fedrep.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewFedAvg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/main_AGS.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/main_AGS.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,25 +14,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/single/main_apfl.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="80" column="44" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
+        <entry file="file://$PROJECT_DIR$/multi/ServerStrategy/Fedavg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="30" column="138" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="138" />
+            <state relative-caret-position="350">
+              <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#17#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/single/main_WEIT.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="37" column="20" lean-forward="true" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
+            <state relative-caret-position="325">
+              <caret line="73" column="7" selection-start-line="72" selection-start-column="12" selection-end-line="73" selection-end-column="7" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -54,10 +39,58 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_BCN.py">
+        <entry file="file://$PROJECT_DIR$/single/main_EWC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="151" selection-start-line="151" selection-end-line="152" selection-end-column="106" />
+            <state relative-caret-position="222">
+              <caret line="71" column="21" lean-forward="true" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="690">
+              <caret line="188" column="8" selection-start-line="188" selection-start-column="8" selection-end-line="188" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/single/main_MAS.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3550">
+              <caret line="142" column="35" selection-start-line="142" selection-start-column="35" selection-end-line="142" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="169" column="26" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/single/main_AGS.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="347">
+              <caret line="133" column="44" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -144,6 +177,7 @@
       <find>10</find>
       <find>num</find>
       <find>Adam</find>
+      <find>self.model_old</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -180,7 +214,6 @@
         <option value="$PROJECT_DIR$/single/ContinualLearningMethod/APFL.py" />
         <option value="$PROJECT_DIR$/single/main_FedKNOW.py" />
         <option value="$PROJECT_DIR$/models/Nets.py" />
-        <option value="$PROJECT_DIR$/single/main_AGS.py" />
         <option value="$PROJECT_DIR$/single/main_fedavg.py" />
         <option value="$PROJECT_DIR$/single/main_GEM.py" />
         <option value="$PROJECT_DIR$/single/main_apfl.py" />
@@ -188,12 +221,19 @@
         <option value="$PROJECT_DIR$/single/main_Co2L.py" />
         <option value="$PROJECT_DIR$/single/main_fedrep.py" />
         <option value="$PROJECT_DIR$/single/main_WEIT.py" />
+        <option value="$PROJECT_DIR$/single/save/main_EWC.py" />
+        <option value="$PROJECT_DIR$/single/main_AGS.py" />
+        <option value="$PROJECT_DIR$/single/main_EWC.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py" />
+        <option value="$PROJECT_DIR$/single/save/MAS.py" />
+        <option value="$PROJECT_DIR$/single/main_MAS.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="739" />
-    <option name="y" value="22" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1156" />
     <option name="height" value="575" />
   </component>
@@ -213,22 +253,7 @@
             <path>
               <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
               <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
-              <item name="pre_train" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
               <item name="single" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -301,12 +326,12 @@
       <option name="presentableId" value="Default" />
       <updated>1651300916339</updated>
       <workItem from="1651300917566" duration="10112000" />
-      <workItem from="1651327862854" duration="45479000" />
+      <workItem from="1651327862854" duration="52758000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55591000" />
+    <option name="totallyTimeSpent" value="62870000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -448,50 +473,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torch/nn/functional.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="1708" selection-start-line="1708" selection-end-line="1708" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/language_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2032" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/ResNetWEIT.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/WEIT.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="170" column="12" selection-start-line="170" selection-start-column="12" selection-end-line="170" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/layer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="151" column="49" selection-start-line="151" selection-start-column="49" selection-end-line="151" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/SENet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
@@ -532,16 +513,6 @@
           <caret line="11" column="61" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/multi/ServerStrategy/Fedavg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -650,13 +621,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/sampling.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="9" column="52" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/train_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="397">
@@ -745,15 +709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NewFedAvg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1813">
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/multi/main_FedKNOW.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -791,49 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/Nets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="725" column="23" selection-start-line="725" selection-start-column="23" selection-end-line="725" selection-end-column="23" />
-          <folding>
-            <element signature="e#185#197#0" expanded="true" />
-            <element signature="e#964#2399#0" />
-            <element signature="e#2437#3526#0" />
-            <element signature="e#3565#4856#0" />
-            <element signature="e#4897#6190#0" />
-            <element signature="e#6229#7540#0" />
-            <element signature="e#7581#8912#0" />
-            <element signature="e#8953#10264#0" />
-            <element signature="e#10305#11640#0" />
-            <element signature="e#11683#13058#0" />
-            <element signature="e#13090#14492#0" />
-            <element signature="e#14528#16999#0" />
-            <element signature="e#17036#21640#0" />
-            <element signature="e#21674#28909#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/single/main_Co2L.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-403">
-          <caret line="145" column="151" selection-start-line="145" selection-start-column="151" selection-end-line="145" selection-end-column="151" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/single/main_fedrep.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="99" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/single/main_FedKNOW.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -848,26 +760,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
           <caret line="151" selection-start-line="151" selection-end-line="152" selection-end-column="106" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/single/main_WEIT.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="37" column="20" lean-forward="true" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/single/main_AGS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -896,10 +788,142 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/single/main_apfl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="80" column="44" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
+        <state relative-caret-position="325">
+          <caret line="13" column="39" lean-forward="true" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Nets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="725" column="23" selection-start-line="725" selection-start-column="23" selection-end-line="725" selection-end-column="23" />
+          <folding>
+            <element signature="e#185#197#0" expanded="true" />
+            <element signature="e#964#2399#0" />
+            <element signature="e#2437#3526#0" />
+            <element signature="e#3565#4856#0" />
+            <element signature="e#4897#6190#0" />
+            <element signature="e#6229#7540#0" />
+            <element signature="e#7581#8912#0" />
+            <element signature="e#8953#10264#0" />
+            <element signature="e#10305#11640#0" />
+            <element signature="e#11683#13058#0" />
+            <element signature="e#13090#14492#0" />
+            <element signature="e#14528#16999#0" />
+            <element signature="e#17036#21640#0" />
+            <element signature="e#21674#28909#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/main_fedrep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="99" selection-end-column="49" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/main_Co2L.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-403">
+          <caret line="145" column="151" selection-start-line="145" selection-start-column="151" selection-end-line="145" selection-end-column="151" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewFedAvg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1125">
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/sampling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="9" column="52" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/save/main_EWC.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/main_AGS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="133" column="44" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/save/MAS.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="169" column="26" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/multi/ServerStrategy/Fedavg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/main_EWC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="71" column="21" lean-forward="true" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/main_WEIT.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="73" column="7" selection-start-line="72" selection-start-column="12" selection-end-line="73" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/main_MAS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3550">
+          <caret line="142" column="35" selection-start-line="142" selection-start-column="35" selection-end-line="142" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="188" column="8" selection-start-line="188" selection-start-column="8" selection-end-line="188" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
