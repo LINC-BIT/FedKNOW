@@ -146,7 +146,8 @@ class Appr(object):
         self.tr_dataloader = tr_dataloader
         self.lr = lr
         self.lr_min = lr_min * 1 / 3
-
+        self.lr_decay = args.lr_decay
+        self.optim_type = args.optim
         self.ce = torch.nn.CrossEntropyLoss()
         self.optimizer = self._get_optimizer()
         self.old_task=-1
@@ -165,15 +166,13 @@ class Appr(object):
         self.fisher = fisher
     def set_trData(self,tr_dataloader):
         self.tr_dataloader = tr_dataloader
+
     def _get_optimizer(self, lr=None):
         if lr is None: lr = self.lr
-
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
-        # self.momentum = 0.9
-        # self.weight_decay = 0.0001
-        #
-        # optimizer =  torch.optim.SGD(self.model.parameters(), lr=lr, momentum=self.momentum,
-        #                       weight_decay=self.weight_decay)
+        if "SGD" in self.optim_type:
+            optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+        else:
+            optimizer = torch.optim.Adam(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
         return optimizer
     def train(self, t):
         if t!=self.old_task:
@@ -203,7 +202,7 @@ class Appr(object):
         # Fisher ops
         return losses
     def tune_epoch(self,t):
-        self.optimizer = torch.optim.SGD(self.classify.parameters(), lr=0.5)
+        self.optimizer = self._get_optimizer()
         self.model.train()
         self.classify.cuda()
         self.classify.train()

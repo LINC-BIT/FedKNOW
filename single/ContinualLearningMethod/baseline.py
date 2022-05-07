@@ -32,10 +32,12 @@ class Appr(object):
         self.tr_dataloader = tr_dataloader
         self.lr = lr
         self.lr_min = lr_min * 1 / 3
-
+        self.lr_decay = args.lr_decay
+        self.optim_type = args.optim
         self.ce = torch.nn.CrossEntropyLoss()
         self.optimizer = self._get_optimizer()
         self.old_task=-1
+        self.num_classes = args.num_classes // args.task
         return
     def set_model(self,model):
         self.model = model
@@ -43,15 +45,13 @@ class Appr(object):
         self.fisher = fisher
     def set_trData(self,tr_dataloader):
         self.tr_dataloader = tr_dataloader
+
     def _get_optimizer(self, lr=None):
         if lr is None: lr = self.lr
-
-        optimizer = torch.optim.SGD(self.model.parameters(), lr=lr)
-        # self.momentum = 0.9
-        # self.weight_decay = 0.0001
-        #
-        # optimizer =  torch.optim.SGD(self.model.parameters(), lr=lr, momentum=self.momentum,
-        #                       weight_decay=self.weight_decay)
+        if "SGD" in self.optim_type:
+            optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+        else:
+            optimizer = torch.optim.Adam(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
         return optimizer
     def train(self, t):
         if t!=self.old_task:
@@ -72,9 +72,9 @@ class Appr(object):
         self.model.train()
         for images,targets in self.tr_dataloader:
             images = images.cuda()
-            targets = (targets - 10 * t).cuda()
+            targets = (targets - self.num_classes * t).cuda()
             # Forward current model
-            offset1, offset2 = compute_offsets(t, 10)
+            offset1, offset2 = compute_offsets(t, self.num_classes)
             outputs = self.model.forward(images,t)[:,offset1:offset2]
             loss = self.ce(outputs, targets)
             ## 根据这个损失计算梯度，变换此梯度
@@ -96,9 +96,9 @@ class Appr(object):
         with torch.no_grad():
             for images,targets in dataloaders:
                 images = images.cuda()
-                targets = (targets - 10*t).cuda()
+                targets = (targets - self.num_classes*t).cuda()
                 # Forward
-                offset1, offset2 = compute_offsets(t, 10)
+                offset1, offset2 = compute_offsets(t, self.num_classes)
                 output = self.model.forward(images,t)[:,offset1:offset2]
 
                 loss = self.ce(output, targets)

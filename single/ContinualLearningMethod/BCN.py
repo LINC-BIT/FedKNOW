@@ -45,13 +45,16 @@ class Appr():
         self.ce = nn.CrossEntropyLoss()
         self.n_outputs = n_outputs
 
-        self.opt = optim.Adam(self.net.parameters(), args.lr)
+
         self.xstep = args.BCNxstep
         self.thetaBstep = args.BCNthetaBstep
         self.beta = args.BCNbeta
         self.n_memories = args.n_memories
         self.gpu = True
         self.lr = args.lr
+        self.lr_decay = args.lr_decay
+        self.optim_type = args.optim
+        self.opt = self._get_optimizer()
         # allocate episodic memory
         self.memory_data = torch.FloatTensor(
             n_tasks, self.n_memories, n_inputs)
@@ -73,8 +76,16 @@ class Appr():
     def set_model(self,model):
         self.net = model
 
+    def _get_optimizer(self, lr=None):
+        if lr is None: lr = self.lr
+        if "SGD" in self.optim_type:
+            optimizer = torch.optim.SGD(self.net.parameters(), lr=lr, weight_decay=self.lr_decay)
+        else:
+            optimizer = torch.optim.Adam(self.net.parameters(), lr=lr,weight_decay=self.lr_decay)
+        return optimizer
+
     def observe(self, x, t, y):
-        self.opt = optim.Adam(self.net.parameters(), self.lr)
+        self.opt = self._get_optimizer()
         # update memory
         if t != self.old_task:
             self.observed_tasks.append(t)

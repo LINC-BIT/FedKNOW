@@ -156,7 +156,7 @@ class Appr(object):
         self.ce = torch.nn.CrossEntropyLoss()
         self.optim_type = args.optim
         self.optimizer = self._get_optimizer()
-        self.pack_optimizer = self._get_optimizer()
+        self.pack_optimizer = self._get_optimizer(model=packmodel)
         self.lamb = args.lamb
         self.e_rep = args.local_rep_ep
         self.old_task=-1
@@ -172,17 +172,18 @@ class Appr(object):
         self.fisher = fisher
     def set_trData(self,tr_dataloader):
         self.tr_dataloader = tr_dataloader
-    def _get_optimizer(self, lr=None):
+    def _get_optimizer(self, model=None,lr=None):
         if lr is None: lr = self.lr
-        if "SGD" in self.optim_type:
-            optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+        if model == None:
+            if "SGD" in self.optim_type:
+                optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+            else:
+                optimizer = torch.optim.Adam(self.model.parameters(), lr=lr,weight_decay=self.lr_decay)
         else:
-            optimizer = torch.optim.Adam(self.model.parameters(), lr=lr,weight_decay=self.lr_decay)
-        # self.momentum = 0.9
-        # self.weight_decay = 0.0001
-        #
-        # optimizer =  torch.optim.SGD(self.model.parameters(), lr=lr, momentum=self.momentum,
-        #                       weight_decay=self.weight_decay)
+            if "SGD" in self.optim_type:
+                optimizer = torch.optim.SGD(self.packmodel.parameters(), lr=lr, weight_decay=self.lr_decay)
+            else:
+                optimizer = torch.optim.Adam(self.packmodel.parameters(), lr=lr,weight_decay=self.lr_decay)
         return optimizer
 
     def train(self, t):

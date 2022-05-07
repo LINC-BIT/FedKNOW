@@ -105,16 +105,9 @@ class Appr():
         self.margin = args.memory_strength
         self.is_cifar = True
         self.net = model
-        # if self.is_cifar:
-        #     self.net = ResNet18(n_outputs)
-        # else:
-        #     self.net = MLP([n_inputs] + [nh] * nl + [n_outputs])
-
         self.ce = nn.CrossEntropyLoss()
         self.n_outputs = n_outputs
-
         self.opt = optim.Adam(self.net.parameters(), args.lr)
-
         self.n_memories = args.n_memories
         self.gpu = True
         self.lr = args.lr

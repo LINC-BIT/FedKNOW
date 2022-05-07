@@ -12,7 +12,7 @@ import torch.nn as nn
 from torch.nn.parameter import Parameter
 from models.Nets import RepTail
 
-def gs_cal(t,tr_dataloader, model, sbatch=20):
+def gs_cal(t,tr_dataloader, model, num_classes,sbatch=20):
     # Init
     param_R = {}
 
@@ -30,9 +30,9 @@ def gs_cal(t,tr_dataloader, model, sbatch=20):
     for images, targets in tr_dataloader:
         total_num += len(targets)
         images = images.cuda()
-        targets = (targets - 10 * t).cuda()
+        targets = (targets - num_classes * t).cuda()
         # Forward current model
-        offset1, offset2 = compute_offsets(t, 10)
+        offset1, offset2 = compute_offsets(t, num_classes)
         outputs = model.forward(images, t,avg_act=True)[:, offset1:offset2]
         cnt = 0
 
@@ -81,10 +81,12 @@ class Appr(object):
         self.nepochs = nepochs
         self.tr_dataloader = tr_dataloader
         self.lr = lr
+        self.lr_decay = args.lr_decay
         self.lr_min = lr_min * 1 / 3
         self.eta  = 0.9
         self.rho =0.3
         self.ce = torch.nn.CrossEntropyLoss()
+        self.optim_type = args.optim
         self.optimizer = self._get_optimizer()
         self.old_task=-1
         self.lamb = 8
@@ -92,6 +94,7 @@ class Appr(object):
         self.mu = 10
         self.freeze = {}
         self.mask = {}
+        self.num_classes = args.num_classes // args.task
         for (name,p) in self.model.named_parameters():
             if len(p.size())<2:
                 continue
@@ -110,15 +113,13 @@ class Appr(object):
         self.fisher = fisher
     def set_trData(self,tr_dataloader):
         self.tr_dataloader = tr_dataloader
+
     def _get_optimizer(self, lr=None):
         if lr is None: lr = self.lr
-
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
-        # self.momentum = 0.9
-        # self.weight_decay = 0.0001
-        #
-        # optimizer =  torch.optim.SGD(self.model.parameters(), lr=lr, momentum=self.momentum,
-        #                       weight_decay=self.weight_decay)
+        if "SGD" in self.optim_type:
+            optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+        else:
+            optimizer = torch.optim.Adam(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
         return optimizer
     def train(self, t):
         if t!=self.old_task:
@@ -153,7 +154,7 @@ class Appr(object):
             self.train_epoch(t)
             train_loss, train_acc = self.eval(t)
         self.model.feature_net.act = None
-        temp = gs_cal(t, self.tr_dataloader, self.model)
+        temp = gs_cal(t, self.tr_dataloader, self.model,self.num_classes)
         for n in temp.keys():
             if t > 0:
                 self.omega[n] = self.eta * self.omega[n] + temp[n]
@@ -228,9 +229,9 @@ class Appr(object):
         # Loop batches
         for images,targets in self.tr_dataloader:
             images = images.cuda()
-            targets = (targets - 10 * t).cuda()
+            targets = (targets - self.num_classes * t).cuda()
             # Forward current model
-            offset1, offset2 = compute_offsets(t, 10)
+            offset1, offset2 = compute_offsets(t, self.num_classes)
             outputs = self.model.forward(images, t)[:, offset1:offset2]
 
             # Forward current model
@@ -329,9 +330,9 @@ class Appr(object):
         with torch.no_grad():
             for images,targets in dataloaders:
                 images = images.cuda()
-                targets = (targets - 10*t).cuda()
+                targets = (targets - self.num_classes*t).cuda()
                 # Forward
-                offset1, offset2 = compute_offsets(t, 10)
+                offset1, offset2 = compute_offsets(t, self.num_classes)
                 output = self.model.forward(images,t)[:,offset1:offset2]
 
                 loss = self.ce(output, targets)

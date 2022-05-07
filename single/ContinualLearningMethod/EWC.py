@@ -134,6 +134,8 @@ class Appr(object):
         self.lr = lr
         self.lr_min = lr_min * 1 / 3
         self.lr_factor = lr_factor
+        self.lr_decay = args.lr_decay
+        self.optim_type = args.optim
         self.lr_patience = lr_patience
         self.clipgrad = clipgrad
 
@@ -141,6 +143,7 @@ class Appr(object):
         self.optimizer = self._get_optimizer()
         self.lamb = args.lamb
         self.e_rep = args.local_rep_ep
+        self.num_classes = args.num_classes // args.task
         self.old_task=-1
         self.grad_dims = []
         for param in self.model.feature_net.parameters():
@@ -153,15 +156,13 @@ class Appr(object):
         self.fisher = fisher
     def set_trData(self,tr_dataloader):
         self.tr_dataloader = tr_dataloader
+
     def _get_optimizer(self, lr=None):
         if lr is None: lr = self.lr
-
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
-        # self.momentum = 0.9
-        # self.weight_decay = 0.0001
-        #
-        # optimizer =  torch.optim.SGD(self.model.parameters(), lr=lr, momentum=self.momentum,
-        #                       weight_decay=self.weight_decay)
+        if "SGD" in self.optim_type:
+            optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+        else:
+            optimizer = torch.optim.Adam(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
         return optimizer
 
     def train(self, t):
@@ -201,9 +202,9 @@ class Appr(object):
         self.model.train()
         for images,targets in self.tr_dataloader:
             images = images.cuda()
-            targets = (targets - 10 * t).cuda()
+            targets = (targets - self.num_classes * t).cuda()
             # Forward current model
-            offset1, offset2 = compute_offsets(t, 10)
+            offset1, offset2 = compute_offsets(t, self.num_classes)
             outputs = self.model.forward(images,t)[:,offset1:offset2]
             loss = self.criterion(t, outputs, targets)
             ## 根据这个损失计算梯度，变换此梯度
@@ -224,9 +225,9 @@ class Appr(object):
         with torch.no_grad():
             for images,targets in dataloaders:
                 images = images.cuda()
-                targets = (targets - 10*t).cuda()
+                targets = (targets - self.num_classes*t).cuda()
                 # Forward
-                offset1, offset2 = compute_offsets(t, 10)
+                offset1, offset2 = compute_offsets(t, self.num_classes)
                 output = self.model.forward(images,t)[:,offset1:offset2]
 
                 loss = self.criterion(t, output, targets)

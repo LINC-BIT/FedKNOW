@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac8ee188-539e-406a-ae69-46605dcefdaa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewFedAvg.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/single/main_AGS.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/main_AGS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/AGS.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/AGS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/APFL.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/APFL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/BCN.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/BCN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/Co2L.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/Co2L.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/FedRep.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/FedRep.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/GEM.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/GEM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/WEIT.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/WEIT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single/ContinualLearningMethod/baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/single/ContinualLearningMethod/baseline.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,46 +23,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/multi/ServerStrategy/Fedavg.py">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#17#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_WEIT.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="73" column="7" selection-start-line="72" selection-start-column="12" selection-end-line="73" selection-end-column="7" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_EWC.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="71" column="21" lean-forward="true" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="188" column="8" selection-start-line="188" selection-start-column="8" selection-end-line="188" selection-end-column="8" />
+            <state relative-caret-position="915">
+              <caret line="178" column="83" selection-start-line="178" selection-start-column="83" selection-end-line="178" selection-end-column="83" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -63,12 +35,42 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_MAS.py">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/APFL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3550">
-              <caret line="142" column="35" selection-start-line="142" selection-start-column="35" selection-end-line="142" selection-end-column="35" />
+            <state relative-caret-position="520">
+              <caret line="65" column="24" lean-forward="true" selection-start-line="59" selection-start-column="4" selection-end-line="65" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/Co2L.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3175">
+              <caret line="204" column="45" selection-start-line="204" selection-start-column="45" selection-end-line="204" selection-end-column="45" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/BCN.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5116">
+              <caret line="303" column="47" selection-start-line="303" selection-start-column="45" selection-end-line="303" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/baseline.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="39" column="56" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="56" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -77,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="169" column="26" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="26" />
+            <state relative-caret-position="475">
+              <caret line="145" column="56" lean-forward="true" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="56" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -87,61 +89,45 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_AGS.py">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedRep.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="133" column="44" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
+            <state relative-caret-position="175">
+              <caret line="43" column="36" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="43" selection-end-column="36" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_Co2L.py">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/GEM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-403">
-              <caret line="145" column="151" selection-start-line="145" selection-start-column="151" selection-end-line="145" selection-end-column="151" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-2125">
+              <caret line="109" column="61" selection-start-line="109" selection-start-column="61" selection-end-line="109" selection-end-column="61" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/single/main_fedrep.py">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="99" selection-end-column="49" />
+            <state relative-caret-position="25">
+              <caret line="158" column="4" selection-start-line="158" selection-start-column="4" selection-end-line="164" selection-end-column="24" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/Nets.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/WEIT.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="972">
-              <caret line="725" column="23" selection-start-line="725" selection-start-column="23" selection-end-line="725" selection-end-column="23" />
+            <state relative-caret-position="430">
+              <caret line="194" column="28" lean-forward="true" selection-start-line="194" selection-start-column="28" selection-end-line="194" selection-end-column="28" />
               <folding>
-                <element signature="e#185#197#0" expanded="true" />
-                <element signature="e#964#2399#0" />
-                <element signature="e#2437#3526#0" />
-                <element signature="e#3565#4856#0" />
-                <element signature="e#4897#6190#0" />
-                <element signature="e#6229#7540#0" />
-                <element signature="e#7581#8912#0" />
-                <element signature="e#8953#10264#0" />
-                <element signature="e#10305#11640#0" />
-                <element signature="e#11683#13058#0" />
-                <element signature="e#13090#14492#0" />
-                <element signature="e#14528#16999#0" />
-                <element signature="e#17036#21640#0" />
-                <element signature="e#21674#28909#0" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -174,11 +160,18 @@
       <find>resnet152</find>
       <find>forward</find>
       <find>per</find>
-      <find>10</find>
       <find>num</find>
-      <find>Adam</find>
       <find>self.model_old</find>
+      <find>gs_cal</find>
+      <find>self.num_classes</find>
+      <find>Adam</find>
+      <find>10</find>
+      <find>SGD</find>
     </findStrings>
+    <replaceStrings>
+      <replace>self.num_class</replace>
+      <replace>self.num_classes</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -203,7 +196,6 @@
         <option value="$PROJECT_DIR$/models/ResNet.py" />
         <option value="$PROJECT_DIR$/dataset/Cifar100.py" />
         <option value="$PROJECT_DIR$/utils/train_utils.py" />
-        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py" />
         <option value="$PROJECT_DIR$/data/tinyimagenet.py" />
         <option value="$PROJECT_DIR$/data/FC100.py" />
         <option value="$PROJECT_DIR$/data/core50.py" />
@@ -211,7 +203,6 @@
         <option value="$PROJECT_DIR$/README_zh-CN.md" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/multi/main_FedKNOW.py" />
-        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/APFL.py" />
         <option value="$PROJECT_DIR$/single/main_FedKNOW.py" />
         <option value="$PROJECT_DIR$/models/Nets.py" />
         <option value="$PROJECT_DIR$/single/main_fedavg.py" />
@@ -224,10 +215,19 @@
         <option value="$PROJECT_DIR$/single/save/main_EWC.py" />
         <option value="$PROJECT_DIR$/single/main_AGS.py" />
         <option value="$PROJECT_DIR$/single/main_EWC.py" />
-        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py" />
         <option value="$PROJECT_DIR$/single/save/MAS.py" />
         <option value="$PROJECT_DIR$/single/main_MAS.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/AGS.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/APFL.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/baseline.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/BCN.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/Co2L.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/FedRep.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/GEM.py" />
         <option value="$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py" />
+        <option value="$PROJECT_DIR$/single/ContinualLearningMethod/WEIT.py" />
       </list>
     </option>
   </component>
@@ -254,6 +254,12 @@
               <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
               <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
               <item name="single" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FedKNOW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FedKNOW" type="462c0819:PsiDirectoryNode" />
+              <item name="single" type="462c0819:PsiDirectoryNode" />
+              <item name="ContinualLearningMethod" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -326,12 +332,12 @@
       <option name="presentableId" value="Default" />
       <updated>1651300916339</updated>
       <workItem from="1651300917566" duration="10112000" />
-      <workItem from="1651327862854" duration="52758000" />
+      <workItem from="1651327862854" duration="55499000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62870000" />
+    <option name="totallyTimeSpent" value="65611000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -392,15 +398,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py</url>
-          <line>140</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="len(self.feature_net.state_dict().keys())" language="Python" />
@@ -473,60 +470,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/models/SENet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="81" column="57" selection-start-line="81" selection-start-column="57" selection-end-line="81" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.conda/envs/taobao/Lib/site-packages/torch/serialization.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="578" selection-start-line="578" selection-end-line="578" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/multi/ContinualLearningMethod/FedKNOW.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="234" selection-start-line="234" selection-end-line="234" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Update.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Densenet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="11" column="61" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/FedAvg_cifar10_2shards.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/FedAvg_cifar10_2shards_1000users.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/shufflenetv2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2007">
@@ -638,16 +581,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="162" column="27" selection-start-line="162" selection-start-column="27" selection-end-line="162" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/core50.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
@@ -736,13 +669,6 @@
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/APFL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-680">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
@@ -855,28 +781,8 @@
     <entry file="file://$PROJECT_DIR$/single/save/main_EWC.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/single/main_AGS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="133" column="44" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/single/save/MAS.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="169" column="26" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/multi/ServerStrategy/Fedavg.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -918,10 +824,111 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/single/main_AGS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1322">
+          <caret line="133" column="44" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/AGS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2920">
+          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="178" column="83" selection-start-line="178" selection-start-column="83" selection-end-line="178" selection-end-column="83" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/APFL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="65" column="24" lean-forward="true" selection-start-line="59" selection-start-column="4" selection-end-line="65" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/BCN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5116">
+          <caret line="303" column="47" selection-start-line="303" selection-start-column="45" selection-end-line="303" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/Co2L.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3175">
+          <caret line="204" column="45" selection-start-line="204" selection-start-column="45" selection-end-line="204" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="39" column="56" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/EWC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="145" column="56" lean-forward="true" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/GEM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2125">
+          <caret line="109" column="61" selection-start-line="109" selection-start-column="61" selection-end-line="109" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedRep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="43" column="36" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="43" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="188" column="8" selection-start-line="188" selection-start-column="8" selection-end-line="188" selection-end-column="8" />
+        <state relative-caret-position="25">
+          <caret line="158" column="4" selection-start-line="158" selection-start-column="4" selection-end-line="164" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/WEIT.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="194" column="28" lean-forward="true" selection-start-line="194" selection-start-column="28" selection-end-line="194" selection-end-column="28" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
