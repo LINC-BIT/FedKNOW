@@ -4,24 +4,24 @@ import torch
 from utils.options import args_parser
 from utils.train_utils import get_data, get_model
 from models.Update import DatasetSplit
-from multi.ContinualLearningMethod.FedKNOW import Appr,LongLifeTest,LongLifeTrain
+from multi.ContinualLearningMethod.WEIT import Appr,LongLifeTest,LongLifeTrain
 from torch.utils.data import DataLoader
 import time
 from models.Packnet import PackNet
 import flwr as fl
 from collections import OrderedDict
 import datetime
-class FedKNOWClient(fl.client.NumPyClient):
+class FPKDClient(fl.client.NumPyClient):
     def __init__(self,appr,args):
         self.appr= appr
         self.args = args
         self.curTask = 0
     def get_parameters(self):
-        net = appr.get_featurenet()
+        net = appr.get_sw()
         return [val.cpu().numpy() for _, val in net.state_dict().items()]
 
     def set_parameters(self, parameters):
-        net = appr.get_featurenet()
+        net = appr.get_sw()
         params_dict = zip(net.state_dict().keys(), parameters)
         state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
         net.load_state_dict(state_dict, strict=True)
@@ -83,5 +83,5 @@ if __name__ == '__main__':
         te_dataloader = DataLoader(DatasetSplit(dataset_test[i], dict_users_test[args.client_id]), batch_size=args.local_test_bs, shuffle=False,num_workers=0)
         appr.traindataloaders.append(tr_dataloaders)
         appr.testdataloaders.append(te_dataloader)
-    client = FedKNOWClient(appr,args)
+    client = FPKDClient(appr,args)
     fl.client.start_numpy_client(args.ip, client=client)

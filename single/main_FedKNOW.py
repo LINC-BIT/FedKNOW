@@ -74,7 +74,7 @@ if __name__ == '__main__':
     accs10_glob = 0
     start = time.time()
     task=-1
-    apprs = [Appr(copy.deepcopy(net_glob),PackNet(args.task,local_ep=args.local_ep,local_rep_ep=args.local_rep_ep,device=args.device),copy.deepcopy(net_glob), None,lr=args.lr, nepochs=args.local_ep, args=args) for i in range(args.num_users)]
+    apprs = [Appr(copy.deepcopy(net_glob),PackNet(args.task,local_ep=args.local_ep,local_rep_ep=args.local_local_ep,device=args.device,prune_instructions= 1 - args.store_rate),copy.deepcopy(net_glob), None,lr=args.lr, nepochs=args.local_ep, args=args) for i in range(args.num_users)]
     print(args.round)
     for iter in range(args.epochs):
         if iter % (args.round) == 0:
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         for ind, idx in enumerate(idxs_users):
             glob_fisher = None
             start_in = time.time()
-            tr_dataloaders = DataLoader(DatasetSplit(dataset_train[task],dict_users_train[idx][:args.m_ft]),batch_size=args.local_bs, shuffle=True,num_workers=2)
+            tr_dataloaders = DataLoader(DatasetSplit(dataset_train[task],dict_users_train[idx][:args.m_ft]),batch_size=args.local_bs, shuffle=True,num_workers=0)
             net_local = copy.deepcopy(net_glob)
             w_local = net_local.state_dict()
             for k in w_locals[idx].keys():

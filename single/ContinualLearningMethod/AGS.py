@@ -128,7 +128,7 @@ class Appr(object):
             self.model_old.train()
             freeze_model(self.model_old)  # Freeze the weights
         lr = self.lr
-        self.optimizer = self._get_optimizer(lr)
+        self.optimizer = self._get_optimizer()
         # Loop epochs
         if t>0:
             self.freeze = {}

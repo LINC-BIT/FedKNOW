@@ -15,7 +15,7 @@ def args_parser():
     parser.add_argument('--local_test_bs', type=int, default=50, help="the number  of local test epochs: E")
     parser.add_argument('--local_bs', type=int, default=40, help="local batch size: B")
     parser.add_argument('--bs', type=int, default=100, help="test batch size")
-    parser.add_argument('--optim', type=str, default='SGD', help="optimizer")
+    parser.add_argument('--optim', type=str, default='Adam', help="optimizer")
     parser.add_argument('--lr', type=float, default=0.001, help="learning rate")
     parser.add_argument('--momentum', type=float, default=0.5, help="SGD momentum (default: 0.5)")
     parser.add_argument('--split', type=str, default='user', help="train-test split type, user or sample")
@@ -26,7 +26,7 @@ def args_parser():
     parser.add_argument('--m_ft', type=int, default=240, help="maximum number of samples/user to use for fine-tuning")
 
     # model arguments
-    parser.add_argument('--model', type=str, default='cnn', help='model name')
+    parser.add_argument('--model', type=str, default='6layer_CNN', help='model name')
     parser.add_argument('--kernel_num', type=int, default=9, help='number of each kind of kernel')
     parser.add_argument('--kernel_sizes', type=str, default='3,4,5',
                         help='comma-separated kernel size to use for convolution')
@@ -38,7 +38,7 @@ def args_parser():
     parser.add_argument('--alg', type=str, default='fedrep', help='FL algorithm to use')
     
     # algorithm-specific hyperparameters
-    parser.add_argument('--local_rep_ep', type=int, default=2, help="the number of local epochs for the representation for FedRep")
+    parser.add_argument('--local_local_ep', type=int, default=2, help="the number of local epochs for the representation for FedRep")
     parser.add_argument('--lr_g', type=float, default=0.1, help="global learning rate for SCAFFOLD")
     parser.add_argument('--mu', type=float, default='0.1', help='FedProx parameter mu')
     parser.add_argument('--gmf', type=float, default='0', help='FedProx parameter gmf')
@@ -48,7 +48,10 @@ def args_parser():
     parser.add_argument('--lr_in', type=float, default='0.001', help='PerFedAvg inner loop step size')
     parser.add_argument('--bs_frac_in', type=float, default='0.8', help='PerFedAvg fraction of batch used for inner update')
     parser.add_argument('--lam_ditto', type=float, default='1', help='Ditto parameter lambda')
-
+    parser.add_argument('--store_rate', type=float, default=0.1,
+                        help='the store rate of model in FedKNOW')
+    parser.add_argument('--select_grad_num', type=int, default=10,
+                        help='the store rate of model in FedKNOW')
     # other arguments
     parser.add_argument('--dataset', type=str, default='cifar100', help="name of dataset")
     parser.add_argument('--iid', action='store_true', help='whether i.i.d or not')
@@ -83,6 +86,7 @@ def args_parser():
                         help='Number of epochs per task')
     parser.add_argument('--client_id', type=int, default=0,
                         help='client ID')
+
     parser.add_argument('--ip', type=str, default=0,
                         help='ip address')
     args = parser.parse_args()

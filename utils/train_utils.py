@@ -131,7 +131,7 @@ def get_model(args):
         else:
             image_size = [3, 224, 224]
         net_glob = RepTail(image_size,output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
-    if args.model == 'ResNet18' :
+    elif args.model == 'ResNet18' :
         net_glob = RepTailResNet18(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)
     elif args.model == 'ResNet152' :
         net_glob = RepTailResNet152(output=args.num_classes,nc_per_task=args.num_classes // args.task).to(args.device)

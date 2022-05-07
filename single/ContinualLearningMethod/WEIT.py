@@ -198,7 +198,7 @@ class Appr(object):
         for name, para in self.model.named_parameters():
             para.requires_grad = True
         self.model.set_knowledge(t,from_kbs)
-        self.optimizer = self._get_optimizer(lr)
+        self.optimizer = self._get_optimizer()
         self.model.cuda()
         # Loop epochs
         for e in range(self.nepochs):

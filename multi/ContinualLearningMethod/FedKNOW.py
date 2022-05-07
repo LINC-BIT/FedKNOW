@@ -152,19 +152,22 @@ class Appr(object):
         self.tr_dataloader = tr_dataloader
         self.lr = lr
         self.lr_min = lr_min * 1 / 3
+        self.lr_decay = args.lr_decay
         self.lr_factor = lr_factor
         self.lr_patience = lr_patience
         self.clipgrad = clipgrad
         self.ce = torch.nn.CrossEntropyLoss()
+        self.optim_type = args.optim
         self.optimizer = self._get_optimizer()
         self.pack_optimizer = torch.optim.SGD(self.packmodel.parameters(), lr=lr,momentum=0.9)
         self.lamb = args.lamb
-        self.e_rep = args.local_rep_ep
+        self.e_rep = args.local_local_ep
         self.old_task=-1
         self.grad_dims = []
         self.traindataloaders= []
         self.testdataloaders = []
         self.model.to(self.device)
+        self.num_classes = args.num_classes // args.task
         for param in self.model.feature_net.parameters():
             self.grad_dims.append(param.data.numel())
 
@@ -178,15 +181,19 @@ class Appr(object):
         self.test_dataloader = self.testdataloaders[task]
     def get_featurenet(self):
         return self.model.feature_net
-    def _get_optimizer(self, lr=None):
-        if lr is None: lr = self.lr
 
-        optimizer = torch.optim.SGD(self.model.parameters(), lr=lr,momentum=0.9)
-        # self.momentum = 0.9
-        # self.weight_decay = 0.0001
-        #
-        # optimizer =  torch.optim.SGD(self.model.parameters(), lr=lr, momentum=self.momentum,
-        #                       weight_decay=self.weight_decay)
+    def _get_optimizer(self, model=None, lr=None):
+        if lr is None: lr = self.lr
+        if model == None:
+            if "SGD" in self.optim_type:
+                optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+            else:
+                optimizer = torch.optim.Adam(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
+        else:
+            if "SGD" in self.optim_type:
+                optimizer = torch.optim.SGD(self.packmodel.parameters(), lr=lr, weight_decay=self.lr_decay)
+            else:
+                optimizer = torch.optim.Adam(self.packmodel.parameters(), lr=lr, weight_decay=self.lr_decay)
         return optimizer
 
     def train(self, t):
@@ -296,7 +303,7 @@ class Appr(object):
         for images,targets in self.tr_dataloader:
             # Forward current model
             images = images.to(self.device)
-            targets = (targets - 10 * t).to(self.device)
+            targets = (targets - self.num_classes * t).to(self.device)
             pre_loss = 0
             grads = torch.Tensor(sum(self.grad_dims), 2+t)
             offset1, offset2 = compute_offsets(t, self.num_classes)
@@ -439,13 +446,3 @@ def LongLifeTest(args, appr, aggNum):
     # np.savetxt(args.agg_output + 'aggNum_already_'+str(aggNum)+args.log_name, acc, '%.4f')
     return mean_lss, mean_acc,100
 
-# def main():
-#     # cifar100 = Cifar100Task('../data',batch_size=900,num_clients=5,cur_client=4,task_num=10,isFed=True)
-#     cifar100 = Cifar100Task('../data/cifar-100-python', batch_size=4500, task_num=10, num_clients=5, cur_client=0,
-#                       isFed=True)
-#     TaskDatas = cifar100.getDatas()
-#     net = network.RepTail([3, 32, 32]).to(self.device)
-#
-#
-# if __name__ == "__main__":
-#     main()

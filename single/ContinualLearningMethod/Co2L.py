@@ -222,7 +222,7 @@ class Appr(object):
             self.optimizer.step()
         return
     def new_train(self,t,epoch,endEpoch=False):
-        self.optimizer = self._get_optimizer(self.lr)
+        self.optimizer = self._get_optimizer()
         self.model.train()
         batch_time = AverageMeter()
         data_time = AverageMeter()

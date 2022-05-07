@@ -33,7 +33,8 @@
     python single/main_FedKNOW.py --alg fedknow --dataset [dataset] --model [mdoel]
     --num_users [num_users]  --shard_per_user [shard_per_user] --frac [frac] 
     --local_bs [local_bs] --lr [lr] --task [task] --epoch [epoch]  --local_ep 
-    [local_ep] --local_local_ep [local_local_ep] --gpu [gpu]
+    [local_ep] --local_local_ep [local_local_ep] --store_rate [store_rate] 
+    --select_grad_num [select_grad_num]--gpu [gpu]
     ```
     参数解释：
     - `alg`： 需要跑的算法，例如：`FedKNOW`,`FedRep`,`GEM`等
@@ -48,6 +49,8 @@
     - `epochs`: 客户端和服务器通信的总次数
     - `local_ep`：本地客户端迭代数
     - `local_local_ep`：本地客户端更新本地参数的迭代数
+    - `store_rate`: FedKNOW中选择存储参数的比例
+    - `select_grad_num`: FedKNOW中用于计算旧梯度的数目
     - `gpu`：GPU ID
 - **多设备运行**
     1. 控制传输网速
@@ -64,7 +67,8 @@
         python multi/main_FedKNOW.py --client_id [client_id] --alg [alg]
         --dataset [dataset] --model[mdoel]  --shard_per_user [shard_per_user] 
         --local_bs [local_bs] --lr [lr] --task [task] --epoch [epoch]  --local_ep 
-        [local_ep] --local_local_ep [local_local_ep] --gpu [gpu] --ip [ip]
+        [local_ep] --local_local_ep [local_local_ep]  --store_rate [store_rate] 
+        --select_grad_num [select_grad_num] --gpu [gpu] --ip [ip]
         ```
         这里的参数描述和单设备参数描述一致，新添加的`client_id`表示客户端标识符, `ip`表示客户端连接服务器的ip地址，用于服务器确定具体的标识。对于每一个算法的配置信息我们放到了`multi/scripts/`。
         完整的参数信息解释在`utils/option.py`。对于每一个算法的详细配置我们放到了`single/scripts/`下。
@@ -110,7 +114,7 @@
     **运行服务器：**
     
     ```shell
-    python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8080
+    python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
     ```
     **运行客户端：**
     - 6-layer CNN on Cifar100

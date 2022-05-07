@@ -60,10 +60,11 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
     python single/main_FedKNOW.py --alg fedknow --dataset [dataset] --model [mdoel]
     --num_users [num_users]  --shard_per_user [shard_per_user] --frac [frac] 
     --local_bs [local_bs] --lr [lr] --task [task] --epoch [epoch]  --local_ep 
-    [local_ep] --local_local_ep [local_local_ep] --gpu [gpu]
+    [local_ep] --local_local_ep [local_local_ep] --store_rate [store_rate] 
+    --select_grad_num [select_grad_num] --gpu [gpu]
     ```
     Arguments:
-    - `alg`： the algorithm, e.g. `FedKNOW`, `FedRep`, `GEM`
+    - `alg`: the algorithm, e.g. `FedKNOW`, `FedRep`, `GEM`
     
     - `dataset` : the dataset, e.g. `cifar100`, `FC100`, `CORe50`, `MiniImagenet`, `Tinyimagenet`
     
@@ -73,9 +74,9 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
     
     - `shard_per_user`: the number of classes in each client
     
-    - `frac`：the percentage of clients participating in training in each epoch
+    - `frac`: the percentage of clients participating in training in each epoch
     
-    - `local_bs`：the batch size in each client
+    - `local_bs`: the batch size in each client
     
     - `lr`: the learning rate
     
@@ -83,9 +84,13 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
     
     - `epochs`: the number of communications between clients and the server
     
-    - `local_ep`：the number of epochs in clients
+    - `local_ep`:the number of epochs in clients
     
-    - `local_local_ep`：the number of updating the local parameters in clients
+    - `local_local_ep`:the number of updating the local parameters in clients
+    
+    - `store_rate`: the store rate of model parameters in FedKNOW
+    
+    - `select_grad_num`: the number of choosing the old grad in FedKNOW
     
     - `gpu`: GPU id
     
@@ -106,7 +111,8 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
         python multi/main_FedKNOW.py --client_id [client_id] --alg [alg]
         --dataset [dataset] --model[mdoel]  --shard_per_user [shard_per_user] 
         --local_bs [local_bs] --lr [lr] --task [task] --epoch [epoch]  --local_ep 
-        [local_ep] --local_local_ep [local_local_ep] --gpu [gpu] --ip [ip]
+        [local_ep] --local_local_ep [local_local_ep]  --store_rate [store_rate] 
+        --select_grad_num [select_grad_num] --gpu [gpu] --ip [ip]
         ```
         Arguments:
         - `client_id`: the id of the client
@@ -133,7 +139,7 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
     **Launch the server：**
     
     ```shell
-    python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8080
+    python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
     ```
     **Launch the clients：**
     
@@ -173,7 +179,7 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
             python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
         done
         ```
-    **Note:** Keep the IP address of the server and clients the same. `--ip=127.0.0.1:8000` represents testing locally. If there're multiple edge devices, you should do `--ip=<IP of the server>`. More details (e.g. baselines) refer to `scripts/DifWork`.
+    **Note:** Keep the IP address of the server and clients the same. `--ip=127.0.0.1:8000` represents testing locally. If there're multiple edge devices, you should do `--ip=<IP of the server>`.
     
 2. **Result**
 

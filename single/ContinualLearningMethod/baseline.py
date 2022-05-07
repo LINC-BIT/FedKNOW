@@ -57,7 +57,7 @@ class Appr(object):
         if t!=self.old_task:
             self.old_task=t
         lr = self.lr
-        self.optimizer = self._get_optimizer(lr)
+        self.optimizer = self._get_optimizer()
         # Loop epochs
         for e in range(self.nepochs):
             self.train_epoch(t)

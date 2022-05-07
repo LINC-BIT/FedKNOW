@@ -156,15 +156,15 @@ class Appr(object):
         self.ce = torch.nn.CrossEntropyLoss()
         self.optim_type = args.optim
         self.optimizer = self._get_optimizer()
-        self.pack_optimizer = self._get_optimizer(model=packmodel)
+        self.pack_optimizer = self._get_optimizer(packmodel)
         self.lamb = args.lamb
-        self.e_rep = args.local_rep_ep
+        self.e_rep = args.local_local_ep
         self.old_task=-1
         self.grad_dims = []
         self.num_classes = args.num_classes // args.task
         for param in self.model.feature_net.parameters():
             self.grad_dims.append(param.data.numel())
-
+        self.select_grad_num = args.select_grad_num
         return
     def set_model(self,model):
         self.model = model
@@ -174,6 +174,7 @@ class Appr(object):
         self.tr_dataloader = tr_dataloader
     def _get_optimizer(self, model=None,lr=None):
         if lr is None: lr = self.lr
+        optimizer =None
         if model == None:
             if "SGD" in self.optim_type:
                 optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=self.lr_decay)
@@ -185,7 +186,6 @@ class Appr(object):
             else:
                 optimizer = torch.optim.Adam(self.packmodel.parameters(), lr=lr,weight_decay=self.lr_decay)
         return optimizer
-
     def train(self, t):
         self.model.to(self.device)
         self.model_old.to(self.device)
@@ -196,8 +196,7 @@ class Appr(object):
             self.model_old.train()
             freeze_model(self.model_old)  # Freeze the weights
             self.old_task=t
-        lr = self.lr
-        self.optimizer = self._get_optimizer(lr)
+        self.optimizer = self._get_optimizer()
         self.pack.on_init_end(self.packmodel,t)
         # trian model
         if len(self.pack.masks) > t:
@@ -305,6 +304,8 @@ class Appr(object):
                 pre_loss=MultiClassCrossEntropy(preoutputs,preLabels,t,T=2)
                 pre_loss.backward()
                 store_grad(self.model.feature_net.parameters,grads, self.grad_dims,0)
+                if t >= self.select_grad_num:
+                    t = self.select_grad_num -1
                 for i in range(t):
                     self.model.zero_grad()
                     self.optimizer.zero_grad()
