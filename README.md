@@ -139,15 +139,15 @@ table th:nth-of-type(4) {
 </style>
 ||Model Name|Data|Script|
 |--|--|--|--|
-|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [6 layer_CNN (NeurIPS'2020)](https://proceedings.neurips.cc/paper/2020/hash/258be18e31c8188555c2ff05b4d542c3-Abstract.html)  | [Cifar100](http://www.cs.toronto.edu/~kriz/cifar.html) <br>[FC100](https://paperswithcode.com/dataset/fc100) <br>[CORe50](https://vlomonaco.github.io/core50/index.html#download)  | [Demo](models/Nets.py)  |
+|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [6 layer_CNN (NeurIPS'2020)](https://proceedings.neurips.cc/paper/2020/hash/258be18e31c8188555c2ff05b4d542c3-Abstract.html) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | [Cifar100](http://www.cs.toronto.edu/~kriz/cifar.html) <br>[FC100](https://paperswithcode.com/dataset/fc100) <br>[CORe50](https://vlomonaco.github.io/core50/index.html#download)  | [Demo](models/Nets.py)  |
 |&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ResNet (CVPR'2016)](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)  | [MiniImageNet](https://image-net.org/download.php) <br>[TinyImageNet](http://cs231n.stanford.edu/tiny-imagenet-200.zip)  | [Demo](models/ResNet.py)  |
-|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [MobileNetV2 (CVPR'2018)](https://arxiv.org/abs/1801.04381)  | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/mobilenet.py)<div>|
-|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [ResNeXt (CVPR'2017)](https://arxiv.org/abs/1611.05431)  | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/ResNet.py)<div>|
-|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [InceptionV3(CVPR'2016)](https://ieeexplore.ieee.org/document/7780677/)  | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/inception_v3.py)<div>|
-|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [WideResNet (BMVC'2016)](https://dx.doi.org/10.5244/C.30.87)  | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/ResNet.py)<div>|
-|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   [ShuffleNetV2 (ECCV'2018)](https://arxiv.org/abs/1807.11164)  | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/shufflenetv2.py)<div>|
-|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [DenseNet](https://arxiv.org/pdf/1707.06990.pdf)  | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/Densenet.py)|
-|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [SENet (CVPR'2018)](https://ieeexplore.ieee.org/document/341010)  | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/SENet.py)<div>|
+|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [MobileNetV2 (CVPR'2018)](https://arxiv.org/abs/1801.04381) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/mobilenet.py)<div>|
+|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [ResNeXt (CVPR'2017)](https://arxiv.org/abs/1611.05431) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/ResNet.py)<div>|
+|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [InceptionV3(CVPR'2016)](https://ieeexplore.ieee.org/document/7780677/) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/inception_v3.py)<div>|
+|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [WideResNet (BMVC'2016)](https://dx.doi.org/10.5244/C.30.87) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/ResNet.py)<div>|
+|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   [ShuffleNetV2 (ECCV'2018)](https://arxiv.org/abs/1807.11164) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/shufflenetv2.py)<div>|
+|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [DenseNet](https://arxiv.org/pdf/1707.06990.pdf) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/Densenet.py)|
+|&#9745;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  [SENet (CVPR'2018)](https://ieeexplore.ieee.org/document/341010) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | [MiniImageNet](https://image-net.org/download.php)  | [Demo](models/SENet.py)<div>|
 ## 4 Experiemts
 ### 4.1 Under different workloads (model and dataset)
 
