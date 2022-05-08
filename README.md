@@ -1,4 +1,18 @@
 # FedKNOW
+<style>
+table th:first-of-type {
+    width: 10%;
+}
+table th:nth-of-type(2) {
+    width: 30%;
+}
+table th:nth-of-type(3) {
+    width: 30%;
+}
+table th:nth-of-type(3) {
+    width: 30%;
+}
+</style>
 English | [简体中文](README_zh-CN.md)
 ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/FedKNOW_architecture.png)
 
