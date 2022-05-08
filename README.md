@@ -30,6 +30,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
 ### 2.1 Setup
 **Requirements**
 
+- Edge devices such as Jetson AGX, Jetson TX2, Jetson Xavier NX and Jetson Nano
 - Linux and Windows 
 - Python 3.6+
 - PyTorch 1.9+
