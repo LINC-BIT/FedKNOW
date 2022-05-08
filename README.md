@@ -123,6 +123,20 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
         
           The other arguments is the same as the one in single device setting. More details refer to `utils/option.py`. The configurations of all algorithms are located in `multi/scripts/`. 
 ## 3 Supported models in image classification
+<style>
+table th:first-of-type {
+    width: 10%;
+}
+table th:nth-of-type(2) {
+    width: 30%;
+}
+table th:nth-of-type(3) {
+    width: 30%;
+}
+table th:nth-of-type(4) {
+    width: 30%;
+}
+</style>
 ||Model Name|Data|Script|
 |--|--|--|--|
 |&#9745;|<div style="width: 30%">[6 layer_CNN (NeurIPS'2020)](https://proceedings.neurips.cc/paper/2020/hash/258be18e31c8188555c2ff05b4d542c3-Abstract.html)</div>|<div style="width: 30%">[Cifar100](http://www.cs.toronto.edu/~kriz/cifar.html) <br>[FC100](https://paperswithcode.com/dataset/fc100) <br>[CORe50](https://vlomonaco.github.io/core50/index.html#download)</div>|<div style="width: 30%">[Demo](models/Nets.py)</div>|
