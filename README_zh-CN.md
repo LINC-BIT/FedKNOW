@@ -15,7 +15,7 @@
   * [4.5 参数存储比例测试](#45-参数存储比例测试)
   * [4.6 适用性测试](#46-适用性测试)
 ## 1 介绍
-目前，在联邦学习的场景下FedKNOW对图像分类的8种网络模型下取得了不错的效果，包括：ResNet，ResNeXt，MobileNet，WideResNet，SENet，ShuffleNet，Inception，DenseNet。
+在持续学习的北京下，FedKNOW针对准确率，时间，通信等等取得不错的效果。目前，在联邦学习的场景下FedKNOW对图像分类的8种网络模型下取得了不错的效果，包括：ResNet，ResNeXt，MobileNet，WideResNet，SENet，ShuffleNet，Inception，DenseNet。
 - [ResNet](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html) : 在图像分类中，由多个卷积层和池化层进行提取图片信息。但随着网络的深度增加，深度神经网络出现梯度消失(爆炸)问题以及网络退化。对于梯度消失(爆炸)的问题，ResNet添加了BatchNorm层进行约束，而对于网络退化，ResNet则建立了残差网络结果，将每一层的输入添加映射到下一层的输入中。
 - [Inception](https://ieeexplore.ieee.org/document/7780677)：卷积网络为了提取高维特征，一般方式进行更深层卷积，但是随之带来网络变大的问题。Inception模块提出可以使网络变宽，在保证模型质量的前提下，减少参数个数，提取高维特征。在Inception结构，首先通过1x1卷积来降低通道数把信息聚集一下，再进行不同尺度的特征提取以及池化，得到多个尺度的信息，最后将特征进行叠加输出。
 - [RepNeXt](https://arxiv.org/abs/1611.05431)：将Inception和ResNet进行结合。首先对Inception的分解进行简化，使每一个分解结构都具有相同的拓扑形状，之后按照ResNet的方式搭建网络。
