@@ -99,7 +99,7 @@
 ## 3 支持的模型和数据集
 ||Model Name|Data|Script|
 |--|--|--|--|
-|&#9745;|[6 layer_CNN (NeurIPS'2020)](https://proceedings.neurips.cc/paper/2020/hash/258be18e31c8188555c2ff05b4d542c3-Abstract.html)|[Cifar100](http://www.cs.toronto.edu/~kriz/cifar.html) <br>[FC100](https://paperswithcode.com/dataset/fc100) <br>[CORe50](https://vlomonaco.github.io/core50/index.html#download)|[Demo](models/ResNet.py)|
+|&#9745;|[6 layer_CNN (NeurIPS'2020)](https://proceedings.neurips.cc/paper/2020/hash/258be18e31c8188555c2ff05b4d542c3-Abstract.html)|[Cifar100](http://www.cs.toronto.edu/~kriz/cifar.html) <br>[FC100](https://paperswithcode.com/dataset/fc100) <br>[CORe50](https://vlomonaco.github.io/core50/index.html#download)|[Demo](models/Nets.py)|
 |&#9745;|[ResNet (CVPR'2016)](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)|[MiniImageNet](https://image-net.org/download.php) <br>[TinyImageNet](http://cs231n.stanford.edu/tiny-imagenet-200.zip)|[Demo](models/ResNet.py)|
 |&#9745;|[MobileNetV2 (CVPR'2018)](https://arxiv.org/abs/1801.04381)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/mobilenet.py)|
 |&#9745;|[ResNeXt (CVPR'2017)](https://arxiv.org/abs/1611.05431)|[MiniImageNet](https://image-net.org/download.php)|[Demo](models/ResNet.py)|
