@@ -4,7 +4,7 @@ English | [简体中文](README_zh-CN.md)
 
 ## Table of contents
 - [1 Introduction](#1-introduction)
-- [2 Hwo to get started](#2-get-started)
+- [2 How to get started](#2-get-started)
   * [2.1 Setup](#21-setup)
   * [2.2 Usage](#22-usage)
 - [3 Supported models in image classification](#3-supported-models-in-image-classification)
