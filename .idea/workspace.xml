@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ac8ee188-539e-406a-ae69-46605dcefdaa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_zh-CN.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_zh-CN.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/single.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/single.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/single.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="293" selection-start-line="5" selection-start-column="293" selection-end-line="5" selection-end-column="293" />
+            <state relative-caret-position="1875">
+              <caret line="75" column="234" selection-start-line="75" selection-start-column="234" selection-end-line="75" selection-end-column="234" />
             </state>
           </provider>
         </entry>
@@ -69,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/options.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="53" column="56" lean-forward="true" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+            <state relative-caret-position="64">
+              <caret line="68" column="37" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -103,8 +105,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="175">
-                <caret line="127" column="301" selection-start-line="127" selection-start-column="301" selection-end-line="127" selection-end-column="301" />
+              <first_editor relative-caret-position="275">
+                <caret line="98" column="119" lean-forward="true" selection-start-line="98" selection-start-column="6" selection-end-line="98" selection-end-column="119" />
               </first_editor>
               <second_editor />
             </state>
@@ -115,8 +117,8 @@
         <entry file="file://$PROJECT_DIR$/README_zh-CN.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="25">
-                <caret line="1" selection-start-line="1" selection-end-line="14" selection-end-column="8" />
+              <first_editor relative-caret-position="275">
+                <caret line="74" column="118" selection-start-line="74" selection-start-column="118" selection-end-line="74" selection-end-column="118" />
               </first_editor>
               <second_editor />
             </state>
@@ -167,6 +169,7 @@
     <replaceStrings>
       <replace>self.num_class</replace>
       <replace>self.num_classes</replace>
+      <replace />
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -223,9 +226,9 @@
         <option value="$PROJECT_DIR$/single/main_FedKNOW.py" />
         <option value="$PROJECT_DIR$/utils/options.py" />
         <option value="$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py" />
-        <option value="$PROJECT_DIR$/scripts/single.sh" />
-        <option value="$PROJECT_DIR$/README_zh-CN.md" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/README_zh-CN.md" />
+        <option value="$PROJECT_DIR$/scripts/single.sh" />
       </list>
     </option>
   </component>
@@ -339,19 +342,19 @@
       <option name="presentableId" value="Default" />
       <updated>1651300916339</updated>
       <workItem from="1651300917566" duration="10112000" />
-      <workItem from="1651327862854" duration="67429000" />
+      <workItem from="1651327862854" duration="69241000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77541000" />
+    <option name="totallyTimeSpent" value="79353000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14765458" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14765458" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" />
@@ -361,7 +364,7 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.3546638" />
+      <window_info anchor="bottom" id="Run" order="8" visible="true" weight="0.36117136" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.4121475" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -848,13 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/Packnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="11" column="72" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedRep.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -862,13 +858,6 @@
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/single.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="293" selection-start-line="5" selection-start-column="293" selection-end-line="5" selection-end-column="293" />
         </state>
       </provider>
     </entry>
@@ -882,17 +871,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/options.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="53" column="56" lean-forward="true" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/MAS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-48">
           <caret line="173" column="44" selection-start-line="173" selection-start-column="25" selection-end-line="173" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Packnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="11" column="72" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="68" column="37" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="320" column="70" lean-forward="true" selection-start-line="320" selection-start-column="70" selection-end-line="320" selection-end-column="70" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
@@ -909,21 +915,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/single/ContinualLearningMethod/FedKNOW.py">
+    <entry file="file://$PROJECT_DIR$/scripts/single.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="320" column="70" lean-forward="true" selection-start-line="320" selection-start-column="70" selection-end-line="320" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1875">
+          <caret line="75" column="234" selection-start-line="75" selection-start-column="234" selection-end-line="75" selection-end-column="234" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README_zh-CN.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="25">
-            <caret line="1" selection-start-line="1" selection-end-line="14" selection-end-column="8" />
+          <first_editor relative-caret-position="275">
+            <caret line="74" column="118" selection-start-line="74" selection-start-column="118" selection-end-line="74" selection-end-column="118" />
           </first_editor>
           <second_editor />
         </state>
@@ -932,8 +935,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="175">
-            <caret line="127" column="301" selection-start-line="127" selection-start-column="301" selection-end-line="127" selection-end-column="301" />
+          <first_editor relative-caret-position="275">
+            <caret line="98" column="119" lean-forward="true" selection-start-line="98" selection-start-column="6" selection-end-line="98" selection-end-column="119" />
           </first_editor>
           <second_editor />
         </state>

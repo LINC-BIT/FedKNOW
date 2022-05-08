@@ -52,6 +52,8 @@
     - `store_rate`: FedKNOW中选择存储参数的比例
     - `select_grad_num`: FedKNOW中用于计算旧梯度的数目
     - `gpu`：GPU ID
+    
+       更多细节在 `utils/option.py`. 对所有算法的描述在 `scripts/single.sh`.
 - **多设备运行**
     1. 控制传输网速
     
@@ -70,8 +72,7 @@
         [local_ep] --local_local_ep [local_local_ep]  --store_rate [store_rate] 
         --select_grad_num [select_grad_num] --gpu [gpu] --ip [ip]
         ```
-        这里的参数描述和单设备参数描述一致，新添加的`client_id`表示客户端标识符, `ip`表示客户端连接服务器的ip地址，用于服务器确定具体的标识。对于每一个算法的配置信息我们放到了`multi/scripts/`。
-        完整的参数信息解释在`utils/option.py`。对于每一个算法的详细配置我们放到了`single/scripts/`下。
+        这里的参数描述和单设备参数描述一致，新添加的`client_id`表示客户端标识符, `ip`表示客户端连接服务器的ip地址，用于服务器确定具体的标识。对于每一个算法的配置信息我们放到了`scripts/multi.sh`。
 ### 2.2 安装
 **相关准备**
 - Linux and Windows 

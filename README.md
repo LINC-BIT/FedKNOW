@@ -96,7 +96,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
     
     - `gpu`: GPU id
     
-      More details refer to `utils/option.py`. The configurations of all algorithms are located in `single/scripts/`.
+      More details refer to `utils/option.py`. The configurations of all algorithms are located in `scripts/single.sh`.
 - **Multiple devices**
   
     1. Limit the network bandwidth to emulate the real long distance transmission:
@@ -121,7 +121,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
         
         - `ip`: IP address of the server
         
-          The other arguments is the same as the one in single device setting. More details refer to `utils/option.py`. The configurations of all algorithms are located in `multi/scripts/`. 
+          The other arguments is the same as the one in single device setting. More details refer to `utils/option.py`. The configurations of all algorithms are located in `scripts/multi.sh`. 
 ## 3 Supported models in image classification
 ||Model Name|Data|Script|
 |--|--|--|--|
