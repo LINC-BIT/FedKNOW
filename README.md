@@ -27,7 +27,7 @@ English | [简体中文](README_zh-CN.md)
   * [4.2 Under different network bandwidths](#42-under-different-network-bandwidths)
   * [4.3 Large scale](#43-large-scale)
   * [4.4 Long task sequence](#44-long-task-sequence)
-  * [4.5 Under different parameter storage ratios](#45-under-different-parameter-storage-ratios)
+  * [4.5 Under different parameter settings](#45-under-different-parameter-settings)
   * [4.6 Applicability on different networks](#46-applicability-on-different-networks)
 
 ## 1 Introduction
@@ -310,7 +310,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
     
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
 
-### 4.5 Under different parameter storage ratios
+### 4.5 Under different parameter settings
 1. **Run**
     ```shell
     # store_rate = 0.05
