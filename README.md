@@ -17,16 +17,16 @@ English | [简体中文](README_zh-CN.md)
   * [4.6 Applicability on different networks](#46-applicability-on-different-networks)
 
 ## 1 Introduction
-FedKNOW has achieved SOTA performance (accuracy, time, and communication cost etc.) in federated continual learning setting. It currently supports eight different networks of image classification: ResNet, ResNeXt, MobileNet, WideResNet, SENet, ShuffleNet, Inception and DenseNet.
-- [ResNet](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html): CNN use multiple convolutional layers and pooling layers to extract the information in image, but it will suffer from gradient vanishing (exploding) and performance degrading when the network is too deep. ResNet add BatchNorm to alleviate gradient vanishing (exploding) and add residual connection to alleviate the performance degrading. 
-- [Inception](https://ieeexplore.ieee.org/document/7780677): To extract high dimensional features, researchers typically use deeper network while make the size of the network too large. Inception Module is proposed to widen the network. This can maintain the performance and reduce the number of parameters. Inception Module firstly leverages 1x1 convolution to aggregate the information, and leverages multi-scale convolutions to obtain multi-scale feature maps, finally concatenate them to produce the final feature map.
-- [ResNeXt](https://arxiv.org/abs/1611.05431): ResNeXt combines Inception and ResNet. It firstly simplifies the Inception Module to make its each branch have the same structure and construct the network as ResNet-style.
-- [WideResNet](http://www.bmva.org/bmvc/2016/papers/paper087/index.html): WideResNet widens the residual connection of ResNet to improve its performance and reduce the number of its parameters. Besides, WideResNet use Dropout regularization to further improve its generalization.
+FedKNOW is designed to achieve SOTA performance (accuracy, time, and communication cost etc.) in federated continual learning setting. It currently supports eight different networks of image classification: ResNet, ResNeXt, MobileNet, WideResNet, SENet, ShuffleNet, Inception and DenseNet.
+- [ResNet](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html): this model consists of multiple convolutional layers and pooling layers that extract the information in image. Typically, ResNet suffers from gradient vanishing (exploding) and performance degrading when the network is  deep. ResNet thus adds BatchNorm to alleviate gradient vanishing (exploding) and adds residual connection to alleviate the performance degrading. 
+- [Inception](https://ieeexplore.ieee.org/document/7780677): To extract high dimensional features, a typical method is to use deeper network which makes the size of the network too large. To address this issue, Inception Module is proposed to widen the network. This can maintain the performance and reduce the number of parameters. Inception Module firstly leverages 1x1 convolution to aggregate the information, and leverages multi-scale convolutions to obtain multi-scale feature maps, finally concatenate them to produce the final feature map.
+- [ResNeXt](https://arxiv.org/abs/1611.05431): ResNeXt combines Inception and ResNet. It first simplifies the Inception Module to make each of its branch have the same structure and then constructs the network as ResNet-style.
+- [WideResNet](http://www.bmva.org/bmvc/2016/papers/paper087/index.html): WideResNet widens the residual connection of ResNet to improve its performance and reduces the number of its parameters. Besides, WideResNet uses Dropout regularization to further improve its generalization.
 - [MobileNet](https://arxiv.org/abs/1801.04381): MobileNet is a lightweight convolutional network which widely uses the depthwise separable convolution.
-- [SENet](https://ieeexplore.ieee.org/document/341010): SENet imports channel attention to make the network focus the more important features. In SENet, a Squeeze & Excitation Module uses the output of a block as input, produce an channel-wise importance vector, and multiplies it into the original output of the block to strengthen the important channels and weaken the unimportant channels.
+- [SENet](https://ieeexplore.ieee.org/document/341010): SENet imports channel attention to allow the network focus the more important features. In SENet, a Squeeze & Excitation Module uses the output of a block as input, produces an channel-wise importance vector, and multiplies it into the original output of the block to strengthen the important channels and weaken the unimportant channels.
 - [ShuffleNet](https://arxiv.org/abs/1807.11164): ShuffleNet is a lightweight network. It imports the pointwise group convolution and channel shuffle to greatly reduce the computation cost. It replaces the 1x1 convolution of ResBlock with the group convolution and add channel shuffle to it.
 - [DenseNet](https://arxiv.org/pdf/1707.06990.pdf): DenseNet extends ResNet by adding connections between each blocks to aggregate all multi-scale features.
-## 2 Get started
+## 2 How to get started
 ### 2.1 Setup
 **Requirements**
 
@@ -183,7 +183,7 @@ FedKNOW has achieved SOTA performance (accuracy, time, and communication cost et
     
 2. **Result**
 
-    - **The accuracy trend with time under different workloads **(X-axis represents the time and Y-axis represents the inference accuracy)
+    - **The accuracy trend overtime time under different workloads **(X-axis represents the time and Y-axis represents the inference accuracy)
     ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
 ### 4.2 Under different network bandwidths
 1. **Run**
