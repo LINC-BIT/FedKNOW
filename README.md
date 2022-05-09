@@ -186,7 +186,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
     
 2. **Result**
 
-    - **The accuracy trend overtime time under different workloads **(X-axis represents the time and Y-axis represents the inference accuracy)
+    - **The accuracy trend overtime time under different workloads**(X-axis represents the time and Y-axis represents the inference accuracy)
     ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
 ### 4.2 Under different network bandwidths
 1. **Run**
