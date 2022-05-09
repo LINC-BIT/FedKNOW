@@ -1,0 +1,3 @@
+pip install opencv-python  pillow matplotlib scipy pandas scikit-learn tqdm scikit-image imutils PyYAML  seaborn easydict  ipython imageio  jieba
+pip install numpy==1.21
+pip install quadprog
