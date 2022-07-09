@@ -238,8 +238,6 @@ class Appr(object):
                     # self.train_epoch_head(t)
             self.train_packnet(t)
             self.pack.on_epoch_end(self.packmodel.feature_net,e,t)
-            print('a')
-
 
             train_loss, train_acc = self.eval(t)
             if e % self.e_rep == self.e_rep -1:
