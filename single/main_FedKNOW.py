@@ -165,7 +165,7 @@ if __name__ == '__main__':
             acc_test, loss_test = test_img_local_all(net_glob, args, dataset_test, dict_users_test,task,
                                                      w_glob_keys=w_glob_keys, w_locals=w_locals, indd=indd,
                                                      dataset_train=dataset_train, dict_users_train=dict_users_train,
-                                                     return_all=False,write=write,num_classes = args.num_classes,device=args.device)
+                                                     return_all=False,write=write,num_classes = args.num_classes//args.task,device=args.device)
             accs.append(acc_test)
             # for algs which learn a single global model, these are the local accuracies (computed using the locally updated versions of the global model at the end of each round)
             if iter != args.epochs:

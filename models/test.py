@@ -80,6 +80,7 @@ def test_img_local(net_g, dataset, args,t,idx=None,indd=None, user_idx=-1, idxs=
         test_loss += F.cross_entropy(log_probs, target, reduction='sum').item()
         y_pred = log_probs.data.max(1, keepdim=True)[1]
         correct += y_pred.eq(target.data.view_as(y_pred)).long().cpu().sum()
+    count = len(data_loader.dataset)
     test_loss /= count
     accuracy = 100.00 * float(correct) / count
     return  accuracy, test_loss

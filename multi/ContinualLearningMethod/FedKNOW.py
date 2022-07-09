@@ -236,8 +236,9 @@ class Appr(object):
                 else:
                     self.train_epoch_rep(t, e,oldpackmodel)
                     # self.train_epoch_head(t)
-            # self.train_packnet(t)
-            # self.pack.on_epoch_end(self.packmodel.feature_net,e,t)
+            self.train_packnet(t)
+            self.pack.on_epoch_end(self.packmodel.feature_net,e,t)
+            print('a')
 
 
             train_loss, train_acc = self.eval(t)
