@@ -76,7 +76,7 @@ if __name__ == '__main__':
     times = []
     start = time.time()
     task=-1
-    appr = Appr(copy.deepcopy(net_glob),PackNet(args.task,local_ep=args.local_ep,local_rep_ep=args.local_rep_ep,device=args.device),copy.deepcopy(net_glob), None,lr=args.lr, nepochs=args.local_ep, args=args)
+    appr = Appr(copy.deepcopy(net_glob),PackNet(args.task,local_ep=args.local_ep,local_rep_ep=args.local_local_ep,device=args.device),copy.deepcopy(net_glob), None,lr=args.lr, nepochs=args.local_ep, args=args)
     for i in range(args.task):
         tr_dataloaders = DataLoader(DatasetSplit(dataset_train[i], dict_users_train[args.client_id]),
                                     batch_size=args.local_bs, shuffle=True, num_workers=0)

@@ -7,13 +7,13 @@ import argparse
 def args_parser():
     parser = argparse.ArgumentParser()
     # federated arguments
-    parser.add_argument('--epochs', type=int, default=150, help="rounds of training")
+    parser.add_argument('--epochs', type=int, default=50, help="rounds of training")
     parser.add_argument('--num_users', type=int, default=20, help="number of users: n")
     parser.add_argument('--shard_per_user', type=int, default=5, help="classes per user")
     parser.add_argument('--frac', type=float, default=0.4, help="the fraction of clients: C")
     parser.add_argument('--local_ep', type=int, default=6, help="the number  of local epochs: E")
-    parser.add_argument('--local_test_bs', type=int, default=50, help="the number  of local test epochs: E")
-    parser.add_argument('--local_bs', type=int, default=40, help="local batch size: B")
+    parser.add_argument('--local_test_bs', type=int, default=30, help="the number  of local test epochs: E")
+    parser.add_argument('--local_bs', type=int, default=20, help="local batch size: B")
     parser.add_argument('--bs', type=int, default=100, help="test batch size")
     parser.add_argument('--optim', type=str, default='Adam', help="optimizer")
     parser.add_argument('--lr', type=float, default=0.001, help="learning rate")
@@ -63,7 +63,7 @@ def args_parser():
     parser.add_argument('--load_fed', type=str, default='n', help='define pretrained federated model path')
     parser.add_argument('--results_save', type=str, default='runA', help='define fed results save folder')
     parser.add_argument('--save_every', type=int, default=50, help='how often to save models')
-    parser.add_argument('--round', type=int, default=15, help='train number of the per-task')
+    parser.add_argument('--round', type=int, default=5, help='train number of the per-task')
     parser.add_argument('--task', type=int, default=10, help='train number of task')
     parser.add_argument('--lamb', default=0, type=float, help='(default=%(default)f)')
     parser.add_argument('--n_memories', type=int, default=10,

@@ -199,15 +199,14 @@ class Appr(object):
     def train(self, t):
         self.model.to(self.device)
         self.model_old.to(self.device)
-        # self.packmodel.to(self.device)
+        self.packmodel.to(self.device)
         oldpackmodel = deepcopy(self.packmodel)
         if t!=self.old_task:
             self.model_old = deepcopy(self.model)
             self.model_old.train()
             freeze_model(self.model_old)  # Freeze the weights
             self.old_task=t
-        lr = self.lr
-        self.optimizer = self._get_optimizer(lr)
+        self.optimizer = self._get_optimizer()
         self.pack.on_init_end(self.packmodel,t)
         # trian model
         if len(self.pack.masks) > t:
@@ -219,7 +218,7 @@ class Appr(object):
             if e < self.e_rep:
                 for name,para in self.model.named_parameters():
                     if 'feature_net' in name:
-                        para.requires_grad = False
+                        para.requires_grad = True
                     else:
                         para.requires_grad = True
             else :
@@ -227,7 +226,7 @@ class Appr(object):
                     if 'feature_net' in name:
                         para.requires_grad = True
                     else:
-                        para.requires_grad = False
+                        para.requires_grad = True
             if t == 0:
                 self.train_epoch_rep(t, e, oldpackmodel)
             else:
@@ -295,16 +294,17 @@ class Appr(object):
             loss.backward()
             self.optimizer.step()
         return
-    def train_epoch_rep(self, t, epoch,oldpackmodel):
+
+    def train_epoch_rep(self, t, epoch, oldpackmodel):
         self.model.train()
         self.packmodel.train()
         # Loop batches
-        for images,targets in self.tr_dataloader:
+        for images, targets in self.tr_dataloader:
             # Forward current model
             images = images.to(self.device)
             targets = (targets - self.num_classes * t).to(self.device)
             pre_loss = 0
-            grads = torch.Tensor(sum(self.grad_dims), 2+t)
+            grads = torch.Tensor(sum(self.grad_dims), 2 + t)
             offset1, offset2 = compute_offsets(t, self.num_classes)
             grads = grads.to(self.device)
             if t > 0:
@@ -312,9 +312,11 @@ class Appr(object):
                 preoutputs = self.model.forward(images, t, pre=True)[:, 0: offset1]
                 self.model.zero_grad()
                 self.optimizer.zero_grad()
-                pre_loss=MultiClassCrossEntropy(preoutputs,preLabels,t,T=2)
+                pre_loss = MultiClassCrossEntropy(preoutputs, preLabels, t, T=2)
                 pre_loss.backward()
-                store_grad(self.model.feature_net.parameters,grads, self.grad_dims,0)
+                store_grad(self.model.feature_net.parameters, grads, self.grad_dims, 0)
+                if t >= self.select_grad_num:
+                    t = self.select_grad_num - 1
                 for i in range(t):
                     self.model.zero_grad()
                     self.optimizer.zero_grad()
@@ -327,11 +329,11 @@ class Appr(object):
                         oldLabels = temppackmodel.forward(images, i)[:, begin:end]
                     memoryloss = MultiClassCrossEntropy(preoutputs, oldLabels, i, T=2)
                     memoryloss.backward()
-                    store_grad(self.model.feature_net.parameters, grads, self.grad_dims, i+1)
+                    store_grad(self.model.feature_net.parameters, grads, self.grad_dims, i + 1)
                     del temppackmodel
                 ## 求出每个分类器算出来的梯度
 
-            outputs = self.model.forward(images,t)[:,offset1:offset2]
+            outputs = self.model.forward(images, t)[:, offset1:offset2]
             loss = self.ce(outputs, targets)
             ## 根据这个损失计算梯度，变换此梯度
 
@@ -339,19 +341,19 @@ class Appr(object):
             self.model.zero_grad()
             self.optimizer.zero_grad()
             loss.backward()
-            if t>0:
+            if t > 0:
                 # copy gradient
-                store_grad(self.model.feature_net.parameters, grads, self.grad_dims, t+1)
-                taskl = [i for i in range(t+2)]
+                store_grad(self.model.feature_net.parameters, grads, self.grad_dims, t + 1)
+                taskl = [i for i in range(t + 2)]
                 indx = torch.LongTensor(taskl[:-1]).to(self.device)
                 errindx = torch.LongTensor(0).to(self.device)
                 dotp = torch.mm(grads[:, 1].unsqueeze(0),
                                 grads.index_select(1, indx))
                 if (dotp < 0).sum() != 0:
-                    project2cone2(grads[:, t+1].unsqueeze(1),
-                                  grads.index_select(1, indx), grads.index_select(1,errindx))
+                    project2cone2(grads[:, t + 1].unsqueeze(1),
+                                  grads.index_select(1, indx), grads.index_select(1, errindx))
                     # copy gradients back
-                    overwrite_grad(self.model.feature_net.parameters, grads[:, t+1],
+                    overwrite_grad(self.model.feature_net.parameters, grads[:, t + 1],
                                    self.grad_dims)
                     nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=50, norm_type=2)
             self.optimizer.step()
