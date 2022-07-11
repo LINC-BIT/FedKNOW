@@ -9,13 +9,17 @@ English | [简体中文](README_zh-CN.md)
   * [2.1 Setup](#21-setup)
   * [2.2 Usage](#22-usage)
 - [3 Supported models in image classification](#3-supported-models-in-image-classification)
-- [4 Experiments](#4-experiments)
-  * [4.1 Under different workloads (model and dataset)](#41-under-different-workloads-model-and-dataset)
-  * [4.2 Under different network bandwidths](#42-under-different-network-bandwidths)
-  * [4.3 Large scale](#43-large-scale)
-  * [4.4 Long task sequence](#44-long-task-sequence)
-  * [4.5 Under different parameter settings](#45-under-different-parameter-settings)
-  * [4.6 Applicability on different networks](#46-applicability-on-different-networks)
+- [4 Experiments setting](#4-supported-models-in-image-classification)
+  * [4.1 Generate task](#41-setup)
+  * [4.2 Selection of hyperparameters](#42-usage)
+- [5 Experiments](#5-experiments)
+  * [5.1 Under different workloads (model and dataset)](#51-under-different-workloads-model-and-dataset)
+  * [5.2 Under different network bandwidths](#52-under-different-network-bandwidths)
+  * [5.3 Large scale](#53-large-scale)
+  * [5.4 Long task sequence](#54-long-task-sequence)
+  * [5.5 Under different parameter settings](#55-under-different-parameter-settings)
+  * [5.6 Applicability on different networks](#56-applicability-on-different-networks)
+
 
 ## 1 Introduction
 FedKNOW is designed to achieve SOTA performance (accuracy, time, and communication cost etc.) in federated continual learning setting. It currently supports eight different networks of image classification: ResNet, ResNeXt, MobileNet, WideResNet, SENet, ShuffleNet, Inception and DenseNet.
@@ -134,8 +138,125 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[ShuffleNetV2 (ECCV'2018)](https://openaccess.thecvf.com/content_ECCV_2018/html/Ningning_Light-weight_CNN_Architecture_ECCV_2018_paper.html) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php)  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/ShuffleNet.sh)&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[DenseNet(CVPR'2017)](https://openaccess.thecvf.com/content_cvpr_2017/papers/Huang_Densely_Connected_Convolutional_CVPR_2017_paper.pdf) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php) &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/DenseNet.sh)&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;|
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[SENet (CVPR'2018)](https://openaccess.thecvf.com/content_cvpr_2018/html/Hu_Squeeze-and-Excitation_Networks_CVPR_2018_paper.html) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php) &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/SENet.sh)&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;|
-## 4 Experiemts
-### 4.1 Under different workloads (model and dataset)
+## 4 Experiments setting
+### 4.1 Generate task
+#### 4.1.1 Dataset introduction
+
+* [Cifar100](http://www.cs.toronto.edu/~kriz/cifar.html): Cifar100 dataset  has a total of 50000 training samples (500 ones per class) and 10000 test samples (100 ones per class) in 100 different classes.
+- [FC100](https://paperswithcode.com/dataset/fc100) : FC100 dataset has a total of 50000 training samples (500 ones per class) and 10000 test samples (100 ones per class) in 100 different classes.
+- [CORe50](https://vlomonaco.github.io/core50/index.html#download) :CORe50 dataset has a total of 165000 training samples(300 ones per class) and 55000 test samples (100 ones per class) in 550 different classes.
+- [MiniImageNet](https://image-net.org/download.php):MiniImageNet dataset has a total of 50000 training samples (500 ones per class) and 10000 test samples (100 ones per class) in 100 different classes.
+- [TinyImageNet](http://cs231n.stanford.edu/tiny-imagenet-200.zip): TinyImageNet dataset has a total of 100000 training samples (500 ones per class) and 10000 test samples (50 ones per class) in 200 different classes.
+
+#### 4.1.2 Task splitting method
+According to the definition of tasks, we use the continual learning dataset splitting method to split these datasets into multiple tasks. Each tasks have data samples of different class and is assigned a unique task ID. 
+Before building the dataloader, we split each dataset, as follows:
+- split Cifar100 into 10 tasks
+	```shell
+	python dataset/Cifar100.py --task_number=10 --class_number=100
+	```
+- split FC100 into 10 tasks
+	```shell
+	python dataset/FC100.py --task_number=10 --class_number=100
+	```
+- split CORe50 into 11 tasks
+	```shell
+	python dataset/core50.py --task_number=11 --class_number=550
+	```
+- split MiniImageNet into 10 tasks
+	```shell
+	python dataset/miniimagenet.py --task_number=10 --class_number=100
+	```
+- split TinyImageNet into 10 tasks
+	```shell
+	python dataset/tinyimagenet.py --task_number=20 --class_number=200
+	```
+
+### 4.1.3 Task allocation method
+Under the setting of FCL, each client has its own private task sequence, so we allocate each task to all clients in the form of Non-IID according to the method of FedRep. 
+Specifically, for each task, we randomly assign a different number of data samples (2-5) to each client, and the client randomly selects a different number of training samples and test samples as private tasks of the client according to the assigned class. 
+```shell
+def noniid(dataset, num_users, shard_per_user, num_classes, rand_set_all=[],dataname='cifar100'):
+    """
+    Sample non-I.I.D client data from MNIST dataset
+    :param dataset:
+    :param num_users:
+    :return:
+    """
+    dict_users = {i: np.array([], dtype='int64') for i in range(num_users)}
+
+    idxs_dict = {}
+    count = 0
+    for i in range(len(dataset)):
+        if dataname == 'miniimagenet' or dataname == 'FC100' or dataname == 'tinyimagenet':
+            label = torch.tensor(dataset.data[i]['label']).item()
+        elif dataname == 'Corn50':
+            label = torch.tensor(dataset.data['label'][i]).item()
+        else:
+            label = torch.tensor(dataset.data[i][1]).item()
+        if label < num_classes and label not in idxs_dict.keys():
+            idxs_dict[label] = []
+        if label < num_classes:
+            idxs_dict[label].append(i)
+            count += 1
+
+    shard_per_class = int(shard_per_user * num_users / num_classes)
+    samples_per_user = int( count/num_users )
+    # whether to sample more test samples per user
+    if (samples_per_user < 20):
+        double = True
+    else:
+        double = False
+
+    for label in idxs_dict.keys():
+        x = idxs_dict[label]
+        num_leftover = len(x) % shard_per_class
+        leftover = x[-num_leftover:] if num_leftover > 0 else []
+        x = np.array(x[:-num_leftover]) if num_leftover > 0 else np.array(x)
+        x = x.reshape((shard_per_class, -1))
+        x = list(x)
+
+        for i, idx in enumerate(leftover):
+            x[i] = np.concatenate([x[i], [idx]])
+        idxs_dict[label] = x
+
+    if len(rand_set_all) == 0:
+        rand_set_all = list(range(num_classes)) * shard_per_class
+        random.shuffle(rand_set_all)
+        rand_set_all = np.array(rand_set_all).reshape((num_users, -1))
+
+    # divide and assign
+    testb = False
+    for i in range(num_users):
+        if double:
+            rand_set_label = list(rand_set_all[i]) * 50
+        else:
+            rand_set_label = rand_set_all[i]
+        rand_set = []
+        for label in rand_set_label:
+            idx = np.random.choice(len(idxs_dict[label]), replace=False)
+            if (samples_per_user < 100 and testb):
+                rand_set.append(idxs_dict[label][idx])
+            else:
+                rand_set.append(idxs_dict[label].pop(idx))
+        dict_users[i] = np.concatenate(rand_set)
+
+    test = []
+    # for key, value in dict_users.items():
+    #     x = np.unique(torch.tensor(dataset.targets)[value])
+    #     test.append(value)
+    # test = np.concatenate(test)
+
+    return dict_users, rand_set_all
+```
+### 4.2 Selection of hyperparameters
+In order to ensure that each method can work effectively, we use the additional image classification dataset [SVHN]() to search the hyperparameters of each method, so as to avoid the leakage of test data and ensure fairness to all methods.
+
+```shell
+./main_hyperparameters.sh
+```
+## 5 Experiemts
+### 5.1 Under different workloads (model and dataset)
 
 1. **Run**
    
@@ -188,7 +309,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
 
     - **The accuracy trend overtime time under different workloads**(X-axis represents the time and Y-axis represents the inference accuracy)
     ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
-### 4.2 Under different network bandwidths
+### 5.2 Under different network bandwidths
 1. **Run**
 
     **Limit the network bandwidth of the server:**
@@ -257,7 +378,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
         
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png" width="50%">
         
-### 4.3 Large scale
+### 5.3 Large scale
 1. **Run**
 
     ```shell
@@ -276,7 +397,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
         
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png" width="50%">
         
-### 4.4 Long task sequence
+### 5.4 Long task sequence
 1. **Run**
 
     ```shell
@@ -297,7 +418,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
     
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
 
-### 4.5 Under different parameter settings
+### 5.5 Under different parameter settings
 1. **Run**
     ```shell
     # store_rate = 0.05
@@ -317,7 +438,7 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
     
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png" width="50%">
     
-### 4.6 Applicability on different networks
+### 5.6 Applicability on different networks
 1. **Run**
 
     ```shell

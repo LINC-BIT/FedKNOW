@@ -37,7 +37,7 @@ def get_data(args):
             data_transform = easy_data_transform
         else:
             data_transform = complex_data_transform
-        cifar100 = Cifar100Task('../../FedRep-main/data/cifar100',task_num=10,data_transform=data_transform)
+        cifar100 = Cifar100Task('../data/cifar100',task_num=10,data_transform=data_transform)
         dataset_train,dataset_test = cifar100.getTaskDataSet()
         dict_users_train, rand_set_all = noniid(dataset_train[0], args.num_users, args.shard_per_user, args.num_classes // args.task)
         dict_users_test, rand_set_all = noniid(dataset_test[0], args.num_users, args.shard_per_user, args.num_classes // args.task, rand_set_all=rand_set_all)
