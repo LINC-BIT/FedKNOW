@@ -318,6 +318,8 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
            python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
        done
        ```
+       **Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。树莓派上使用cpu进行运行，保证超参数--gpu=-1。
+
 #### 5.2 **Experiment result**
 
     - **不同算法在不同工作负载上的运行时间和准确率**(x axis for time and y axis for inference accuracy)
