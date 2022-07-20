@@ -321,9 +321,8 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
        **Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。树莓派上使用cpu进行运行，保证超参数--gpu=-1。
 
 #### 5.2 **Experiment result**
-
-    - **不同算法在不同工作负载上的运行时间和准确率**(x axis for time and y axis for inference accuracy)
-    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
+- **The accuracy trend overtime time under different workloads**(X-axis represents the time and Y-axis represents the inference accuracy)
+    ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
 ### 5.2 在不同带宽下运行结果
 1. **Experiment code**
 
