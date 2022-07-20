@@ -138,18 +138,17 @@ FedKNOW is designed to achieve SOTA performance (accuracy, time, and communicati
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[ShuffleNetV2 (ECCV'2018)](https://openaccess.thecvf.com/content_ECCV_2018/html/Ningning_Light-weight_CNN_Architecture_ECCV_2018_paper.html) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php)  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/ShuffleNet.sh)&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[DenseNet(CVPR'2017)](https://openaccess.thecvf.com/content_cvpr_2017/papers/Huang_Densely_Connected_Convolutional_CVPR_2017_paper.pdf) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php) &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/DenseNet.sh)&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;|
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[SENet (CVPR'2018)](https://openaccess.thecvf.com/content_cvpr_2018/html/Hu_Squeeze-and-Excitation_Networks_CVPR_2018_paper.html) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php) &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/SENet.sh)&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;|
-## 4 Experiments setting
+## 4 Experiment setting
 ### 4.1 Generate task
 #### 4.1.1 Dataset introduction
-
 * [Cifar100](http://www.cs.toronto.edu/~kriz/cifar.html): Cifar100 dataset  has a total of 50000 training samples (500 ones per class) and 10000 test samples (100 ones per class) in 100 different classes.
 - [FC100](https://paperswithcode.com/dataset/fc100) : FC100 dataset has a total of 50000 training samples (500 ones per class) and 10000 test samples (100 ones per class) in 100 different classes.
 - [CORe50](https://vlomonaco.github.io/core50/index.html#download) :CORe50 dataset has a total of 165000 training samples(300 ones per class) and 55000 test samples (100 ones per class) in 550 different classes.
 - [MiniImageNet](https://image-net.org/download.php):MiniImageNet dataset has a total of 50000 training samples (500 ones per class) and 10000 test samples (100 ones per class) in 100 different classes.
 - [TinyImageNet](http://cs231n.stanford.edu/tiny-imagenet-200.zip): TinyImageNet dataset has a total of 100000 training samples (500 ones per class) and 10000 test samples (50 ones per class) in 200 different classes.
 
-#### 4.1.2 Task splitting method
-According to the definition of tasks, we use the continual learning dataset splitting method to split these datasets into multiple tasks. Each tasks have data samples of different class and is assigned a unique task ID. 
+#### 4.1.2 Task split method
+According to the definition of tasks, we use the continual learning [dataset splitting method](https://openaccess.thecvf.com/content_cvpr_2017/html/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.html) to split these datasets into multiple tasks. Each tasks have data samples of different class and is assigned a unique task ID. 
 Before building the dataloader, we split each dataset, as follows:
 - split Cifar100 into 10 tasks
 	```shell
@@ -167,22 +166,15 @@ Before building the dataloader, we split each dataset, as follows:
 	```shell
 	python dataset/miniimagenet.py --task_number=10 --class_number=100
 	```
-- split TinyImageNet into 10 tasks
+- split Cifar100 into 20 tasks
 	```shell
 	python dataset/tinyimagenet.py --task_number=20 --class_number=200
 	```
-
-### 4.1.3 Task allocation method
-Under the setting of FCL, each client has its own private task sequence, so we allocate each task to all clients in the form of Non-IID according to the method of FedRep. 
-Specifically, for each task, we randomly assign a different number of data samples (2-5) to each client, and the client randomly selects a different number of training samples and test samples as private tasks of the client according to the assigned class. 
+#### 4.1.3 Task allocation method
+Under the setting of FCL, each client has its own private task sequence, so we allocate each task to all clients in the form of Non-IID according to the method of [FedRep](http://proceedings.mlr.press/v139/collins21a). 
+Specifically, we assign the task sequence of each dataset split to all clients. For each task, each client randomly selects 2-5 classes of data, and randomly obtains 10% of the training samples and test samples from the selected classes. As follows:
 ```shell
-def noniid(dataset, num_users, shard_per_user, num_classes, rand_set_all=[],dataname='cifar100'):
-    """
-    Sample non-I.I.D client data from MNIST dataset
-    :param dataset:
-    :param num_users:
-    :return:
-    """
+def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_all=[]):
     dict_users = {i: np.array([], dtype='int64') for i in range(num_users)}
 
     idxs_dict = {}
@@ -242,16 +234,40 @@ def noniid(dataset, num_users, shard_per_user, num_classes, rand_set_all=[],data
         dict_users[i] = np.concatenate(rand_set)
 
     test = []
-    # for key, value in dict_users.items():
-    #     x = np.unique(torch.tensor(dataset.targets)[value])
-    #     test.append(value)
-    # test = np.concatenate(test)
-
     return dict_users, rand_set_all
 ```
 ### 4.2 Selection of hyperparameters
-In order to ensure that each method can work effectively, we use the additional image classification dataset [SVHN]() to search the hyperparameters of each method, so as to avoid the leakage of test data and ensure fairness to all methods.
+- **Select method** 
 
+	To ensure that each method works effectively, we use additional image classification datasets [SVHH]( http://ufldl.stanford.edu/housenumbers/ ) to search the hyperparameters of each method, so as to avoid the leakage of test data and ensure the fairness of all methods.
+
+- **Select metrics** 
+
+	Under the memory limit (4G memory per client) and time limit (the running time of each task is no more than 20 minutes), select the hyperparameter with the highest accuracy.
+- **Description and search space of each hyperparameter**
+1. Base hyperparameters
+    Base hyperparameters are used to ensure that the model has enough time to train and update under each method, so that the model can converge.
+	- `Aggregation round`: The number of aggregation rounds of each task, the search space is [5, 10, 15].
+	- `Local epoch`: Number of client local training per aggregation round, the search space is  [5, 8, 10]。
+	- `Lr`: Learning rate，the search space is [0.0005, 0.0008, 0.001, 0.005]。
+	- `Lr_decrease`: Learning rate decrease，the search space is [1e-6, 1e-5, 1e-4]
+2. Different hyperparameters of each method
+    Each method (baseline) has its own hyperparameters, which ensure that the method can work normally. For these hyperparameters, we choose three intermediate values to search according to the lower and upper bounds of the search space, which are 1/2 and 2 times of the set value in the paper.
+	- Memory-based continual learning（GEM，BCN，Co2L）
+		* `Task sample rate`: The proportion of samples saved for each task is used to calculate the loss of past tasks and avoid catastrophic forgetting, the search space is [5%, 10%, 15%]。
+	- Regulation-based continual learning（EWC，AGS-CL，MAS）
+		* `Regulation parameter`: Regularization parameters are used to freeze the weights of some key old task parameters, the search space is [100, 10000, 40000]。
+	- FLCN
+		* `Center sample rate`: The proportion of samples stored by the server is used to adjust the regularization parameters, the search space is [5%, 10%, 15%].
+	- FedWEIT
+		* `sparseness parameter`: The loss sparse parameter is used to separate the basic parameter and the adaptive parameter, the search space is [1e-5, 1e-4, 1e-3]。
+		* `weight-decay parameter`: weight-decay parameter，the search space is [1e-5, 1e-4, 1e-3]。
+		* `old-task rate`: past task loss parameter，the search space is [0.5, 1, 2]。
+	- FedKNOW(Our)
+		* `Weight rate`: The proportion of parameters stored in each task is used as the task knowledge of each task，the search space is [5%, 10%, 20%]。
+		* `k`: The number of past task gradients participating in aggregation, the search space is [5, 10, 20]。
+
+**Running code**
 ```shell
 ./main_hyperparameters.sh
 ```
