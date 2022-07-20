@@ -9,9 +9,9 @@ English | [简体中文](README_zh-CN.md)
   * [2.1 Setup](#21-setup)
   * [2.2 Usage](#22-usage)
 - [3 Supported models in image classification](#3-supported-models-in-image-classification)
-- [4 Experiments setting](#4-supported-models-in-image-classification)
-  * [4.1 Generate task](#41-setup)
-  * [4.2 Selection of hyperparameters](#42-usage)
+- [4 Experiments setting](#4-Experiments setting)
+  * [4.1 Generate task](#41-Generate task)
+  * [4.2 Selection of hyperparameters](#42-Selection of hyperparameters)
 - [5 Experiments](#5-experiments)
   * [5.1 Under different workloads (model and dataset)](#51-under-different-workloads-model-and-dataset)
   * [5.2 Under different network bandwidths](#52-under-different-network-bandwidths)
@@ -273,81 +273,131 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 ```
 ## 5 Experiemts
 ### 5.1 Under different workloads (model and dataset)
+#### 5.1.1 Experiment code
+1. Run on 20 Jetson devices
+    
+We selected 20 Jetson devices with different memory and different computing speeds to test on five different workloads, including 8 Jetson-nano devices with 4GB memory, 2 Jetson-TX2 with 8GB memory, 8 Jetson-Xavier-NX with 16GB memory and 2 Jetson-AgX with 32GB memory.
+    - **Launch the server: **
+        ```shell
+        ## Run on 20 Jetson devices
+        python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
+        ```
+        **Note：--ip=127.0.0.1:8000 here means that the local machine is used as the center server. If there is an existing server, it can be replaced with the IP address of the server.**
+    
+   - **Launch the clients：**
+       * 6-layer CNN on Cifar100
+            ```shell
+           ## Run on 20 Jetson devices
+           for ((i=0;i<20;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+           done
+           ```
+       * 6-layer CNN on FC100
+           ```shell
+           ## Run on 20 Jetson devices
+           for ((i=0;i<20;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+           done
+           ```
+       * 6-layer CNN on CORe50
+           ```shell
+           ## Run on 20 Jetson devices
+           for ((i=0;i<20;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+           done
+           ```
+       * ResNet18 on MiniImageNet
+           ```shell
+             ## Run on 20 Jetson devices
+           for ((i=0;i<20;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
+           done
+           ```
+       * ResNet18 on TiniImageNet
+           ```shell
+           ## Run on 20 Jetson devices
+           for ((i=0;i<20;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
+           done
+           ```
+       **Note:** Please keep the IP addresses of the server and the client consistent. If there are multiple devices running, run the corresponding code directly on the corresponding edge device and replace it with the IP address of the server. The operating instructions of other baselines are in `scripts/difwork`.
 
-1. **Run**
-   
-    **Launch the server：**
-    
-    ```shell
-    python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
-    ```
-    **Launch the clients：**
-    
-    - 6-layer CNN on Cifar100
+2. Run on 10 Raspberry pies and 20 Jetson devices
+    In order to increase the heterogeneity of edge devices, we added 10 raspberry pies with different memories (one 2GB memory, five 4GB memory, four 8GB memory). Compared with the Jetson device using GPU for computing, the computing speed of raspberry pie using CPU will be greatly reduced. At the same time, due to memory constraints, if the size of stored data is not limited during the training process, memory overflow will occur.
+    - **Launch the server：**
         ```shell
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
+        ## Run on 10 Raspberry pies and 20 Jetson devices
+        python multi/server.py --epochs=150 --num_users=30 --frac=0.4 --ip=127.0.0.1:8000
         ```
-    - 6-layer CNN on FC100
-      
-        ```shell
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
-        ```
-    - 6-layer CNN on CORe50
-        ```shell
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
-        ```
-    - ResNet18 on MiniImageNet
-        ```shell
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
-        done
-        ```
-    - ResNet18 on TiniImageNet
-        ```shell
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
-        done
-        ```
-    **Note:** Keep the IP address of the server and clients the same. `--ip=127.0.0.1:8000` represents testing locally. If there're multiple edge devices, you should do `--ip=<IP of the server>`.
-    
-2. **Result**
-
-    - **The accuracy trend overtime time under different workloads**(X-axis represents the time and Y-axis represents the inference accuracy)
+        **Note：--ip=127.0.0.1:8000 here means that the local machine is used as the center server. If there is an existing server, it can be replaced with the ip address of the server.**
+   - **Launch the clients：**
+       * 6-layer CNN on Cifar100
+           ```shell
+           ##  Run on 10 Raspberry pies and 20 Jetson devices
+           for ((i=0;i<20;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+           done
+           for ((i=0;i<10;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
+           done
+           ```
+       * 6-layer CNN on FC100
+           ```shell
+           ##  Run on 10 Raspberry pies and 20 Jetson devices
+           for ((i=0;i<20;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+           done
+           for ((i=0;i<10;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
+           done
+           ```
+       * 6-layer CNN on CORe50
+           ```shell
+           ##  Run on 10 Raspberry pies and 20 Jetson devices
+           for ((i=0;i<20;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+           done
+           for ((i=0;i<10;i++));
+           do
+               python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
+           done
+           ```
+           **Note:** Raspberry pie can only run with CPU，Guaranteed hyperparameter --gpu=-1.
+#### 5.1.2 Result
+- **The accuracy trend overtime time under different workloads**(X-axis represents the time and Y-axis represents the inference accuracy)
     ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
 ### 5.2 Under different network bandwidths
-1. **Run**
-
-    **Limit the network bandwidth of the server:**
+#### 5.2.1 Experiment code
+- **Limit the network bandwidth of the server:**
     
     ```shell
     # The maximal download rate and upload rate are 1000KB/s. 
     # In practice this is not so precise so you can adjust it.
     sudo wondershaper [adapter] 1000 1000 
     ```
-    **Check the network state of the server**
+- **Check the network state of the server**
     
     ```shell
     sudo nload -m
     ```
     
-    **Launch the server：**
+- **Launch the server：**
     ```shell
     python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
     ```
-    **Launch the clients：**
+- **Launch the clients：**
     
-    - 6-layer CNN on Cifar100
+    * 6-layer CNN on Cifar100
       
         ```shell
         for ((i=0;i<20;i++));
@@ -355,7 +405,7 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
             python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
         done
         ```
-    - 6-layer CNN on FC100
+    * 6-layer CNN on FC100
         
         ```shell
         for ((i=0;i<20;i++));
@@ -363,119 +413,118 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
             python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
         done
         ```
-    - 6-layer CNN on CORe50
+    * 6-layer CNN on CORe50
         ```shell
         for ((i=0;i<20;i++));
         do
             python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
         done
         ```
-    - ResNet18 on MiniImageNet
+    * ResNet18 on MiniImageNet
         ```shell
         for ((i=0;i<20;i++));
         do
             python multi/main_FedKNOW.py --client_id=$i --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
         done
         ```
-    - ResNet18 on TiniImageNet
+    * ResNet18 on TiniImageNet
         ```shell
         for ((i=0;i<20;i++));
         do
             python multi/main_FedKNOW.py --client_id=$i --model=ResNet18 --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
         done
         ```
-2. **Result**
+#### 5.2.2 Result
 
-    - **The communication time under different workloads and maximal network bandwidth 1MB/s** (X-axis represents the dataset and Y-axis represents the communication time)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png" width="50%">
-        
-    - **The communication time under different network bandwidths** (X-axis represents the network bandwidth and Y-axis represents the communication time)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png" width="50%">
-        
-### 5.3 Large scale
-1. **Run**
-
-    ```shell
-    # 50 clients
-    python single/main_FedKNOW.py --epochs=150 --num_users=50 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
-    # 100 clients
-    python single/main_FedKNOW.py --epochs=150 --num_users=100 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
-    ```
-2. **Result**
-
-    - **The accuracy under 50 clients and 100 clients** (X-axis represents the task and Y-axis represents the accuracy)
+- **The communication time under different workloads and maximal network bandwidth 1MB/s** (X-axis represents the dataset and Y-axis represents the communication time)
     
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png" width="50%">
-        
-    - **The average forgetting rate under 50 clients and 100 clients** (X-axis represents the task and Y-axis represents the average forgetting rate)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png" width="50%">
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png" width="50%">
+    
+- **The communication time under different network bandwidths** (X-axis represents the network bandwidth and Y-axis represents the communication time)
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png" width="50%">
+    
+### 5.3 Large scale
+#### 5.3.1 Experiment code
+```shell
+# 50 clients
+python single/main_FedKNOW.py --epochs=150 --num_users=50 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
+# 100 clients
+python single/main_FedKNOW.py --epochs=150 --num_users=100 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
+```
+#### 5.3.2 Result
+
+- **The accuracy under 50 clients and 100 clients** (X-axis represents the task and Y-axis represents the accuracy)
+
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png" width="50%">
+    
+- **The average forgetting rate under 50 clients and 100 clients** (X-axis represents the task and Y-axis represents the average forgetting rate)
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png" width="50%">
         
 ### 5.4 Long task sequence
-1. **Run**
+#### 5.4.1 Experiment code
 
-    ```shell
-    # dataset = MiniImageNet + TinyImageNet + cifar100 + FC100, task = 80 ,per_task_class = 5
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=All --num_classes=400 --task=80 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
-    ```
-2. **Result**
+```shell
+# dataset = MiniImageNet + TinyImageNet + cifar100 + FC100, task = 80 ,per_task_class = 5
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=All --num_classes=400 --task=80 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
+```
+#### 5.4.2 Result
 
-    - **The average accuracy under 80 tasks** (X-axis represents the task and Y-axis represents the accuracy)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png" width="50%">
-        
-    - **The average forgetting rate under 80 tasks** (X-axis represents the task and Y-axis represents the average forgetting rate)
+- **The average accuracy under 80 tasks** (X-axis represents the task and Y-axis represents the accuracy)
     
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png" width="50%">
-        
-    - **The time under 80 tasks** (X-axis represents the task and Y-axis represents the time on current task)
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png" width="50%">
     
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
+- **The average forgetting rate under 80 tasks** (X-axis represents the task and Y-axis represents the average forgetting rate)
+
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png" width="50%">
+    
+- **The time under 80 tasks** (X-axis represents the task and Y-axis represents the time on current task)
+
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
 
 ### 5.5 Under different parameter settings
-1. **Run**
-    ```shell
-    # store_rate = 0.05
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.05
-    # store_rate = 0.1
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.1
-    # store_rate = 0.2
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.2
-    ```
-2. **Result**
+#### 5.5.1 Experiment code 
+```shell
+# store_rate = 0.05
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.05
+# store_rate = 0.1
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.1
+# store_rate = 0.2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.2
+```
+#### 5.5.2 Result
 
-    - **The accuracy under different parameter storage ratios** (X-axis represents the task and Y-axis represents the accuracy)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png" width="50%">
-        
-    - **The time under different parameter storage ratios** (X-axis represents the task and Y-axis represents the time on current task)
+- **The accuracy under different parameter storage ratios** (X-axis represents the task and Y-axis represents the accuracy)
     
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png" width="50%">
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png" width="50%">
+    
+- **The time under different parameter storage ratios** (X-axis represents the task and Y-axis represents the time on current task)
+
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png" width="50%">
     
 ### 5.6 Applicability on different networks
-1. **Run**
+#### 5.6.1 Experiment code
 
-    ```shell
-    # WideResNet50
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=WideResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
-    # ResNeXt50
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNeXt --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
-    # ResNet152
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet152 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
-    # SENet18
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=SENet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
-    # MobileNetV2
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=MobileNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
-    # ShuffleNetV2
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ShuffleNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
-    # InceptionV3
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Inception --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
-    # DenseNet
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=DenseNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
-    ```
-2. **Result**
+```shell
+# WideResNet50
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=WideResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# ResNeXt50
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNeXt --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# ResNet152
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet152 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# SENet18
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=SENet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# MobileNetV2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=MobileNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
+# ShuffleNetV2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ShuffleNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
+# InceptionV3
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Inception --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
+# DenseNet
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=DenseNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
+```
+#### 5.6.2 Result
 
-    - **The accuracy on different networks**(X-axis represents the task and Y-axis represents the accuracy)
-        ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel.png)
+- **The accuracy on different networks**(X-axis represents the task and Y-axis represents the accuracy)
+    ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel.png)
