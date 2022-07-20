@@ -212,22 +212,22 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 ```
 ### 4.2 超参数的选择
 **选择方法** 
-    
-    为了确保每种方法都能有效工作，我们使用额外的图像分类数据集[SVHN]()来搜索每种方法的超参数，以避免测试数据泄漏，并确保所有方法的公平性。
+
+为了确保每种方法都能有效工作，我们使用额外的图像分类数据集SVHN来搜索每种方法的超参数，以避免测试数据泄漏，并确保所有方法的公平性。
 
 **选择指标** 
     
-    在内存限制(每个客户端4G内存)、时间限制(每个任务运行时间不超过20分钟)下，选择正确率最高的超参数。
+在内存限制(每个客户端4G内存)、时间限制(每个任务运行时间不超过20分钟)下，选择正确率最高的超参数。
 
-**各个超参数描述及搜索空间：**
-1. 基本超参数：
+**各个超参数描述及搜索空间**
+1. 基本超参数
 
     基本超参数用于保证在各个方法下模型能有足够的时间进行训练和更新，使得模型能够收敛。
 	- `Aggregation round`: 每个任务的聚合轮数，搜索空间为[5, 10, 15]。
 	- `Local epoch`: 每轮客户端本地训练的次数，搜索空间为[5, 8, 10]。
 	- `Learning rate`: 学习率，搜索空间为[0.0005, 0.0008, 0.001, 0.005]。
 	- `Learning rate decrease`: 学习率衰减量，搜索空间为[1e-6, 1e-5, 1e-4]
-2. 各个方法不同的超参数：
+2. 各个方法不同的超参数
     
     每个方法（baseline）都有其独有的超参数，这些参数保证了方法能够正常的工作。对于这些超参数，我们根据其论文中设定值的1/2和2倍为搜索空间的下界以及上界，从中选择3个中间值进行搜索。
 	- 基于存储样本的持续学习算法（GEM，BCN，Co2L）
@@ -357,9 +357,8 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 - **The accuracy trend overtime time under different workloads**(X-axis represents the time and Y-axis represents the inference accuracy)
     ![](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
 ### 5.2 在不同带宽下运行结果
-1. **Experiment code**
-
-    **限制服务器网速：**
+#### 5.2.1 Experiment code
+- **限制服务器网速：**
     ```shell
     sudo wondershaper [网卡名] 1000 1000 # 1000表示为最大速度为1000KB/s, 实际中网络会存在波动，可以调整上限值。
     ```
@@ -372,135 +371,135 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
     ```shell
     python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
     ```
-    **运行客户端：**
-    - 6-layer CNN on Cifar100
+- **运行客户端：**
+    * 6-layer CNN on Cifar100
         ```shell
         for ((i=0;i<20;i++));
         do
             python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
         done
         ```
-    - 6-layer CNN on FC100
+    * 6-layer CNN on FC100
         ```shell
         for ((i=0;i<20;i++));
         do
             python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
         done
         ```
-    - 6-layer CNN on CORe50
+    * 6-layer CNN on CORe50
         ```shell
         for ((i=0;i<20;i++));
         do
             python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
         done
         ```
-    - ResNet18 on MiniImageNet
+    * ResNet18 on MiniImageNet
         ```shell
         for ((i=0;i<20;i++));
         do
             python multi/main_FedKNOW.py --client_id=$i --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
         done
         ```
-    - ResNet18 on TiniImageNet
+    * ResNet18 on TiniImageNet
         ```shell
         for ((i=0;i<20;i++));
         do
             python multi/main_FedKNOW.py --client_id=$i --model=ResNet18 --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
         done
         ```
-2. **Experiment result**
+#### 5.2.2 Experiment result
 
-    - **算法在最大带宽为1MB/s下在不同工作负载的通信时间(x axis for dataset and y axis for communication time)**
-         
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png" width="50%">
-        
-    - **算法在不同网络带宽的总通信时间(x axis for bandwidth and y axis for communication time)**
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png" width="50%">
-        
+- **算法在最大带宽为1MB/s下在不同工作负载的通信时间(x axis for dataset and y axis for communication time)**
+     
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difctime.png" width="50%">
+    
+- **算法在不同网络带宽的总通信时间(x axis for bandwidth and y axis for communication time)**
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png" width="50%">
+    
 ### 5.3 大规模测试
-1. **Experiment code**
+#### 5.3.1 Experiment code
 
-    ```shell
-    # 50 clients
-    python single/main_FedKNOW.py --epochs=150 --num_users=50 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
-    # 100 clients
-    python single/main_FedKNOW.py --epochs=150 --num_users=100 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
-    ```
-2. **Experiment result**
+```shell
+# 50 clients
+python single/main_FedKNOW.py --epochs=150 --num_users=50 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
+# 100 clients
+python single/main_FedKNOW.py --epochs=150 --num_users=100 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
+```
+#### 5.3.2 Experiment result
 
-    - **算法在50个客户端以及100个客户端的下的准确率**(x axis for task and y axis for accuracy)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png" width="50%">
-        
-    - **算法在50个客户端以及100个客户端的下的平均遗忘率**(x axis for task and y axis for average forgetting rate)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png" width="50%">
+- **算法在50个客户端以及100个客户端的下的准确率**(x axis for task and y axis for accuracy)
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_acc.png" width="50%">
+    
+- **算法在50个客户端以及100个客户端的下的平均遗忘率**(x axis for task and y axis for average forgetting rate)
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png" width="50%">
         
 ### 5.4 多任务测试
-1. **Experiment code**
+#### 5.4.1 Experiment code
 
-    ```shell
-    # dataset = MiniImageNet + TinyImageNet + cifar100 + FC100, task = 80 ,per_task_class = 5
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=All --num_classes=400 --task=80 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
-    ```
-2. **Experiment result**
+```shell
+# dataset = MiniImageNet + TinyImageNet + cifar100 + FC100, task = 80 ,per_task_class = 5
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=All --num_classes=400 --task=80 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 
+```
+#### 5.4.2 Experiment result
 
-    - **算法在80个任务的平均准确率**(x axis for task and y axis for accuracy)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png" width="50%">
-        
-    - **算法在80个任务的平均遗忘率**(x axis for task and y axis for average forgetting rate)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png" width="50%">
-        
-    - **算法在80个任务的任务时间**(x axis for task and y axis for current task time)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
+- **算法在80个任务的平均准确率**(x axis for task and y axis for accuracy)
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_acc.png" width="50%">
+    
+- **算法在80个任务的平均遗忘率**(x axis for task and y axis for average forgetting rate)
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_fr.png" width="50%">
+    
+- **算法在80个任务的任务时间**(x axis for task and y axis for current task time)
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
 
 ### 5.5 参数存储比例测试
-1. **Experiment code**
-    ```shell
-    # store_rate = 0.05
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.05
-    # store_rate = 0.1
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.1
-    # store_rate = 0.2
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.2
-    ```
-2. **Experiment result**
+#### 5.5.1 Experiment code
+```shell
+# store_rate = 0.05
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.05
+# store_rate = 0.1
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.1
+# store_rate = 0.2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet18 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --store_rate=0.2
+```
+#### 5.5.2 Experiment result**
 
-    - **算法使用不同存储比例时准确率**(x axis for task and y axis for accuracy)
-         
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png" width="50%">
-        
-    - **算法使用不同存储比例时任务时间**(x axis for task and y axis for current task time)
-        
-        <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png" width="50%">
+- **算法使用不同存储比例时准确率**(x axis for task and y axis for accuracy)
+     
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_acc.png" width="50%">
+    
+- **算法使用不同存储比例时任务时间**(x axis for task and y axis for current task time)
+    
+    <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png" width="50%">
     
     
 ### 5.6 适用性测试
-1. **Experiment code**
+#### 5.6.1 Experiment code
 
-    ```shell
-    # WideResNet50
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=WideResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
-    # ResNeXt50
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNeXt --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
-    # ResNet152
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet152 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
-    # SENet18
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=SENet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
-    # MobileNetV2
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=MobileNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
-    # ShuffleNetV2
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ShuffleNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
-    # InceptionV3
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Inception --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
-    # DenseNet
-    python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=DenseNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
-    ```
-2. **Experiment result**
+```shell
+# WideResNet50
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=WideResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# ResNeXt50
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNeXt --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# ResNet152
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ResNet152 --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# SENet18
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=SENet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5
+# MobileNetV2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=MobileNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
+# ShuffleNetV2
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=ShuffleNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
+# InceptionV3
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=Inception --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0005 --optim=Adam --lr_decay=1e-5
+# DenseNet
+python single/main_FedKNOW.py --epochs=150 --num_users=20 --frac=0.4 --model=DenseNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-5
+```
+#### 5.6.2 Experiment result
 
-    - **算法在不同网络模型上的正确率**(x axis for task and y axis for accuracy)
-        ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel.png)
+- **算法在不同网络模型上的正确率**(x axis for task and y axis for accuracy)
+    ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moremodel.png)
