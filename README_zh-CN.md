@@ -7,13 +7,16 @@
   * [2.1 代码](#21-代码)
   * [2.2 安装](#22-安装)
 - [3 在图像分类中支持的模型](#3-支持的模型)
-- [4 实验细节描述](#4-实验细节描述)
-  * [4.1 在不同的工作负载测试](#41-在不同的工作负载测试-models)
-  * [4.2 在不同带宽下测试](#42-在不同带宽下测试)
-  * [4.3 大规模测试](#43-大规模测试)
-  * [4.4 多任务测试](#44-多任务测试)
-  * [4.5 参数存储比例测试](#45-参数存储比例测试)
-  * [4.6 适用性测试](#46-适用性测试)
+- [4 实验设置](#4-supported-models-in-image-classification)
+  * [4.1 任务生成](#41-setup)
+  * [4.2 超参数的选择](#42-usage)
+- [5 实验细节描述](#4-实验细节描述)
+  * [5.1 在不同的工作负载测试](#41-在不同的工作负载测试-models)
+  * [5.2 在不同带宽下测试](#42-在不同带宽下测试)
+  * [5.3 大规模测试](#43-大规模测试)
+  * [5.4 多任务测试](#44-多任务测试)
+  * [5.5 参数存储比例测试](#45-参数存储比例测试)
+  * [5.6 适用性测试](#46-适用性测试)
 ## 1 介绍
 在持续学习的北京下，FedKNOW针对准确率，时间，通信等等取得不错的效果。目前，在联邦学习的场景下FedKNOW对图像分类的8种网络模型下取得了不错的效果，包括：ResNet，ResNeXt，MobileNet，WideResNet，SENet，ShuffleNet，Inception，DenseNet。
 - [ResNet](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html) : 在图像分类中，由多个卷积层和池化层进行提取图片信息。但随着网络的深度增加，深度神经网络出现梯度消失(爆炸)问题以及网络退化。对于梯度消失(爆炸)的问题，ResNet添加了BatchNorm层进行约束，而对于网络退化，ResNet则建立了残差网络结果，将每一层的输入添加映射到下一层的输入中。
@@ -109,8 +112,117 @@
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[ShuffleNetV2 (ECCV'2018)](https://openaccess.thecvf.com/content_ECCV_2018/html/Ningning_Light-weight_CNN_Architecture_ECCV_2018_paper.html) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php)  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/ShuffleNet.sh)&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[DenseNet(CVPR'2017)](https://openaccess.thecvf.com/content_cvpr_2017/papers/Huang_Densely_Connected_Convolutional_CVPR_2017_paper.pdf) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php) &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/DenseNet.sh)&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;|
 |&nbsp; &nbsp; &nbsp; &nbsp;&#9745;&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;[SENet (CVPR'2018)](https://openaccess.thecvf.com/content_cvpr_2018/html/Hu_Squeeze-and-Excitation_Networks_CVPR_2018_paper.html) &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;[MiniImageNet](https://image-net.org/download.php) &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;|&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;[Demo](scripts/models/SENet.sh)&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;|
-## 4 实验细节描述
-### 4.1 在不同的工作负载运行结果
+
+## 4 实验设置
+### 4.1 任务生成
+#### 4.1.1 数据集介绍
+- [Cifar100](http://www.cs.toronto.edu/~kriz/cifar.html): Cifar100 数据集共有100个不同类别共计50000个训练样本（每个类有500个）以及10000个测试样本（每个类有100个）。
+- [FC100](https://paperswithcode.com/dataset/fc100) : FC100 数据集共有100个不同类别共计50000个训练样本（每个类有500个）以及10000个测试样本（每个类有100个）。
+- [CORe50](https://vlomonaco.github.io/core50/index.html#download) :CORe50数据集共有550个不同类别共计165000个训练样本（每个类有300个）以及55000个测试样本（每个类有100个）。
+- [MiniImageNet](https://image-net.org/download.php):MiniImageNet 数据集共有100个不同类别共计50000个训练样本（每个类有500个）以及10000个测试样本（每个类有100个）。
+- [TinyImageNet](http://cs231n.stanford.edu/tiny-imagenet-200.zip): MiniImageNet 数据集共有200个不同类别共计100000个训练样本（每个类有500个）以及10000个测试样本（每个类有50个）。
+
+#### 4.1.2 任务划分方法
+在构建不同的dataloader前，我们需要将各个数据集拆分成多个任务。我们使用[持续学习数据集拆分方法]()将这些数据集拆分为多个任务。每个任务都有不同类别的数据样本，并分配了一个唯一的任务ID，如下：
+
+- 将Cifar100拆分为10个任务
+	```shell
+	python dataset/Cifar100.py --task_number=10 --class_number=100
+	```
+- 将FC100拆分为10个任务
+	```shell
+	python dataset/FC100.py --task_number=10 --class_number=100
+	```
+- 将CORe50拆分为11个任务
+	```shell
+	python dataset/core50.py --task_number=11 --class_number=550
+	```
+- 将MiniImageNet拆分为10个任务
+	```shell
+	python dataset/miniimagenet.py --task_number=10 --class_number=100
+	```
+- 将TinyImageNet拆分为20个任务
+	```shell
+	python dataset/tinyimagenet.py --task_number=20 --class_number=200
+	```
+
+### 4.1.3 任务的分配方法
+在联邦持续设置下，每个客户端都有自己的私有任务序列，因此我们根据[FedRep]()方法将每个任务以Non-IID的形式分配给所有客户端。
+具体来说，我们将每一个数据集拆分的任务序列分配给所有的客户端。对于每个任务，每个客户端随机选择2-5个类别的数据，从被选中类别中随机获得10%的训练样本和测试样本。
+```shell
+def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_all=[]):
+    dict_users = {i: np.array([], dtype='int64') for i in range(num_users)}
+
+    idxs_dict = {}
+    count = 0
+    for i in range(len(dataset)):
+        if dataname == 'miniimagenet' or dataname == 'FC100' or dataname == 'tinyimagenet':
+            label = torch.tensor(dataset.data[i]['label']).item()
+        elif dataname == 'Corn50':
+            label = torch.tensor(dataset.data['label'][i]).item()
+        else:
+            label = torch.tensor(dataset.data[i][1]).item()
+        if label < num_classes and label not in idxs_dict.keys():
+            idxs_dict[label] = []
+        if label < num_classes:
+            idxs_dict[label].append(i)
+            count += 1
+
+    shard_per_class = int(shard_per_user * num_users / num_classes)
+    samples_per_user = int( count/num_users )
+    # whether to sample more test samples per user
+    if (samples_per_user < 20):
+        double = True
+    else:
+        double = False
+
+    for label in idxs_dict.keys():
+        x = idxs_dict[label]
+        num_leftover = len(x) % shard_per_class
+        leftover = x[-num_leftover:] if num_leftover > 0 else []
+        x = np.array(x[:-num_leftover]) if num_leftover > 0 else np.array(x)
+        x = x.reshape((shard_per_class, -1))
+        x = list(x)
+
+        for i, idx in enumerate(leftover):
+            x[i] = np.concatenate([x[i], [idx]])
+        idxs_dict[label] = x
+
+    if len(rand_set_all) == 0:
+        rand_set_all = list(range(num_classes)) * shard_per_class
+        random.shuffle(rand_set_all)
+        rand_set_all = np.array(rand_set_all).reshape((num_users, -1))
+
+    # divide and assign
+    testb = False
+    for i in range(num_users):
+        if double:
+            rand_set_label = list(rand_set_all[i]) * 50
+        else:
+            rand_set_label = rand_set_all[i]
+        rand_set = []
+        for label in rand_set_label:
+            idx = np.random.choice(len(idxs_dict[label]), replace=False)
+            if (samples_per_user < 100 and testb):
+                rand_set.append(idxs_dict[label][idx])
+            else:
+                rand_set.append(idxs_dict[label].pop(idx))
+        dict_users[i] = np.concatenate(rand_set)
+
+    test = []
+    return dict_users, rand_set_all
+```
+### 4.2 超参数的选择
+**选择方法：** 为了确保每种方法都能有效工作，我们使用额外的图像分类数据集[SVHN]()来搜索每种方法的超参数，以避免测试数据泄漏，并确保所有方法的公平性。
+**选择指标：** 在内存限制(每个客户端4G内存)、时间限制(每个任务运行时间不超过20分钟)下，选择正确率最高的超参数。
+- **基本超参数：** 每个任务的聚合轮数（Aggregation Round）：搜索空间为[5,10,15]，最终在5个工作负载上确定的值依次为：15,15,15,10,5。每轮客户端本地训练次数（local epoch）：搜索空间为[5,8,10]，最终在5个工作负载上确定的值均为5。一次epoch中的迭代数：搜索空间为[5,10,15]，在5个工作负载上确定的值为：5,5,15,5,5。学习率（learning rate）：搜索空间为[0.0005,0.0008,0.001,0.005]，在5个工作负载上确定的值为：0.001, 0.001, 0.001, 0.0008, 0.0008。学习率衰减量（learning rate decrease）：搜索空间为[1e-6,1e-5,1e-4]，最终在5个工作负载上确定的值为：1e-4, 1e-4, 1e-4, 1e-5, 1e-5。
+- **各个方法不同的超参数：** 对于每个方法（baseline）独有的超参数，我们根据其论文中设定值的1/2和2倍为搜索空间的下界以及上界，从中选择3个中间值进行搜索。对于需要存储样本的持续学习算法（GEM，BCN，Co2L）,每个任务需要存储一定比例的样本，搜索空间为[5%,10%,15%]，最终确定的值为10%。对于基于正则化的持续学习（EWC，AGS-CL，MAS），关键的超参数为正则化参数，搜索空间为[100,10000,40000]，最终确定的值依次为：40000，40000，100。对于FLCN，通过在服务器存储一定比例的样本用于调整正则化参数，搜索空间为[5%,10%,15%]，最终确定的值为10%。对于FedWEIT，三个关键的超参数：the sparseness parameter, weight-decay parameter 以及 past task loss parameter用于损失计算，搜索空间分别为[1e-5,1e-4,1e-3], [1e-5, 1e-4, 1e-3], [0.5,1,2]，最终确定的值为1e-4, 1e-3, 1。最后，对于FedKNOW，为每个任务存储参数比例我们从5%,10%,20%中进行搜寻，虽然20%的比例达到最高的准确率，但超过了内存的限制，因此我们选择10%的比例作为每一个任务的任务知识; 参与聚合的过去任务梯度数$k$的搜索空间为5,10,20，由于k=20超过了时间限制，最后我们选择10个最重要的任务梯度参与到梯度聚合器中。
+```shell
+./main_hyperparameters.sh
+```
+
+## 5 实验细节描述
+### 5.1 在不同的工作负载运行结果
 
 1. **Experiment code**
     **运行服务器：**
@@ -159,7 +271,7 @@
 
     - **不同算法在不同工作负载上的运行时间和准确率**(x axis for time and y axis for inference accuracy)
     ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
-### 4.2 在不同带宽下运行结果
+### 5.2 在不同带宽下运行结果
 1. **Experiment code**
 
     **限制服务器网速：**
@@ -221,7 +333,7 @@
         
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difbandwidth.png" width="50%">
         
-### 4.3 大规模测试
+### 5.3 大规模测试
 1. **Experiment code**
 
     ```shell
@@ -240,7 +352,7 @@
         
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/bigscale_fr.png" width="50%">
         
-### 4.4 多任务测试
+### 5.4 多任务测试
 1. **Experiment code**
 
     ```shell
@@ -261,7 +373,7 @@
         
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/moretask_time.png" width="50%">
 
-### 4.5 参数存储比例测试
+### 5.5 参数存储比例测试
 1. **Experiment code**
     ```shell
     # store_rate = 0.05
@@ -282,7 +394,7 @@
         <img src="https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difporpotion_time.png" width="50%">
     
     
-### 4.6 适用性测试
+### 5.6 适用性测试
 1. **Experiment code**
 
     ```shell
