@@ -228,7 +228,10 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
     **运行服务器：**
     
     ```shell
+    ## 在20个jetson设备上运行
     python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
+    ## 在10个树莓派以及20个jetson设备运行
+    python multi/server.py --epochs=150 --num_users=30 --frac=0.4 --ip=127.0.0.1:8000
     ```
     **运行客户端：**
     - 6-layer CNN on Cifar100
