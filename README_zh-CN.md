@@ -214,9 +214,11 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 ```
 ### 4.2 超参数的选择
 **选择方法** 
+    
     为了确保每种方法都能有效工作，我们使用额外的图像分类数据集[SVHN]()来搜索每种方法的超参数，以避免测试数据泄漏，并确保所有方法的公平性。
 
 **选择指标** 
+    
     在内存限制(每个客户端4G内存)、时间限制(每个任务运行时间不超过20分钟)下，选择正确率最高的超参数。
 
 **各个超参数描述及搜索空间：**
@@ -226,6 +228,7 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 	- `Learning rate`: 学习率，搜索空间为[0.0005, 0.0008, 0.001, 0.005]。
 	- `Learning rate decrease`: 学习率衰减量，搜索空间为[1e-6, 1e-5, 1e-4]
 2. 各个方法不同的超参数：
+    
     对于每个方法（baseline）独有的超参数，我们根据其论文中设定值的1/2和2倍为搜索空间的下界以及上界，从中选择3个中间值进行搜索。
 	- 基于存储样本的持续学习算法（GEM，BCN，Co2L）
 		* `Task sample rate`: 每个任务保存样本的比例，搜索空间为[5%, 10%, 15%]。
