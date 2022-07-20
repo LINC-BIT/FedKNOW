@@ -246,12 +246,14 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 	Under the memory limit (4G memory per client) and time limit (the running time of each task is no more than 20 minutes), select the hyperparameter with the highest accuracy.
 - **Description and search space of each hyperparameter**
 1. Base hyperparameters
+
     Base hyperparameters are used to ensure that the model has enough time to train and update under each method, so that the model can converge.
 	- `Aggregation round`: The number of aggregation rounds of each task, the search space is [5, 10, 15].
 	- `Local epoch`: Number of client local training per aggregation round, the search space is  [5, 8, 10]。
 	- `Lr`: Learning rate，the search space is [0.0005, 0.0008, 0.001, 0.005]。
 	- `Lr_decrease`: Learning rate decrease，the search space is [1e-6, 1e-5, 1e-4]
 2. Different hyperparameters of each method
+
     Each method (baseline) has its own hyperparameters, which ensure that the method can work normally. For these hyperparameters, we choose three intermediate values to search according to the lower and upper bounds of the search space, which are 1/2 and 2 times of the set value in the paper.
 	- Memory-based continual learning（GEM，BCN，Co2L）
 		* `Task sample rate`: The proportion of samples saved for each task is used to calculate the loss of past tasks and avoid catastrophic forgetting, the search space is [5%, 10%, 15%]。
@@ -276,7 +278,7 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 #### 5.1.1 Experiment code
 1. Run on 20 Jetson devices
     
-We selected 20 Jetson devices with different memory and different computing speeds to test on five different workloads, including 8 Jetson-nano devices with 4GB memory, 2 Jetson-TX2 with 8GB memory, 8 Jetson-Xavier-NX with 16GB memory and 2 Jetson-AgX with 32GB memory.
+    We selected 20 Jetson devices with different memory and different computing speeds to test on five different workloads, including 8 Jetson-nano devices with 4GB memory, 2 Jetson-TX2 with 8GB memory, 8 Jetson-Xavier-NX with 16GB memory and 2 Jetson-AgX with 32GB memory.
     - **Launch the server: **
         ```shell
         ## Run on 20 Jetson devices
