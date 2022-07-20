@@ -223,87 +223,100 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 
 ## 5 实验细节描述
 ### 5.1 在不同的工作负载运行结果
+#### 5.1.1 Experiment code
+#### 5.1.1.1 在20个Jetson设备上运行
+**运行服务器：**
+```shell
+## 在20个jetson设备上运行
+python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
+```
+   **运行客户端：**
+   - 6-layer CNN on Cifar100
+       ```shell
+       ## 在20个jetson设备上运行
+       for ((i=0;i<20;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+       done
+       ```
+   - 6-layer CNN on FC100
+       ```shell
+       ## 在20个jetson设备上运行
+       for ((i=0;i<20;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+       done
+       ```
+   - 6-layer CNN on CORe50
+       ```shell
+       ## 在20个jetson设备上运行
+       for ((i=0;i<20;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+       done
+       ```
+   - ResNet18 on MiniImageNet
+       ```shell
+         ## 在20个jetson设备上运行
+       for ((i=0;i<20;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
+       done
+       ```
+   - ResNet18 on TiniImageNet
+       ```shell
+       ## 在20个jetson设备上运行
+       for ((i=0;i<20;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
+       done
+       ```
+   **Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。其他baseline的运行说明在`scripts/DifWork`中。
 
-1. **Experiment code**
-    **运行服务器：**
-    
-    ```shell
-    ## 在20个jetson设备上运行
-    python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
-    ## 在10个树莓派以及20个jetson设备运行
-    python multi/server.py --epochs=150 --num_users=30 --frac=0.4 --ip=127.0.0.1:8000
-    ```
-    **运行客户端：**
-    - 6-layer CNN on Cifar100
-        ```shell
-        ## 在20个jetson设备上运行
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
-        
-        ## 在10个树莓派以及20个jetson设备运行
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
-        
-        for ((i=0;i<10;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=10 + $i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
-        done
-        ```
-    - 6-layer CNN on FC100
-        ```shell
-        ## 在20个jetson设备上运行
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
-        
-        ## 在10个树莓派以及20个jetson设备运行
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
-        for ((i=0;i<10;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
-        done
-        ```
-    - 6-layer CNN on CORe50
-        ```shell
-        ## 在20个jetson设备上运行
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
-        ## 在10个树莓派以及20个jetson设备运行
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
-        done
-        for ((i=0;i<10;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
-        done
-        ```
-    - ResNet18 on MiniImageNet
-        ```shell
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=MiniImageNet --num_classes=100 --task=10 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
-        done
-        ```
-    - ResNet18 on TiniImageNet
-        ```shell
-        for ((i=0;i<20;i++));
-        do
-            python multi/main_FedKNOW.py --client_id=$i --model=ResNet --dataset=TinyImageNet --num_classes=200 --task=20 --alg=FedKNOW --lr=0.0008 --optim=SGD --lr_decay=1e-5 --ip=127.0.0.1:8000
-        done
-        ```
-    **Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。其他baseline的运行说明在`scripts/DifWork`中。
-2. **Experiment result**
+#### 5.1.1.2 在10个树莓派以及20个Jetson设备上运行
+**运行服务器：**
+```shell
+## 在10个树莓派以及20个jetson设备运行
+python multi/server.py --epochs=150 --num_users=30 --frac=0.4 --ip=127.0.0.1:8000
+```
+   **运行客户端：**
+   - 6-layer CNN on Cifar100
+       ```shell
+       ## 在20个jetson设备上运行
+       for ((i=0;i<20;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+       done
+       for ((i=0;i<10;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=cifar100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
+       done
+       ```
+   - 6-layer CNN on FC100
+       ```shell
+       ## 在10个树莓派以及20个jetson设备运行
+       for ((i=0;i<20;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+       done
+       for ((i=0;i<10;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=FC100 --num_classes=100 --task=10 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
+       done
+       ```
+   - 6-layer CNN on CORe50
+       ```shell
+       ## 在10个树莓派以及20个jetson设备运行
+       for ((i=0;i<20;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000
+       done
+       for ((i=0;i<10;i++));
+       do
+           python multi/main_FedKNOW.py --client_id=10+$i --model=6_layerCNN --dataset=CORe50 --num_classes=550 --task=11 --alg=FedKNOW --lr=0.001 --optim=Adam --lr_decay=1e-4 --ip=127.0.0.1:8000 --gpu=-1
+       done
+       ```
+#### 5.2 **Experiment result**
 
     - **不同算法在不同工作负载上的运行时间和准确率**(x axis for time and y axis for inference accuracy)
     ![在这里插入图片描述](https://github.com/LINC-BIT/FedKNOW/blob/main/Experiment%20images/difworkerloader.png)
