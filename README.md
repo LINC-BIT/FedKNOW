@@ -9,10 +9,10 @@ English | [简体中文](README_zh-CN.md)
   * [2.1 Setup](#21-setup)
   * [2.2 Usage](#22-usage)
 - [3 Supported models in image classification](#3-supported-models-in-image-classification)
-- [4 Experiments setting](#4-Experiments setting)
-  * [4.1 Generate task](#41-Generate task)
-  * [4.2 Selection of hyperparameters](#42-Selection of hyperparameters)
-- [5 Experiments](#5-experiments)
+- [4 Experiments setting](#4-Experiments-setting)
+  * [4.1 Generate task](#41-Generate-task)
+  * [4.2 Selection of hyperparameters](#42-Selection-of-hyperparameters)
+- [5 Experiments](#5-Experiments)
   * [5.1 Under different workloads (model and dataset)](#51-under-different-workloads-model-and-dataset)
   * [5.2 Under different network bandwidths](#52-under-different-network-bandwidths)
   * [5.3 Large scale](#53-large-scale)
@@ -279,14 +279,14 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 1. Run on 20 Jetson devices
     
     We selected 20 Jetson devices with different memory and different computing speeds to test on five different workloads, including 8 Jetson-nano devices with 4GB memory, 2 Jetson-TX2 with 8GB memory, 8 Jetson-Xavier-NX with 16GB memory and 2 Jetson-AgX with 32GB memory.
-    - **Launch the server: **
+    - **Launch the server:**
         ```shell
         ## Run on 20 Jetson devices
         python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
         ```
         **Note：--ip=127.0.0.1:8000 here means that the local machine is used as the center server. If there is an existing server, it can be replaced with the IP address of the server.**
     
-   - **Launch the clients：**
+   - **Launch the clients:**
        * 6-layer CNN on Cifar100
             ```shell
            ## Run on 20 Jetson devices
@@ -330,14 +330,15 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
        **Note:** Please keep the IP addresses of the server and the client consistent. If there are multiple devices running, run the corresponding code directly on the corresponding edge device and replace it with the IP address of the server. The operating instructions of other baselines are in `scripts/difwork`.
 
 2. Run on 10 Raspberry pies and 20 Jetson devices
+
     In order to increase the heterogeneity of edge devices, we added 10 raspberry pies with different memories (one 2GB memory, five 4GB memory, four 8GB memory). Compared with the Jetson device using GPU for computing, the computing speed of raspberry pie using CPU will be greatly reduced. At the same time, due to memory constraints, if the size of stored data is not limited during the training process, memory overflow will occur.
-    - **Launch the server：**
+    - **Launch the server:**
         ```shell
         ## Run on 10 Raspberry pies and 20 Jetson devices
         python multi/server.py --epochs=150 --num_users=30 --frac=0.4 --ip=127.0.0.1:8000
         ```
         **Note：--ip=127.0.0.1:8000 here means that the local machine is used as the center server. If there is an existing server, it can be replaced with the ip address of the server.**
-   - **Launch the clients：**
+   - **Launch the clients:**
        * 6-layer CNN on Cifar100
            ```shell
            ##  Run on 10 Raspberry pies and 20 Jetson devices
