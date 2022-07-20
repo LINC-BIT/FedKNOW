@@ -262,9 +262,9 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
         ```
         **Note：这里的ip=127.0.0.1：8000表示利用本地机器充当服务器，如果有现成的服务器则可以替换为服务器的ip地址。**
     
-   -**运行客户端：**
+   - **运行客户端：**
        * 6-layer CNN on Cifar100
-           ```shell
+            ```shell
            ## 在20个jetson设备上运行
            for ((i=0;i<20;i++));
            do
