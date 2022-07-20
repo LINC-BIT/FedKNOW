@@ -214,7 +214,9 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 ```
 ### 4.2 超参数的选择
 **选择方法：** 为了确保每种方法都能有效工作，我们使用额外的图像分类数据集[SVHN]()来搜索每种方法的超参数，以避免测试数据泄漏，并确保所有方法的公平性。
+
 **选择指标：** 在内存限制(每个客户端4G内存)、时间限制(每个任务运行时间不超过20分钟)下，选择正确率最高的超参数。
+
 **各个超参数描述及搜索空间：**
 1. 基本超参数：
 	- `Aggregation round`: 每个任务的聚合轮数，搜索空间为[5, 10, 15]。
@@ -236,6 +238,7 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 	- FedKNOW(Our)
 		* `Weight rate`: 每个任务存储参数的比例，搜索空间为[5%, 10%, 20%]。
 		* `k`: 参与聚合的过去任务梯度数，搜索空间为[5, 10, 20]。
+
 **运行脚本**
 ```shell
 ./main_hyperparameters.sh
