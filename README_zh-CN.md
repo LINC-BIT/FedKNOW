@@ -224,12 +224,12 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 ## 5 实验细节描述
 ### 5.1 在不同的工作负载运行结果
 #### 5.1.1 Experiment code
-#### 5.1.1.1 在20个Jetson设备上运行
-**运行服务器：**
-```shell
-## 在20个jetson设备上运行
-python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
-```
+1. 在20个Jetson设备上运行
+    **运行服务器：**
+    ```shell
+    ## 在20个jetson设备上运行
+    python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:8000
+    ```
    **运行客户端：**
    - 6-layer CNN on Cifar100
        ```shell
@@ -273,12 +273,12 @@ python multi/server.py --epochs=150 --num_users=20 --frac=0.4 --ip=127.0.0.1:800
        ```
    **Note:** 服务器和客户端的ip地址请保持一致，127.0.0.1表示在本机上测试，如果有多个设备进行运行的话，将其替换为服务器的ip地址。其他baseline的运行说明在`scripts/DifWork`中。
 
-#### 5.1.1.2 在10个树莓派以及20个Jetson设备上运行
-**运行服务器：**
-```shell
-## 在10个树莓派以及20个jetson设备运行
-python multi/server.py --epochs=150 --num_users=30 --frac=0.4 --ip=127.0.0.1:8000
-```
+2. 在10个树莓派以及20个Jetson设备上运行
+    **运行服务器：**
+    ```shell
+    ## 在10个树莓派以及20个jetson设备运行
+    python multi/server.py --epochs=150 --num_users=30 --frac=0.4 --ip=127.0.0.1:8000
+    ```
    **运行客户端：**
    - 6-layer CNN on Cifar100
        ```shell
