@@ -283,27 +283,27 @@ model=(6CNN ResNet18)
 ## The learning rate(or learning rate decrease) is mainly related to the model, so it only needs a few iterations to see whether the setting is reasonable
 for m in ${model[@]}
 do
-	for lr in ${LR[@]}
-	do
-	    for lrd in ${Lr_decrease}:
-	    do
-	    	python main_hyperLR.py --lr=$lr --lr_decrease=$lrd --dataset=SVHN --model=$m
-	    done
-	done
+for lr in ${LR[@]}
+do
+for lrd in ${Lr_decrease}:
+do
+python main_hyperLR.py --lr=$lr --lr_decrease=$lrd --dataset=SVHN --model=$m
+done
+done
 done
 ## Use the determined learning rate and other parameters to search the fedknow super parameters
 for r in ${Agg_round[@]}
 do
-	for l in ${Local_epoch[@]}
-	do
-		for k in ${Local_epoch[@]}
-		do
-			for wr in ${Weight_rate[@]}
-			do
-				python main_FedKNOW.py --epochs=$r --num_users=20 --frac=0.4 --dataset=SVHN --model=ResNet18 --lr=0.0008 --lr_decay=1e-5 --local_ep=$l --store_rate=$wr --agg_task=$k
-			done
-		done
-	done
+for l in ${Local_epoch[@]}
+do
+for k in ${Local_epoch[@]}
+do
+for wr in ${Weight_rate[@]}
+do
+python main_FedKNOW.py --epochs=$r --num_users=20 --frac=0.4 --dataset=SVHN --model=ResNet18 --lr=0.0008 --lr_decay=1e-5 --local_ep=$l --store_rate=$wr --agg_task=$k
+done
+done
+done
 done
 ```
 ## 5 Experiment
