@@ -271,6 +271,7 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 
 **Running code**
 ```shell
+#### Selection hyperparameters for FedKNOW
 #!/bin/bash
 cd single/
 Agg_round=(5 10 15)
@@ -296,7 +297,7 @@ for r in ${Agg_round[@]}
 do
 for l in ${Local_epoch[@]}
 do
-for k in ${Local_epoch[@]}
+for k in ${K[@]}
 do
 for wr in ${Weight_rate[@]}
 do
@@ -306,6 +307,7 @@ done
 done
 done
 ```
+other methods are in [single/hyperparameters.sh](single/hyperparameters.sh) 
 ## 5 Experiment
 ### 5.1 Under different workloads (model and dataset)
 #### 5.1.1 Experiment code
