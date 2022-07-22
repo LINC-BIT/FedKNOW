@@ -246,8 +246,43 @@ def noniid(dataset, num_users, shard_per_user, num_classes, dataname, rand_set_a
 
 **运行脚本**
 ```shell
-./main_hyperparameters.sh
+#### Selection hyperparameters for FedKNOW
+#!/bin/bash
+cd single/
+Agg_round=(5 10 15)
+Local_epoch=(5 8 10)
+LR=(0.0005 0.0008 0.001 0.005)
+Lr_decrease=(1e-6 1e-5 1e-4)
+Weight_rate=(0.05 0.1 0.2)
+K=(5 10 20)
+model=(6CNN ResNet18)
+## The learning rate(or learning rate decrease) is mainly related to the model, so it only needs a few iterations to see whether the setting is reasonable
+for m in ${model[@]}
+do
+for lr in ${LR[@]}
+do
+for lrd in ${Lr_decrease}:
+do
+python main_hyperLR.py --lr=$lr --lr_decrease=$lrd --dataset=SVHN --model=$m
+done
+done
+done
+## Use the determined learning rate and other parameters to search the fedknow super parameters
+for r in ${Agg_round[@]}
+do
+for l in ${Local_epoch[@]}
+do
+for k in ${K[@]}
+do
+for wr in ${Weight_rate[@]}
+do
+python main_FedKNOW.py --epochs=$r --num_users=20 --frac=0.4 --dataset=SVHN --model=ResNet18 --lr=0.0008 --lr_decay=1e-5 --local_ep=$l --store_rate=$wr --agg_task=$k
+done
+done
+done
+done
 ```
+其他方法的超参数搜索在 [single/hyperparameters.sh](single/hyperparameters.sh) 
 
 ## 5 实验细节描述
 ### 5.1 在不同的工作负载运行结果
