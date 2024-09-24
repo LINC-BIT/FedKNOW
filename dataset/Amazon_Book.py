@@ -2,12 +2,14 @@ import torch
 import os
 
 def split_data(num_client,train_file,test_file):
-    client_dict = './data/amazon_book/data_' + str(num_client) + 'clients'
+    client_dict = '../data/Amazon_Book/data_' + str(num_client) + 'clients'
     num_train = 1086120 // num_client
     num_test = 121216 // num_client
 
     if not os.path.exists(client_dict):
         os.mkdir(client_dict)
+    else:
+        return
 
     f_train = open(train_file, 'r')
     f_test = open(test_file, 'r')
@@ -25,6 +27,7 @@ def split_data(num_client,train_file,test_file):
             for j in range(num_test):
                 a = f_test.readline()
                 f.write(a)
+    return
 
 
 class DINDataSet(torch.utils.data.Dataset):

@@ -121,7 +121,7 @@ class AttentionLayer(nn.Module):
 
 
 class DIN(nn.Module):
-    def __init__(self, n_uid, n_mid, n_cid, embedding_dim, ):
+    def __init__(self, n_uid, n_mid, n_cid, embedding_dim):
         super().__init__()
 
         self.embedding_layer = InputEmbedding(n_uid, n_mid, n_cid, embedding_dim)

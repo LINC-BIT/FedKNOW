@@ -27,11 +27,11 @@ class Appr(object):
         self.clipgrad = clipgrad
         self.args = args
         self.ce = torch.nn.CrossEntropyLoss()
-        #self.optimizer = self._get_optimizer()
-        self.optimizer = torch.optim.Adam(model.parameters(), lr, (0.5, 0.99))
+        self.optimizer = self._get_optimizer()
+        #self.optimizer = torch.optim.Adam(model.parameters(), lr, (0.5, 0.99))
 
         self.lamb = args.lamb  # 20000
-        self.e_rep = args.local_rep_ep
+        self.e_rep = args.local_local_ep
         self.old_task = -1
         self.grad_dims = []
         for param in self.model.parameters():
@@ -73,7 +73,7 @@ class Appr(object):
             return loss, accuracy
         train_loss = 0
         train_acc = 0
-
+        self.optimizer = self._get_optimizer()
         for e in range(self.nepochs):
             total = 0
             loss_sum = 0
