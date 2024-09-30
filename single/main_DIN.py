@@ -245,6 +245,8 @@ if __name__ == '__main__':
 
                 # 这里需要同时把自己的模型也加进去
                 cur_local_models.append(apprs[idx].model.state_dict())
+                m = len(cur_local_models)
+
                 w_tmp = {}
                 for w_local in cur_local_models:
                     if len(w_tmp) == 0:
