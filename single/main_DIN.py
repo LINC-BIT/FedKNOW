@@ -177,8 +177,8 @@ if __name__ == '__main__':
             # loss_locals.append(copy.deepcopy(loss))
 
             appr.set_trData(tr_dataloader[idx])
-            net_local = copy.deepcopy(net_glob).to(args.device)
-            appr.set_model(net_local)
+            #net_local = copy.deepcopy(net_glob).to(args.device)
+            #appr.set_model(net_local)
             last = iter == args.epochs
 
             w_local, loss, indd = LongLifeTrain(args, appr, iter, None, idx)
@@ -221,33 +221,49 @@ if __name__ == '__main__':
             iter, loss_avg, loss_test, acc_test))
 
         #fedavg
-        # if w_globals is not None:
-        #     for i in range(args.num_users):
-        #         apprs[i].model.load_state_dict(w_globals)
+        if args.alg == 'Fedavg':
+            if w_globals is not None:
+                for i in range(args.num_users):
+                    apprs[i].model.load_state_dict(w_globals)
+
 
 
 
 
         # DisGOSSIP
-        # clients_global = []
-        # all_users = [i for i in range(args.num_users)]
-        #
-        # for ind, idx in enumerate(all_users):
-        #     temp = copy.deepcopy(all_users)
-        #     temp.remove(idx)
-        #     cur_local_models = []
-        #     idxs_users = np.random.choice(temp, args.neibour, replace=False)
-        #     for idx_user in idxs_users:
-        #         cur_local_models.append(apprs[idx_user].model.state_dict())
-        #
-        #     # 这里需要同时把自己的模型也加进去
-        #     cur_local_models.append(apprs[idx].model.state_dict())
-        #
-        #     w_globals = serverAgg.update(cur_local_models)
-        #     clients_global.append(copy.deepcopy(w_globals))
-        #
-        # for ind, idx in enumerate(all_users):
-        #     apprs[idx].model.load_state_dict(clients_global[idx])
+        else:
+            clients_global = []
+            all_users = [i for i in range(args.num_users)]
+
+            for ind, idx in enumerate(all_users):
+                temp = copy.deepcopy(all_users)
+                temp.remove(idx)
+                cur_local_models = []
+                idxs_users = np.random.choice(temp, args.neibour, replace=False)
+                for idx_user in idxs_users:
+                    cur_local_models.append(apprs[idx_user].model.state_dict())
+
+                # 这里需要同时把自己的模型也加进去
+                cur_local_models.append(apprs[idx].model.state_dict())
+                w_tmp = {}
+                for w_local in cur_local_models:
+                    if len(w_tmp) == 0:
+                        w_tmp = copy.deepcopy(w_local)
+                        for k, key in enumerate(net_glob.state_dict().keys()):
+                            w_tmp[key] = w_tmp[key] * 1 / m
+                            w_locals[idx][key] = w_local[key]
+                    else:
+                        for k, key in enumerate(net_glob.state_dict().keys()):
+                            if key in w_glob_keys:
+                                w_tmp[key] += w_local[key] * 1 / m
+                            else:
+                                w_tmp[key] += w_local[key] * 1 / m
+                            w_locals[idx][key] = w_local[key]
+                clients_global.append(copy.deepcopy(w_tmp))
+
+            for ind, idx in enumerate(all_users):
+                apprs[idx].model.load_state_dict(clients_global[idx])
+
 
 
         # if iter >= args.epochs - 10 and iter != args.epochs:
